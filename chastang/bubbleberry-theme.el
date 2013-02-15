@@ -16,7 +16,7 @@
  
  ;; basic theming.
  '(default                          ((t (:foreground "#ABAEB3" :background "#222222" ))))
- '(region                           ((t (:background "#101010" ))))
+ '(region                           ((t (:background "#52534A" ))))
  '(cursor                           ((t (:background "#ffffff" ))))
  '(fringe                           ((t (:background "#2f2f2f" :foreground "#ffffff" ))))
  '(linum                            ((t (:background "#202020" :foreground "#2f2f2f" :box nil :height 100 ))))
