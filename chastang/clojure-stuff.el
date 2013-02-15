@@ -1,3 +1,5 @@
+;; paredit stuff
+
 (defun lisp-enable-paredit-hook () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'lisp-enable-paredit-hook)
 (add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
@@ -19,3 +21,13 @@
        ;; ESC-C-right
        (define-key paredit-mode-map (kbd "ESC M-[ 5 c")
                    'paredit-backward-barf-sexp))))
+
+
+;; nrepl stuff
+
+(add-hook 'nrepl-interaction-mode-hook
+  'nrepl-turn-on-eldoc-mode)
+
+(add-hook 'nrepl-mode-hook 'paredit-mode)
+
+(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
