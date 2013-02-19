@@ -1,8 +1,17 @@
 ;; Mode line setup
+
+(defvar my-mode-line-buffer-line-count nil)
+(make-variable-buffer-local 'my-mode-line-buffer-line-count)
+
 (setq-default
  mode-line-format
  '(; Position, including warning for 80 columns
-   (:propertize "%4l:" face mode-line-position-face)
+   (:propertize 
+    (:eval (let ((str "%4l"))
+	     (when (and (not (buffer-modified-p)) my-mode-line-buffer-line-count)
+	       (setq str (concat str "/" my-mode-line-buffer-line-count)))
+	     str))
+    face mode-line-position-face)
    (:eval (propertize "%3c" 'face
                       (if (>= (current-column) 80)
                           'mode-line-80col-face
@@ -43,7 +52,7 @@
    (:eval (when nyan-mode (list (nyan-create))))
    ))
 
-;; Helper function
+;; Helper functions
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
@@ -56,6 +65,15 @@
     (when path
       (setq output (concat ".../" output)))
     output))
+
+;; Keep track of total line length
+(defun my-mode-line-count-lines ()
+  (setq my-mode-line-buffer-line-count (int-to-string (count-lines (point-min) (point-max)))))
+
+(add-hook 'find-file-hook 'my-mode-line-count-lines)
+(add-hook 'after-save-hook 'my-mode-line-count-lines)
+(add-hook 'after-revert-hook 'my-mode-line-count-lines)
+(add-hook 'dired-after-readin-hook 'my-mode-line-count-lines)
 
 ;; Extra mode line faces
 (make-face 'mode-line-read-only-face)
