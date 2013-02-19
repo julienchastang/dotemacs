@@ -11,3 +11,4 @@
 (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 (ac-set-trigger-key "TAB")
 
+(show-paren-mode 1)
