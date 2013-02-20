@@ -38,6 +38,9 @@
  (djvu .
        [(0 5)
 	nil "Edit and view Djvu files via djvused" single])
+ (docbook .
+	  [(0 1)
+	   nil "Info-like viewer for DocBook" single])
  (ediprolog .
 	    [(1 0)
 	     nil "Emacs Does Interactive Prolog" single])
@@ -63,7 +66,7 @@
 	      [(1 0)
 	       nil "Major mode for Jgraph files" single])
  (js2-mode .
-	   [(20130217)
+	   [(20130219)
 	    ((emacs
 	      (24 1)))
 	    "Improved JavaScript editing mode" single])
