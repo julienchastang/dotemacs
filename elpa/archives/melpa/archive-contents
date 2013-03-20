@@ -36,7 +36,7 @@
 	    [(20130218 2229)
 	     nil "Yet another snippet extension for Emacs. [source: github]" tar])
  (yascroll .
-	   [(20120502 1738)
+	   [(20130321 334)
 	    nil "Yet Another Scroll Bar Mode [source: github]" single])
  (yari .
        [(20110417 2248)
@@ -134,7 +134,7 @@
 	       (1 6 8)))
 	     "Weblog maintenance via XML-RPC APIs [source: bzr]" single])
  (web-mode .
-	   [(20130317 2218)
+	   [(20130320 2147)
 	    nil "major mode for editing HTML templates [source: github]" single])
  (web .
       [(20130312 1014)
@@ -359,7 +359,7 @@
 		 [(20120406 2251)
 		  nil "generic major mode for tabulated lists. [source: github]" single])
  (tabbar-ruler .
-	       [(20130220 2253)
+	       [(20130320 1033)
 		((tabbar
 		  (2 0 1)))
 		"Setup tabbar to look pretty... [source: github]" tar])
@@ -661,7 +661,7 @@
 	    [(20130315 250)
 	     nil "A better backspace [source: github]" single])
  (s .
-    [(20130319 1534)
+    [(20130320 1524)
      nil "The long lost Emacs string manipulation library. [source: github]" single])
  (rvm .
       [(20130210 1710)
@@ -855,7 +855,7 @@
 	  [(20121128 2315)
 	   nil "Show tooltip at point [source: github]" single])
  (popwin .
-	 [(20121210 2054)
+	 [(20130321 132)
 	  nil "Popup Window Manager. [source: github]" single])
  (popup .
 	[(20130117 1954)
@@ -876,7 +876,7 @@
 		[(20120214 2332)
 		 nil "Interface to the ArchLinux package manager [source: github]" single])
  (pivotal-tracker .
-		  [(20120403 1455)
+		  [(20130319 2233)
 		   nil "Interact with Pivotal Tracker through its API [source: github]" single])
  (php-mode .
 	   [(20130315 2020)
@@ -997,6 +997,13 @@
 	      ((browse-url-dwim
 		(0 6 2)))
 	      "Web browsing helpers for OS X [source: github]" single])
+ (orglue .
+	 [(20130319 1359)
+	  ((epic
+	    (0 1))
+	   (org-mac-link-grabber
+	    (1 0 1)))
+	  "more functionality to org-mode. [source: github]" tar])
  (org2blog .
 	   [(20130115 2217)
 	    ((org
@@ -1120,7 +1127,7 @@
       [(20120507 7)
        nil "Emacs mode for filesystem navigation [source: hg]" tar])
  (namespaces .
-	     [(20130312 105)
+	     [(20130320 1906)
 	      nil "An implementation of namespaces for Elisp, with an emphasis on immutabilty. [source: github]" single])
  (n3-mode .
 	  [(20130115 2145)
@@ -1247,7 +1254,7 @@
 	       [(20120927 1839)
 		nil "mapping macros that report progress [source: github]" tar])
  (main-line .
-	    [(20130319 1420)
+	    [(20130320 1807)
 	     nil "modeline replacement forked from an early version of powerline.el [source: github]" single])
  (magnet .
 	 [(20121107 1805)
@@ -1274,9 +1281,6 @@
  (magit-commit-training-wheels .
 			       [(20121223 154)
 				nil "Advice for magit-log-edit-commit [source: github]" single])
- (magit .
-	[(20130317 2323)
-	 nil "Control Git from Emacs. [source: github]" tar])
  (mag-menu .
 	   [(20130224 56)
 	    ((splitter
@@ -1289,7 +1293,7 @@
 	     [(20090309 1715)
 	      nil "in-buffer mathematical operations [source: github]" single])
  (lua-mode .
-	   [(20130319 1938)
+	   [(20130320 104)
 	    nil "a major-mode for editing Lua scripts [source: github]" single])
  (lorem-ipsum .
 	      [(20051013 1756)
@@ -1373,6 +1377,9 @@
  (kv .
      [(20130217 1638)
       nil "key/value data structure functions [source: github]" single])
+ (kivy-mode .
+	    [(20130319 1633)
+	     nil "Emacs major mode for editing Kivy files [source: github]" single])
  (kite .
        [(20130201 2038)
 	((json
@@ -1701,7 +1708,7 @@
 	    (20120509)))
 	  "helm-sources and some utilities for GNU R. [source: github]" single])
  (helm .
-       [(20130317 247)
+       [(20130319 1358)
 	nil "Helm is an Emacs incremental and narrowing framework [source: github]" tar])
  (header2 .
 	  [(20121228 2051)
@@ -1741,6 +1748,9 @@
 	     ((popwin
 	       (0 3 0)))
 	     "Guide the following key bindings automatically and dynamically [source: github]" single])
+ (gruber-darker-theme .
+		      [(20130320 2010)
+		       nil "Gruber Darker color theme for Emacs 24. [source: github]" single])
  (groovy-mode .
 	      [(20120510 1755)
 	       nil "Groovy mode derived mode [source: bzr]" single])
@@ -1754,7 +1764,7 @@
 		    [(20120821 1835)
 		     nil "Mode for the dot-language used by graphviz (att). [source: github]" single])
  (graphene .
-	   [(20130318 959)
+	   [(20130319 2000)
 	    ((auto-complete
 	      (20120909))
 	     (ac-dabbrev
@@ -1823,14 +1833,14 @@
 		 [(20130227 1617)
 		  nil "Major mode for editing .gitconfig files [source: github]" single])
  (git-gutter-fringe .
-		    [(20130311 2057)
+		    [(20130320 1404)
 		     ((git-gutter
-		       (0 31))
+		       (0 35))
 		      (fringe-helper
 		       (0 1 1)))
 		     "Fringe version of git-gutter.el [source: github]" single])
  (git-gutter .
-	     [(20130318 1241)
+	     [(20130320 2326)
 	      nil "Port of Sublime Text plugin GitGutter [source: github]" single])
  (git-dwim .
 	   [(20130130 2150)
@@ -2173,6 +2183,11 @@
  (eproject .
 	   [(20130220 1109)
 	    nil "assign files to projects, programatically [source: github]" tar])
+ (epic .
+       [(20130320 1540)
+	((htmlize
+	  (1 47)))
+	"Evernote Picker [source: github]" tar])
  (epc .
       [(20130312 2201)
        ((concurrent
@@ -2552,7 +2567,7 @@
 		      (0 8 0)))
 		    "Yasnippets for clojure [source: github]" tar])
  (clojure-mode .
-	       [(20130225 1036)
+	       [(20130320 1351)
 		nil "Major mode for Clojure code [source: github]" single])
  (cljsbuild-mode .
 		 [(20130110 1632)
@@ -2646,6 +2661,9 @@
  (birds-of-paradise-plus-theme .
 			       [(20120811 1252)
 				nil "A brown/orange light-on-dark theme for Emacs 24 (deftheme). [source: github]" single])
+ (bf-mode .
+	  [(20130320 1248)
+	   nil "Browse file persistently on dired [source: github]" single])
  (bdo .
       [(20130314 1020)
        nil "Do things to a browser page from Emacs. BETA! [source: github]" tar])
@@ -2736,7 +2754,7 @@
 	      [(20080905 553)
 	       nil "major mode for editing Apache configuration files [source: wiki]" single])
  (anti-zenburn-theme .
-		     [(20130216 39)
+		     [(20130319 2353)
 		      nil "Low-contrast Zenburn-inverted theme [source: github]" single])
  (ansi .
        [(20121008 1920)
@@ -2818,7 +2836,7 @@
 	     (1 4)))
 	   "Auto-complete sources for input of mathematical symbols and latex tags [source: github]" single])
  (ac-js2 .
-	 [(20130318 1502)
+	 [(20130320 1728)
 	  ((js2-mode
 	    (20090723))
 	   (skewer-mode
@@ -2829,5 +2847,8 @@
 	      nil "auto-complete.el source for dabbrev [source: wiki]" single])
  (abl-mode .
 	   [(20120718 1655)
-	    nil "Python TDD minor mode [source: github]" single]))
+	    nil "Python TDD minor mode [source: github]" single])
+ (magit .
+	[(20130318 1630)
+	 nil "Control Git from Emacs. [source: github]" tar]))
 

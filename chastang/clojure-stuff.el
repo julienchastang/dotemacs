@@ -5,3 +5,5 @@
 							   "\u0192"
 							   'decompose-region)))))))
 (add-hook 'clojure-mode-hook 'esk-pretty-fn)
+
+(add-hook 'clojure-mode-hook 'lisp-enable-paredit-hook)

@@ -1,8 +1,7 @@
 ;; paredit stuff
 
 (defun lisp-enable-paredit-hook () (paredit-mode 1))
-(add-hook 'clojure-mode-hook 'lisp-enable-paredit-hook)
-(add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
+
 
 ;; Fixing paredit for OS X
 ;; http://www.snowfrog.net/2012/06/02/emacs-paredit-notes-for-osx/

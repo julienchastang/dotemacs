@@ -1,7 +1,9 @@
 (require 'package)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
+;; mepla does not have everything
+(add-to-list 'package-archives
+  '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path (concat "~/.emacs.d/" (user-login-name)))
@@ -15,4 +17,6 @@
 (safe-load "ido-stuff" nil t)
 (safe-load "nrepl-stuff" nil t)
 (safe-load "paredit-stuff" nil t)
+(safe-load "scheme-stuff" nil t)
+(safe-load "lisp-stuff" nil t)
 
