@@ -25,3 +25,10 @@
 
 ;; magit
 (require 'magit)
+
+;;ido
+(require 'ido)
+(ido-mode t)
+
+;;elisp
+(add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
