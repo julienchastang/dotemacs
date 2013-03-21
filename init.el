@@ -9,9 +9,8 @@
 (package-refresh-contents)
 
 (defvar my/install-packages
-  '(
-    ac-nrepl auto-complete clojure-mode geiser magit nrepl paredit
-    popup quack rainbow-delimiters smex undo-tree))
+  '(ac-nrepl auto-complete clojure-mode geiser magit nrepl paredit
+	     popup quack rainbow-delimiters smex undo-tree))
 
 (dolist (pack my/install-packages)
   (unless (package-installed-p pack)
