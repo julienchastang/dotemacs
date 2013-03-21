@@ -30,5 +30,7 @@
 (require 'ido)
 (ido-mode t)
 
-;;elisp
+;;lisps
+(add-hook 'emacs-lisp-mode-hook 'lisp-enable-paredit-hook)
 (add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
+(add-hook 'lisp-interaction-mode-hook 'lisp-enable-paredit-hook)
