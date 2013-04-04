@@ -9,8 +9,7 @@
 (package-refresh-contents)
 
 (defvar my/install-packages
-  '(ac-nrepl auto-complete clojure-mode geiser magit nrepl paredit
-	     popup quack rainbow-delimiters smex undo-tree))
+  '(ac-nrepl auto-complete clojure-mode geiser magit nrepl paredit popup quack rainbow-delimiters smex undo-tree w3m markdown-mode websocket request python-mode ein))
 
 (dolist (pack my/install-packages)
   (unless (package-installed-p pack)
@@ -28,3 +27,6 @@
 (safe-load "org-stuff" nil t)
 (safe-load "nrepl-stuff" nil t)
 (safe-load "scheme-stuff" nil t)
+(safe-load "w3m-stuff" nil t)
+(safe-load "markdown-stuff" nil t)
+(safe-load "python-stuff" nil t)
