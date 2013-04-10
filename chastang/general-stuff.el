@@ -1,5 +1,8 @@
 (menu-bar-mode -1)
 
+;; exec path
+(add-to-list 'exec-path "/opt/local/bin/")
+
 ;; "y or n" instead of "yes or no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -34,3 +37,4 @@
 (add-hook 'emacs-lisp-mode-hook 'lisp-enable-paredit-hook)
 (add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
 (add-hook 'lisp-interaction-mode-hook 'lisp-enable-paredit-hook)
+
