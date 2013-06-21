@@ -26,8 +26,9 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;; magit
+;; git
 (require 'magit)
+(global-git-gutter-mode t)
 
 ;;ido
 (require 'ido)

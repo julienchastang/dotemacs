@@ -8,8 +8,10 @@
 
 (package-refresh-contents)
 
-(defvar my/install-packages
-  '(ac-nrepl auto-complete clojure-mode geiser magit nrepl paredit popup quack rainbow-delimiters smex undo-tree w3m markdown-mode websocket request python-mode ein cyberpunk-theme))
+(defvar  my/install-packages   '(ac-nrepl  auto-complete  clojure-mode
+  geiser  magit  nrepl  paredit popup  quack  rainbow-delimiters  smex
+  undo-tree  w3m  markdown-mode   websocket  request  python-mode  ein
+  cyberpunk-theme clojure-test-mode git-gutter))
 
 (dolist (pack my/install-packages)
   (unless (package-installed-p pack)
@@ -17,7 +19,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path (concat "~/.emacs.d/" (user-login-name)))
-(add-to-list 'custom-theme-load-path (concat "~/.emacs.d/" (user-login-name) "/themes"))
+
+;; color themes
+(add-to-list 'custom-theme-load-path (concat "~/.emacs.d/" 
+					     (user-login-name) "/themes"))
 
 (load "safe-load" nil t)
 (safe-load "general-stuff" nil t)
