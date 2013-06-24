@@ -39,3 +39,5 @@
 (add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
 (add-hook 'lisp-interaction-mode-hook 'lisp-enable-paredit-hook)
 
+;;nyan
+(nyan-mode)
