@@ -11,7 +11,7 @@
 (defvar  my/install-packages   '(ac-nrepl  auto-complete  clojure-mode
   geiser  magit  nrepl  paredit popup  quack  rainbow-delimiters  smex
   undo-tree  w3m  markdown-mode   websocket  request  python-mode  ein
-  cyberpunk-theme clojure-test-mode git-gutter nyan-mode))
+  cyberpunk-theme clojure-test-mode git-gutter nyan-mode jedi))
 
 (dolist (pack my/install-packages)
   (unless (package-installed-p pack)
