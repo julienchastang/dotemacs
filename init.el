@@ -8,10 +8,28 @@
 
 (package-refresh-contents)
 
-(defvar  my/install-packages   '(ac-nrepl  auto-complete  clojure-mode
-  geiser  magit  nrepl  paredit popup  quack  rainbow-delimiters  smex
-  undo-tree  w3m  markdown-mode   websocket  request  python-mode  ein
-  cyberpunk-theme clojure-test-mode git-gutter nyan-mode jedi maxframe))
+(defvar  my/install-packages   
+  '(
+    ;; Clojure
+    clojure-mode clojure-test-mode nrepl ac-nrepl
+
+    ;; Lisp
+    paredit rainbow-delimiters
+
+    ;; Scheme
+    geiser quack
+
+    ;; git
+    magit git-gutter
+
+    ;; misc
+    popup smex undo-tree w3m markdown-mode 
+    websocket request cyberpunk-theme nyan-mode 
+    maxframe  auto-complete  
+
+    ;;Python
+    python-mode ein jedi
+    ))
 
 (dolist (pack my/install-packages)
   (unless (package-installed-p pack)
