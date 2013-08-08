@@ -25,10 +25,10 @@
     ;; misc
     popup smex undo-tree w3m markdown-mode 
     websocket request cyberpunk-theme nyan-mode 
-    maxframe  auto-complete  
+    maxframe auto-complete  
 
     ;;Python
-    python-mode ein jedi
+    ein jedi python-mode nose
     ))
 
 (dolist (pack my/install-packages)
