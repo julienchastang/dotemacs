@@ -45,3 +45,7 @@
 ;; maxframe
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)
+
+;; snippets
+(require 'yasnippet)
+(yas-global-mode 1)
