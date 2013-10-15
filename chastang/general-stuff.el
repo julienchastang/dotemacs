@@ -44,6 +44,8 @@
 
 ;; maxframe
 (require 'maxframe)
+(setq mf-max-width 1650)  ;; Pixel width of main monitor.
+(setq mf-max-height 1050)  ;; Pixel width of main monitor.
 (add-hook 'window-setup-hook 'maximize-frame t)
 
 ;; snippets
