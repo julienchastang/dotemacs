@@ -54,6 +54,7 @@
 
 ;; fill column indicator
 (require 'fill-column-indicator)
+(add-hook 'emacs-lisp-mode-hook 'fci-mode)
 
 ;; rename file and buffer
 ;; http://emacsredux.com/blog/2013/05/04/rename-file-and-buffer/
