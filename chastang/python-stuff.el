@@ -8,3 +8,5 @@
 ;; nose
 (require 'nose)
 
+;; Fill Column Indicator for Python files
+(add-hook 'python-mode-hook 'fci-mode)

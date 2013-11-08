@@ -25,7 +25,7 @@
     ;; misc
     popup smex undo-tree w3m markdown-mode 
     websocket request cyberpunk-theme nyan-mode 
-    maxframe auto-complete yasnippet
+    maxframe auto-complete yasnippet fill-column-indicator
 
     ;;Python
     ein jedi python-mode nose

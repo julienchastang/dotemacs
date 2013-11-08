@@ -52,6 +52,8 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+;; fill column indicator
+(require 'fill-column-indicator)
 
 ;; rename file and buffer
 ;; http://emacsredux.com/blog/2013/05/04/rename-file-and-buffer/
@@ -68,3 +70,4 @@
          (t
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
+
