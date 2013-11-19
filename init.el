@@ -39,8 +39,9 @@
 (add-to-list 'load-path (concat "~/.emacs.d/" (user-login-name)))
 
 ;; color themes
-(add-to-list 'custom-theme-load-path (concat "~/.emacs.d/" 
-					     (user-login-name) "/themes"))
+(add-to-list 'custom-theme-load-path 
+	     (concat "~/.emacs.d/" 
+		     (user-login-name) "/themes"))
 
 (load "safe-load" nil t)
 (safe-load "general-stuff" nil t)
