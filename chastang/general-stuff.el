@@ -35,9 +35,9 @@
 (ido-mode t)
 
 ;;lisps
-(add-hook 'emacs-lisp-mode-hook 'lisp-enable-paredit-hook)
-(add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
-(add-hook 'lisp-interaction-mode-hook 'lisp-enable-paredit-hook)
+(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+(add-hook 'lisp-mode-hook 'smartparens-strict-mode)
+(add-hook 'lisp-interaction-mode-hook 'smartparens-strict-mode)
 
 ;;nyan
 (nyan-mode)

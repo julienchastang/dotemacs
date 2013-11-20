@@ -11,10 +11,10 @@
 (defvar  my/install-packages   
   '(
     ;; Clojure
-    clojure-mode clojure-test-mode nrepl ac-nrepl
+    clojure-mode clojure-test-mode cider ac-nrepl
 
     ;; Lisp
-    paredit rainbow-delimiters
+    smartparens rainbow-delimiters
 
     ;; Scheme
     geiser quack
@@ -47,10 +47,9 @@
 (safe-load "general-stuff" nil t)
 (safe-load "mode-line" nil t)
 (safe-load "color-stuff" nil t)
-(safe-load "paredit-stuff" nil t)
+(safe-load "smartparens-stuff" nil t)
 (safe-load "clojure-stuff" nil t)
 (safe-load "org-stuff" nil t)
-(safe-load "nrepl-stuff" nil t)
 (safe-load "scheme-stuff" nil t)
 (safe-load "w3m-stuff" nil t)
 (safe-load "markdown-stuff" nil t)

@@ -1,1 +1,1 @@
-(add-hook 'lisp-mode-hook 'lisp-enable-paredit-hook)
+(add-hook 'lisp-mode-hook 'smartparens-strict-mode) 
