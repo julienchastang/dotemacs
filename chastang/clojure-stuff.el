@@ -11,6 +11,9 @@
 
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 
+;; Fill Column Indicator
+(add-hook 'clojure-mode-hook 'fci-mode)
+
 ;; Cider stuff
 
 (add-hook 'cider-mode-hook 'rainbow-delimiters-mode)
@@ -34,3 +37,4 @@
 
 (eval-after-load "cider"
   '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+
