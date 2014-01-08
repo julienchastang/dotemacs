@@ -72,3 +72,6 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
+;; auto revert buffer
+
+(global-auto-revert-mode 1)
