@@ -54,3 +54,4 @@
 (safe-load "w3m-stuff" nil t)
 (safe-load "markdown-stuff" nil t)
 (safe-load "python-stuff" nil t)
+(safe-load "julia-stuff" nil t)
