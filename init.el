@@ -28,7 +28,7 @@
     maxframe auto-complete yasnippet fill-column-indicator
 
     ;;Python
-    ein jedi nose python-mode 
+    python-environment ein jedi nose python-mode 
     ))
 
 (dolist (pack my/install-packages)
