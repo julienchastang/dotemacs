@@ -72,6 +72,14 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
+(defun generate-passwd ()
+  "Generate password."
+  (interactive)
+  (kill-new 
+   (substring 
+    (shell-command-to-string "pwgen -0 -B -A 15 1") 
+    0 -1)))
+
 ;; auto revert buffer
 
 (global-auto-revert-mode 1)
