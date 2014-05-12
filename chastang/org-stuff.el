@@ -1,5 +1,10 @@
+;; org mode stuff
+
 (define-key global-map "\C-ca" 'org-agenda)
 
+(setq org-log-done 'time)
+
+(setq org-confirm-babel-evaluate nil)
 (setq org-todo-keywords
              '((sequence "TODO" "PROG" "STCK" "DONE" )))
 
@@ -9,7 +14,11 @@
               ("STCK" :foreground "#375EB7" :background "#1A1A1A")
               ("DONE" :foreground "#43A243" :background "#1A1A1A"))))
 
-(setq org-tag-faces '(("URGENT" :background "#DB2929")))
+;; needs to be in org file itself, but don't know how to do that yet.
+(setq org-tag-faces 
+      '(("URGENT" :background "#DB2929")
+	("Python" :foreground "#3772A2" :background "#FFDC50")
+	("IDV"    :foreground "#1411C0" :background "#349403")))
 
 (setq org-priority-faces
       '((?A . (:foreground "red"))
