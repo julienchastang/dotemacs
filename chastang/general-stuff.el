@@ -1,5 +1,8 @@
 (menu-bar-mode -1)
 
+(setq inhibit-startup-message t)
+(split-window-right)
+
 ;; exec path
 (add-to-list 'exec-path "/opt/local/bin/")
 
