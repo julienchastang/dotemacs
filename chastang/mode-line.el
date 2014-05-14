@@ -90,12 +90,12 @@
     :foreground "gray60" :background "gray20"
     :inverse-video nil
     :family "Muli" :height 110
-    :box '(:line-width 6 :color "gray20" :style nil))
+    :box '(:line-width 2 :color "#E30707" :style nil))
 (set-face-attribute 'mode-line-inactive nil
     :foreground "gray40" :background "gray15"
     :inverse-video nil
     :family "Muli" :height 110
-    :box '(:line-width 6 :color "gray15" :style nil))
+    :box '(:line-width 2 :color "gray15" :style nil))
 (set-face-attribute 'mode-line-read-only-face nil
     :inherit 'mode-line-face
     :foreground "#4271ae"

@@ -45,7 +45,6 @@
 
 (load "safe-load" nil t)
 (safe-load "general-stuff" nil t)
-(safe-load "mode-line" nil t)
 (safe-load "color-stuff" nil t)
 (safe-load "smartparens-stuff" nil t)
 (safe-load "clojure-stuff" nil t)
@@ -55,3 +54,4 @@
 (safe-load "markdown-stuff" nil t)
 (safe-load "python-stuff" nil t)
 (safe-load "julia-stuff" nil t)
+(safe-load "mode-line" nil t)
