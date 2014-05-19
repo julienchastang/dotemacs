@@ -2,6 +2,7 @@ ac-comphist.dat
 auto-save-list
 .DS_Store
 *~
+*.el
 \#*
 eshell
 elpa

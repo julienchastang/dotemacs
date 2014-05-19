@@ -1,0 +1,366 @@
+#+TITLE:    Julien's emacs settings file
+#+AUTHOR:   Julien Chastang
+#+EMAIL:    julien.c.chastang@gmail.com
+#+LANGUAGE: en
+
+* Literate Emacs initialization file
+  
+** General Settings 
+
+Everything in this section are general settings that should not need any
+non-default packages.
+
+First let's change to a less horrible color theme
+
+#+BEGIN_SRC emacs-lisp
+(load-theme 'deeper-blue)
+#+END_SRC
+
+Column and line numbers
+
+#+BEGIN_SRC emacs-lisp
+(line-number-mode 1)
+(column-number-mode 1)
+#+END_SRC
+
+Don't need a startup message
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-message t)
+#+end_src
+
+Initially split windows vertically
+
+#+begin_src emacs-lisp
+(split-window-right)
+#+end_src
+
+UTF-8
+
+#+BEGIN_SRC emacs-lisp
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+#+END_SRC
+
+y or n instead of yes or no
+
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Turn on syntax highlighting for all buffers
+
+#+BEGIN_SRC emacs-lisp
+(global-font-lock-mode t)
+#+END_SRC
+
+Turn off irrelevant stuff.
+
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode -1)
+(when (window-system)
+  (set-scroll-bar-mode 'nil)
+  (mouse-wheel-mode t))
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(blink-cursor-mode -1)
+#+END_SRC
+
+Set up the fill-column to 80 characters and set tab width to 2.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default fill-column 80)
+(setq-default default-tab-width 2)
+(setq-default indent-tabs-mode nil)
+#+END_SRC
+
+Hide the mouse while typing.
+
+#+BEGIN_SRC emacs-lisp
+(setq make-pointer-invisible t)
+#+END_SRC
+
+It's okay to refer to a file by a symlink.
+
+#+BEGIN_SRC emacs-lisp
+(setq-default find-file-visit-truename nil)
+#+END_SRC
+
+Require a newline at the end of files.
+
+#+BEGIN_SRC emacs-lisp
+(setq require-final-newline t)
+#+END_SRC
+
+Always turn on whitespace mode
+
+#+BEGIN_SRC emacs-lisp
+(whitespace-mode t)
+#+END_SRC
+
+Parentheses.
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode 1)
+#+END_SRC
+
+Auto revert buffer.
+
+#+BEGIN_SRC emacs-lisp
+(global-auto-revert-mode 1)
+#+END_SRC
+
+rename file and buffer
+ http://emacsredux.com/blog/2013/05/04/rename-file-and-buffer/
+
+#+BEGIN_SRC emacs-lisp
+(defun rename-file-and-buffer ()
+  "Rename the current buffer and file it is visiting."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (message "Buffer is not visiting a file!")
+      (let ((new-name (read-file-name "New name: " filename)))
+        (cond
+         ((vc-backend filename) (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name t)
+          (set-visited-file-name new-name t t)))))))
+#+END_SRC
+
+Interactively Do Things
+
+#+BEGIN_SRC emacs-lisp
+(ido-mode t)
+#+END_SRC
+
+** Org mode Settings
+
+At this point we still have not done anything special outside of what is
+possible in a default emacs programming environment. This will continue for this
+section.
+
+Let's get the agenda going.
+
+#+BEGIN_SRC emacs-lisp
+(define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+
+Some todo and priority customizations
+
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords
+             '((sequence "TODO" "PROG" "STCK" "DONE" )))
+
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "#DB2929" :background "#1A1A1A")
+              ("PROG" :foreground "#D08800" :background "#1A1A1A")
+              ("STCK" :foreground "#375EB7" :background "#1A1A1A")
+              ("DONE" :foreground "#43A243" :background "#1A1A1A"))))
+
+(setq org-priority-faces
+      '((?A . (:foreground "red"))
+        (?B . (:foreground "#D08800" ))
+        (?C . (:foreground "#43A243" ))))
+#+END_SRC
+
+Done items should have a time stamp.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-log-done 'time)
+#+END_SRC
+
+Code blocks should be have syntax highlighting
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-fontify-natively t)
+#+END_SRC
+
+** Package Archives
+We have a decent emacs configuration at this point. Now start loading external
+utilities.
+
+First define the package archives and where they live.
+
+#+BEGIN_SRC emacs-lisp
+;; Keep track of loading time
+(defconst emacs-start-time (current-time))
+
+;; initalize all ELPA packages
+(require 'package)
+
+;; define some package archives
+(add-to-list 'package-archives 
+   '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives
+  '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+(package-refresh-contents)
+
+;; keep customize settings in their own file
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+;; Message how long it took to load everything (minus packages)
+(let ((elapsed (float-time (time-subtract (current-time)
+                                          emacs-start-time))))
+  (message "Loading settings...done (%.3fs)" elapsed))
+#+END_SRC
+
+** Packages We Will Use
+
+Define all the packages we are going to use.
+
+#+tblname: my-packages
+|-----------------------+--------------------------------------------|
+| package               | description                                |
+|-----------------------+--------------------------------------------|
+| magit                 | emacs git client                           |
+| git-gutter            | git gutter                                 |
+| fill-column-indicator | 80 column rule                             |
+| smart-mode-line       | A better mode line                         |
+| smartparens           | Smart paren pairs                          |
+| smex                  | recently and most frequently used commands |
+| w3m                   | web browser in emacs                       |
+|-----------------------+--------------------------------------------|
+
+Download the packages we need.
+
+#+BEGIN_SRC emacs-lisp :var packs=my-packages :hlines no
+(defvar install-packages (mapcar 'intern (mapcar 'car (cdr packs))))
+
+(dolist (pack install-packages)
+   (unless (package-installed-p pack)
+     (package-install pack)))
+#+END_SRC
+
+** Package Configuration
+*** git
+
+#+BEGIN_SRC emacs-lisp
+(global-git-gutter-mode t)
+#+END_SRC
+
+*** Fill Column Indicator
+
+#+BEGIN_SRC emacs-lisp
+nil
+#+END_SRC
+
+*** Smart mode line
+
+#+BEGIN_SRC emacs-lisp
+(setq sml/theme 'dark)
+(sml/setup)
+#+END_SRC
+
+*** Smartparens
+    
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;
+;; global
+(smartparens-global-mode t)
+
+;; highlights matching pairs
+(show-smartparens-global-mode t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; keybinding management
+
+(define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+(define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+
+(define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
+(define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
+(define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+(define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+
+(define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
+(define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+(define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
+(define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
+
+(define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
+(define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
+
+(define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
+(define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
+
+(define-key sp-keymap (kbd "M-<delete>") 'sp-unwrap-sexp)
+(define-key sp-keymap (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+
+(define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+(define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+(define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+(define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+
+(define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
+(define-key sp-keymap (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
+(define-key sp-keymap (kbd "C-M-<backspace>") 'sp-splice-sexp-killing-backward)
+(define-key sp-keymap (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around)
+
+(define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
+(define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+(define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
+
+(define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
+(define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
+
+(define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
+(define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
+(define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
+(define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
+(define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
+(define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
+(define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
+(define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
+(define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
+
+;;;;;;;;;;;;;;;;;;
+;; pair management
+
+(sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
+
+;;; markdown-mode
+(sp-with-modes '(markdown-mode gfm-mode rst-mode)
+  (sp-local-pair "*" "*" :bind "C-*")
+  (sp-local-tag "2" "**" "**")
+  (sp-local-tag "s" "```scheme" "```")
+  (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags))
+
+;;; tex-mode latex-mode
+(sp-with-modes '(tex-mode plain-tex-mode latex-mode)
+  (sp-local-tag "i" "\"<" "\">"))
+
+;;; html-mode
+(sp-with-modes '(html-mode sgml-mode)
+  (sp-local-pair "<" ">"))
+
+;;; lisp modes
+(sp-with-modes sp--lisp-modes
+  (sp-local-pair "(" nil :bind "C-("))
+#+END_SRC
+*** Smex
+    
+#+BEGIN_SRC emacs-lisp
+(smex-initialize) 
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+#+END_SRC
+
+*** W3M
+
+#+BEGIN_SRC emacs-lisp
+(setq browse-url-browser-function 'w3m-browse-url)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+ ;; optional keyboard short-cut
+(global-set-key "\C-xm" 'browse-url-at-point)
+
+;;cookies
+(setq w3m-use-cookies t)
+#+END_SRC
