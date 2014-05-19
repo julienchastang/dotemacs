@@ -3,7 +3,7 @@
 #+EMAIL:    julien.c.chastang@gmail.com
 #+LANGUAGE: en
 
-* Literate Emacs initialization file
+* Literate Emacs Initialization File
   
 ** General Settings 
 
@@ -16,23 +16,10 @@ First let's change to a less horrible color theme
 (load-theme 'deeper-blue)
 #+END_SRC
 
-Column and line numbers
-
-#+BEGIN_SRC emacs-lisp
-(line-number-mode 1)
-(column-number-mode 1)
-#+END_SRC
-
 Don't need a startup message
 
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
-#+end_src
-
-Initially split windows vertically
-
-#+begin_src emacs-lisp
-(split-window-right)
 #+end_src
 
 UTF-8
@@ -215,17 +202,28 @@ First define the package archives and where they live.
 Define all the packages we are going to use.
 
 #+tblname: my-packages
-|-----------------------+--------------------------------------------|
-| package               | description                                |
-|-----------------------+--------------------------------------------|
-| magit                 | emacs git client                           |
-| git-gutter            | git gutter                                 |
-| fill-column-indicator | 80 column rule                             |
-| smart-mode-line       | A better mode line                         |
-| smartparens           | Smart paren pairs                          |
-| smex                  | recently and most frequently used commands |
-| w3m                   | web browser in emacs                       |
-|-----------------------+--------------------------------------------|
+|-----------------------+---------------------------------------------+----------|
+| package               | description                                 | anchors  |
+|-----------------------+---------------------------------------------+----------|
+| magit                 | emacs git client                            | [[git]]      |
+| git-gutter            | git gutter                                  | [[git]]      |
+| fill-column-indicator | 80 column rule                              | [[fci]]      |
+| smart-mode-line       | A better mode line                          | [[modeline]] |
+| smartparens           | Smart paren pairs                           | [[paren]]    |
+| rainbow-delimiters    | rainbow parentheses                         | [[paren]]    |
+| smex                  | recently and most frequently used commands  | [[smex]]     |
+| w3m                   | web browser in emacs                        | [[w3m]]      |
+| undo-tree             | undo tree                                   | [[undo]]     |
+| auto-complete         | auto-completion extension for Emac          | [[autoc]]    |
+| clojure-mode          | Mode for clojure                            | [[clojure]]  |
+| cider                 | Clojure IDE and REPL for Emacs              | [[clojure]]  |
+| kibit-mode            | Static code analyzer for Clojure            | [[clojure]]  |
+| clojure-test-mode     | Support for running Clojure tests           | [[clojure]]  |
+| javap-mode            | Load a .class file you get the javap output |          |
+| python-mode           | Python mode for emacs                       | [[python]]   |
+| ein                   | Emacs IPython Notebook                      | [[python]]   |
+| jedi                  | Python auto-completion for Emacs            | [[python]]   |
+|-----------------------+---------------------------------------------+----------|
 
 Download the packages we need.
 
@@ -239,25 +237,33 @@ Download the packages we need.
 
 ** Package Configuration
 *** git
+#+NAME: git
 
 #+BEGIN_SRC emacs-lisp
 (global-git-gutter-mode t)
 #+END_SRC
 
 *** Fill Column Indicator
+#+NAME: fci
 
 #+BEGIN_SRC emacs-lisp
 nil
 #+END_SRC
 
-*** Smart mode line
+*** Mode line
+#+NAME: modeline
 
 #+BEGIN_SRC emacs-lisp
+(line-number-mode 1)
+(column-number-mode 1)
 (setq sml/theme 'dark)
 (sml/setup)
 #+END_SRC
 
-*** Smartparens
+*** Parentheses
+#+NAME: paren
+
+**** Smartparens
     
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;
@@ -329,7 +335,7 @@ nil
   (sp-local-pair "*" "*" :bind "C-*")
   (sp-local-tag "2" "**" "**")
   (sp-local-tag "s" "```scheme" "```")
-  (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags))
+  (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-mafltch-sgml-tags))
 
 ;;; tex-mode latex-mode
 (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
@@ -343,7 +349,13 @@ nil
 (sp-with-modes sp--lisp-modes
   (sp-local-pair "(" nil :bind "C-("))
 #+END_SRC
+**** Rainbow Delimiters
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+#+END_SRC
+
 *** Smex
+#+NAME: smex
     
 #+BEGIN_SRC emacs-lisp
 (smex-initialize) 
@@ -354,6 +366,7 @@ nil
 #+END_SRC
 
 *** W3M
+#+NAME: w3m
 
 #+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'w3m-browse-url)
@@ -363,4 +376,35 @@ nil
 
 ;;cookies
 (setq w3m-use-cookies t)
+#+END_SRC
+
+*** Undo
+#+NAME: undo
+
+
+#+BEGIN_SRC emacs-lisp
+(global-undo-tree-mode)
+#+END_SRC
+    
+*** Auto-Complete
+#+NAME: autoc
+
+#+BEGIN_SRC emacs-lisp
+(ac-config-default)
+#+END_SRC
+
+*** Clojure
+#+NAME: clojure
+
+*** Python
+#+NAME: python
+
+
+#+BEGIN_SRC emacs-lisp
+;; autocomplete with Jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'ein:connect-mode-hook 'ein:jedi-setup)
+
+;; fill column indicator for python files
+(add-hook 'python-mode-hook 'fci-mode)
 #+END_SRC
