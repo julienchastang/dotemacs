@@ -230,28 +230,29 @@ Define all the packages we are going to use. Note if you are viewing this table
 on github, the anchors will not take you anywhere.
 
 #+tblname: my-packages
-|-----------------------+---------------------------------------------+----------|
-| package               | description                                 | anchors  |
-|-----------------------+---------------------------------------------+----------|
-| magit                 | emacs git client                            | [[git]]      |
-| git-gutter            | git gutter                                  | [[git]]      |
-| fill-column-indicator | 80 column rule                              | [[fci]]      |
-| smart-mode-line       | A better mode line                          | [[modeline]] |
-| smartparens           | Smart paren pairs                           | [[paren]]    |
-| rainbow-delimiters    | rainbow parentheses                         | [[paren]]    |
-| smex                  | recently and most frequently used commands  | [[smex]]     |
-| w3m                   | web browser in emacs                        | [[w3m]]      |
-| undo-tree             | undo tree                                   | [[undo]]     |
-| auto-complete         | auto-completion extension for Emac          | [[autoc]]    |
-| clojure-mode          | Mode for clojure                            | [[clojure]]  |
-| cider                 | Clojure IDE and REPL for Emacs              | [[clojure]]  |
-| kibit-mode            | Static code analyzer for Clojure            | [[clojure]]  |
-| clojure-test-mode     | Support for running Clojure tests           | [[clojure]]  |
-| javap-mode            | Load a .class file you get the javap output |          |
-| python-mode           | Python mode for emacs                       | [[python]]   |
-| ein                   | Emacs IPython Notebook                      | [[python]]   |
-| jedi                  | Python auto-completion for Emacs            | [[python]]   |
-|-----------------------+---------------------------------------------+----------|
+|-----------------------+--------------------------------------------+----------|
+| package               | description                                | anchors  |
+|-----------------------+--------------------------------------------+----------|
+| magit                 | emacs git client                           | [[git]]      |
+| git-gutter            | git gutter                                 | [[git]]      |
+| fill-column-indicator | 80 column rule                             | [[fci]]      |
+| smart-mode-line       | A better mode line                         | [[modeline]] |
+| smartparens           | Smart paren pairs                          | [[paren]]    |
+| rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
+| smex                  | recently and most frequently used commands | [[smex]]     |
+| w3m                   | web browser in emacs                       | [[w3m]]      |
+| undo-tree             | undo tree                                  | [[undo]]     |
+| auto-complete         | auto-completion extension for Emac         | [[autoc]]    |
+| windresize            | arrow keys resize the window               |          |
+| clojure-mode          | Mode for clojure                           | [[clojure]]  |
+| cider                 | Clojure IDE and REPL for Emacs             | [[clojure]]  |
+| kibit-mode            | Static code analyzer for Clojure           | [[clojure]]  |
+| clojure-test-mode     | Support for running Clojure tests          | [[clojure]]  |
+| javap-mode            | Load .class file and get javap output      |          |
+| python-mode           | Python mode for emacs                      | [[python]]   |
+| ein                   | Emacs IPython Notebook                     | [[python]]   |
+| jedi                  | Python auto-completion for Emacs           | [[python]]   |
+|-----------------------+--------------------------------------------+----------|
 
 Download the packages we need.
 
