@@ -4,6 +4,9 @@
 #+LANGUAGE: en
 
 * Literate Emacs Initialization File
+
+Emacs initialization as org file.
+
 ** Disclaimer
 
 #+BEGIN_SRC emacs-lisp
@@ -13,8 +16,8 @@
 
 ** Preamble
 
-In order to have this file be the emacs init file, put the following snippet
-in your ~/.emacs.d/init.el file.
+In order to have this file be the emacs initialization file, put the following
+snippet in your ~/.emacs.d/init.el file.
 
 #+BEGIN_SRC
 (package-initialize)
@@ -36,7 +39,7 @@ tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat
 (load-theme 'deeper-blue)
 #+END_SRC
 
-Don't need a startup message
+Don't need a startup message.
 
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
@@ -227,7 +230,8 @@ First define the package archives and where they live.
 ** Packages We Will Use
 
 Define all the packages we are going to use. Note if you are viewing this table
-on github, the anchors will not take you anywhere.
+on github, the anchors will not take you anywhere. The anchors only work in
+emacs org mode.
 
 #+tblname: my-packages
 |-----------------------+--------------------------------------------+----------|
