@@ -240,7 +240,7 @@ emacs org mode.
 | magit                 | emacs git client                           | [[git]]      |
 | git-gutter            | git gutter                                 | [[git]]      |
 | fill-column-indicator | 80 column rule                             | [[fci]]      |
-| smart-mode-line       | A better mode line                         | [[modeline]] |
+| powerline             | A better mode line                         | [[modeline]] |
 | smartparens           | Smart paren pairs                          | [[paren]]    |
 | rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
 | smex                  | recently and most frequently used commands | [[smex]]     |
@@ -287,10 +287,17 @@ nil
 #+NAME: modeline
 
 #+BEGIN_SRC emacs-lisp
-(line-number-mode 1)
-(column-number-mode 1)
-(setq sml/theme 'dark)
-(sml/setup)
+(powerline-default-theme)
+(set-face-background 'mode-line "#FF8700")
+(set-face-foreground 'mode-line "#870000")
+ 
+(set-face-background 'powerline-active1 "#373b41")
+(set-face-foreground 'powerline-active1 "#dcdcdc")
+ 
+(set-face-background 'powerline-active2 "#282a2e")
+(set-face-foreground 'powerline-active2 "#dcdcdc")
+
+(powerline-reset)
 #+END_SRC
 
 *** Parentheses
