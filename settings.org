@@ -165,30 +165,6 @@ Let's get the agenda going.
 (define-key global-map "\C-ca" 'org-agenda)
 #+END_SRC
 
-Some todo and priority customizations
-
-#+BEGIN_SRC emacs-lisp
-(setq org-todo-keywords
-             '((sequence "TODO" "PROG" "STCK" "DONE" )))
-
-(setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "#DB2929" :background "#1A1A1A")
-              ("PROG" :foreground "#D08800" :background "#1A1A1A")
-              ("STCK" :foreground "#375EB7" :background "#1A1A1A")
-              ("DONE" :foreground "#43A243" :background "#1A1A1A"))))
-
-(setq org-priority-faces
-      '((?A . (:foreground "red"))
-        (?B . (:foreground "#D08800" ))
-        (?C . (:foreground "#43A243" ))))
-#+END_SRC
-
-Done items should have a time stamp.
-
-#+BEGIN_SRC emacs-lisp
-(setq org-log-done 'time)
-#+END_SRC
-
 Code blocks should be have syntax highlighting
 
 #+BEGIN_SRC emacs-lisp
