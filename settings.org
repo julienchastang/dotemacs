@@ -171,6 +171,21 @@ Code blocks should be have syntax highlighting
 (setq org-src-fontify-natively t)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(defun my/org-query-clock-out ()
+      "Ask the user before clocking out.
+    This is a useful function for adding to `kill-emacs-query-functions'."
+      (if (and (featurep 'org-clock)
+               (funcall 'org-clocking-p)
+               (y-or-n-p "You are currently clocking time, clock out? "))
+          (org-clock-out)
+        t)) ; only fails on keyboard quit or error
+
+(add-hook 'kill-emacs-query-functions 'my/org-query-clock-out)
+#+END_SRC
+
+
+
 ** Package Archives
 We have a decent emacs configuration at this point. Now start loading external
 utilities.
