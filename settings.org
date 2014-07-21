@@ -172,6 +172,8 @@ Code blocks should be have syntax highlighting
 (setq org-src-fontify-natively t)
 #+END_SRC
 
+Clocking commands
+
 #+BEGIN_SRC emacs-lisp
 (defun my/org-query-clock-out ()
       "Ask the user before clocking out.
