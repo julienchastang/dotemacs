@@ -1,4 +1,4 @@
-#+TITLE:    Julien's emacs settings file
+ #+TITLE:    Julien's emacs settings file
 #+AUTHOR:   Julien Chastang
 #+EMAIL:    julien.c.chastang@gmail.com
 #+LANGUAGE: en
@@ -187,7 +187,17 @@ Clocking commands
 (add-hook 'kill-emacs-query-functions 'my/org-query-clock-out)
 #+END_SRC
 
+Ditaa is a command-line utility that converts diagrams drawn using ASCII art
+into bitmap graphics.
 
+#+BEGIN_SRC emacs-lisp
+;; Brew path
+(setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
+
+(org-babel-do-load-languages
+      'org-babel-load-languages
+      '((ditaa . t)))
+#+END_SRC
 
 ** Package Archives
 We have a decent emacs configuration at this point. Now start loading external
