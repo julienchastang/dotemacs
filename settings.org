@@ -425,6 +425,19 @@ nil
  ;; optional keyboard short-cut
 (global-set-key "\C-xm" 'browse-url-at-point)
 
+;; Give the user a chance to switch away from W3M
+(defun toggle-url-browser ()
+  "Toggle URL browser between W3M and firefox (linux) or default OS X browser."
+  (let ((browser 
+         (if (eq system-type 'darwin) 
+             'browse-url-default-macosx-browser
+           'browse-url-firefox )))
+    (setq browse-url-browser-function 
+          (if (eq browse-url-browser-function browser) 
+              'w3m-browse-url
+            browser)))
+  browse-url-browser-function)
+
 ;;cookies
 (setq w3m-use-cookies t)
 #+END_SRC
