@@ -127,7 +127,7 @@ rename file and buffer
  http://emacsredux.com/blog/2013/05/04/rename-file-and-buffer/
 
 #+BEGIN_SRC emacs-lisp
-(defun rename-file-and-buffer ()
+(defun jc/rename-file-and-buffer ()
   "Rename the current buffer and file it is visiting."
   (interactive)
   (let ((filename (buffer-file-name)))
@@ -175,7 +175,7 @@ Code blocks should be have syntax highlighting
 Clocking commands
 
 #+BEGIN_SRC emacs-lisp
-(defun my/org-query-clock-out ()
+(defun jc/org-query-clock-out ()
       "Ask the user before clocking out.
     This is a useful function for adding to `kill-emacs-query-functions'."
       (if (and (featurep 'org-clock)
@@ -184,7 +184,7 @@ Clocking commands
           (org-clock-out)
         t)) ; only fails on keyboard quit or error
 
-(add-hook 'kill-emacs-query-functions 'my/org-query-clock-out)
+(add-hook 'kill-emacs-query-functions 'jc/org-query-clock-out)
 #+END_SRC
 
 Ditaa is a command-line utility that converts diagrams drawn using ASCII art
@@ -426,8 +426,9 @@ nil
 (global-set-key "\C-xm" 'browse-url-at-point)
 
 ;; Give the user a chance to switch away from W3M
-(defun toggle-url-browser ()
+(defun jc/toggle-url-browser ()
   "Toggle URL browser between W3M and firefox (linux) or default OS X browser."
+  (interactive)
   (let ((browser 
          (if (eq system-type 'darwin) 
              'browse-url-default-macosx-browser
