@@ -1,4 +1,4 @@
- #+TITLE:    Julien's emacs settings file
+#+TITLE:    Julien's emacs settings file
 #+AUTHOR:   Julien Chastang
 #+EMAIL:    julien.c.chastang@gmail.com
 #+LANGUAGE: en
