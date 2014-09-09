@@ -39,6 +39,13 @@ tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat
 (load-theme 'deeper-blue)
 #+END_SRC
 
+Increase auto-save rate.
+
+#+begin_src emacs-lisp
+(setq auto-save-interval 20) ; twenty keystrokes
+(setq auto-save-timeout 10) ; ten idle seconds
+#+end_src
+
 Don't need a startup message.
 
 #+begin_src emacs-lisp
