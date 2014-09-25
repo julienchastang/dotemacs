@@ -263,6 +263,7 @@ emacs org mode.
 | rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
 | smex                  | recently and most frequently used commands | [[smex]]     |
 | w3m                   | web browser in emacs                       | [[w3m]]      |
+| markdown-mode         | markdown for emacs                         | [[markdown]] |
 | undo-tree             | undo tree                                  | [[undo]]     |
 | auto-complete         | auto-completion extension for Emac         | [[autoc]]    |
 | windresize            | arrow keys resize the window               |          |
@@ -491,4 +492,17 @@ nil
 
 ;; fill column indicator for python files
 (add-hook 'python-mode-hook 'fci-mode)
+#+END_SRC
+
+*** Markdown
+#+NAME: markdown
+
+#+BEGIN_SRC emacs-lisp
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 #+END_SRC
