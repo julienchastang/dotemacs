@@ -262,7 +262,6 @@ emacs org mode.
 | smartparens           | Smart paren pairs                          | [[paren]]    |
 | rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
 | smex                  | recently and most frequently used commands | [[smex]]     |
-| w3m                   | web browser in emacs                       | [[w3m]]      |
 | markdown-mode         | markdown for emacs                         | [[markdown]] |
 | undo-tree             | undo tree                                  | [[undo]]     |
 | auto-complete         | auto-completion extension for Emac         | [[autoc]]    |
@@ -422,33 +421,6 @@ nil
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-#+END_SRC
-
-*** W3M
-#+NAME: w3m
-
-#+BEGIN_SRC emacs-lisp
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
- ;; optional keyboard short-cut
-(global-set-key "\C-xm" 'browse-url-at-point)
-
-;; Give the user a chance to switch away from W3M
-(defun jc/toggle-url-browser ()
-  "Toggle URL browser between W3M and firefox (linux) or default OS X browser."
-  (interactive)
-  (let ((browser 
-         (if (eq system-type 'darwin) 
-             'browse-url-default-macosx-browser
-           'browse-url-firefox )))
-    (setq browse-url-browser-function 
-          (if (eq browse-url-browser-function browser) 
-              'w3m-browse-url
-            browser)))
-  browse-url-browser-function)
-
-;;cookies
-(setq w3m-use-cookies t)
 #+END_SRC
 
 *** Undo
