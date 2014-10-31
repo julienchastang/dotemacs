@@ -259,29 +259,30 @@ on github, the anchors will not take you anywhere. The anchors only work in
 emacs org mode.
 
 #+tblname: my-packages
-|-----------------------+--------------------------------------------+----------|
-| package               | description                                | anchors  |
-|-----------------------+--------------------------------------------+----------|
-| magit                 | emacs git client                           | [[git]]      |
-| git-gutter            | git gutter                                 | [[git]]      |
-| fill-column-indicator | 80 column rule                             | [[fci]]      |
-| powerline             | A better mode line                         | [[modeline]] |
-| smartparens           | Smart paren pairs                          | [[paren]]    |
-| rainbow-delimiters    | rainbow parentheses                        | [[paren]]    |
-| smex                  | recently and most frequently used commands | [[smex]]     |
-| markdown-mode         | markdown for emacs                         | [[markdown]] |
-| undo-tree             | undo tree                                  | [[undo]]     |
-| auto-complete         | auto-completion extension for Emac         | [[autoc]]    |
-| windresize            | arrow keys resize the window               |          |
-| clojure-mode          | Mode for clojure                           | [[clojure]]  |
-| cider                 | Clojure IDE and REPL for Emacs             | [[clojure]]  |
-| kibit-mode            | Static code analyzer for Clojure           | [[clojure]]  |
-| ac-nrepl              | nrepl completion source for Emacs          | [[clojure]]  |
-| javap-mode            | Load .class file and get javap output      |          |
-| python-mode           | Python mode for emacs                      | [[python]]   |
-| ein                   | Emacs IPython Notebook                     | [[python]]   |
-| jedi                  | Python auto-completion for Emacs           | [[python]]   |
-|-----------------------+--------------------------------------------+----------|
+|-----------------------+--------------------------------------------------+----------|
+| package               | description                                      | anchors  |
+|-----------------------+--------------------------------------------------+----------|
+| magit                 | emacs git client                                 | [[git]]      |
+| git-gutter            | git gutter                                       | [[git]]      |
+| fill-column-indicator | 80 column rule                                   | [[fci]]      |
+| powerline             | A better mode line                               | [[modeline]] |
+| smartparens           | Smart paren pairs                                | [[paren]]    |
+| rainbow-delimiters    | rainbow parentheses                              | [[paren]]    |
+| smex                  | recently and most frequently used commands       | [[smex]]     |
+| markdown-mode         | markdown for emacs                               | [[markdown]] |
+| undo-tree             | undo tree                                        | [[undo]]     |
+| auto-complete         | auto-completion extension for Emac               | [[autoc]]    |
+| company               | Modular in-buffer completion framework for Emacs | [[autoc]]    |
+| windresize            | arrow keys resize the window                     |          |
+| clojure-mode          | Mode for clojure                                 | [[clojure]]  |
+| cider                 | Clojure IDE and REPL for Emacs                   | [[clojure]]  |
+| kibit-mode            | Static code analyzer for Clojure                 | [[clojure]]  |
+| ac-cider              | Emacs auto-complete client for CIDER             | [[clojure]]  |
+| javap-mode            | Load .class file and get javap output            |          |
+| python-mode           | Python mode for emacs                            | [[python]]   |
+| ein                   | Emacs IPython Notebook                           | [[python]]   |
+| jedi                  | Python auto-completion for Emacs                 | [[python]]   |
+|-----------------------+--------------------------------------------------+----------|
 
 Download the packages we need.
 
@@ -451,13 +452,27 @@ nil
 #+BEGIN_SRC emacs-lisp
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
+(setq cider-show-error-buffer nil)
 
-(eval-after-load "cider"
-  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
+(add-hook 'cider-repl-mode-hook 'company-mode)
+
+(add-hook 'cider-mode-hook 'company-mode)
+
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+
+(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-mode))
+
 #+END_SRC
 
 *** Python
