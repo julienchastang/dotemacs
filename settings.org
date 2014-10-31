@@ -32,11 +32,18 @@ Everything in this section are general settings that should not need any
 non-default packages.
 
 First let's change to a less horrible color theme. The available default options
-are adwaita deeper-blue dichromacy light-blue manoj-dark misterioso tango
-tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat
+are adwaita 	deeper-blue 	dichromacy 	leuven 	light-blue 	manoj-dark
+misterioso 	tango 	tango-dark 	tsdh-dark 	tsdh-light 	wheatgrass
+whiteboard 	wombat
 
 #+BEGIN_SRC emacs-lisp
-(load-theme 'deeper-blue)
+(load-theme 'leuven)
+
+(custom-set-faces
+ '(default ((t (:inherit nil :stipple nil :background "#F6F6EF" :foreground "#333333" 
+                :inverse-video nil :box nil :strike-through nil :overline nil 
+                :underline nil :slant normal :weight normal :height 98 :width normal 
+                :foundry "monotype" :family "Andale Mono")))))
 #+END_SRC
 
 Increase auto-save rate.
