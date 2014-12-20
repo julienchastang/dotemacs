@@ -86,8 +86,8 @@ Turn off irrelevant stuff.
 (menu-bar-mode -1)
 (when (window-system)
   (set-scroll-bar-mode 'nil)
-  (mouse-wheel-mode t))
-(tool-bar-mode -1)
+  (mouse-wheel-mode t)
+  (tool-bar-mode -1))
 (tooltip-mode -1)
 (blink-cursor-mode -1)
 #+END_SRC
