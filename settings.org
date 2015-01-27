@@ -283,6 +283,7 @@ emacs org mode.
 | ein                   | Emacs IPython Notebook                           | [[python]]   |
 | jedi                  | Python auto-completion for Emacs                 | [[python]]   |
 | hackernews            | Access the hackernews aggregator from Emacs      | [[hn]]       |
+| sx                    | Stack Exchange for Emacs                         | [[sx]]       |
 |-----------------------+--------------------------------------------------+----------|
 
 Download the packages we need.
@@ -416,5 +417,14 @@ nil
 
 (custom-set-faces 
  '(hackernews-link-face ((t (:foreground "dark orange")))))
+ 
+#+END_SRC
+
+*** Stack Exchange
+
+#+NAME: sx
+
+#+BEGIN_SRC emacs-lisp
+(require 'sx-load)
  
 #+END_SRC
