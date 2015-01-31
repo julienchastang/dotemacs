@@ -370,6 +370,10 @@ nil
 
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
+(add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
+
+(add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
