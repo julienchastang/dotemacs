@@ -321,9 +321,9 @@ nil
 *** Parentheses
 #+NAME: paren
 
-**** Rainbow Delimiters
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'ielm-mode-hook 'enable-paredit-mode)
 #+END_SRC
 
 *** Smex
