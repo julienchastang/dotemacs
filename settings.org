@@ -23,7 +23,7 @@ snippet in your ~/.emacs.d/init.el file.
 (package-initialize)
 (require 'cl)
 (require 'ob-tangle)
-(org-babel-load-file "~/git/emacs-config/settings.org")
+(org-babel-load-file "~/git/dotemacs/settings.org")
 #+END_SRC
 
 ** General Settings 
@@ -346,7 +346,6 @@ nil
 *** Undo
 #+NAME: undo
 
-
 #+BEGIN_SRC emacs-lisp
 (global-undo-tree-mode)
 #+END_SRC
@@ -395,7 +394,6 @@ nil
 
 *** Python
 #+NAME: python
-
 
 #+BEGIN_SRC emacs-lisp
 ;; autocomplete with Jedi
