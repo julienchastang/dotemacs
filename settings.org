@@ -37,8 +37,9 @@ tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat
 
 #+BEGIN_SRC emacs-lisp
 
-(when (custom-theme-p 'leuven)
-  (load-theme 'leuven))
+(condition-case nil
+    (load-theme 'leuven)
+  ('error (message (format "Could not load leuven theme"))))
 
 (custom-set-faces
  '(default ((t (:inherit nil :stipple nil :background "#F6F6EF" :foreground "#333333" 
