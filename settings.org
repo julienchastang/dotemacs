@@ -338,7 +338,8 @@ hunspell=.
 #+NAME: fci
 
 #+BEGIN_SRC emacs-lisp
-nil
+(add-hook 'clojure-mode-hook 'fci-mode)
+(add-hook 'org-mode-hook 'fci-mode)
 #+END_SRC
 
 *** Mode line
