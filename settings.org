@@ -266,32 +266,35 @@ on github, the anchors will not take you anywhere. The anchors only work in
 emacs org mode.
 
 #+tblname: my-packages
-|-----------------------+--------------------------------------------------+----------|
-| package               | description                                      | anchors  |
-|-----------------------+--------------------------------------------------+----------|
-| magit                 | emacs git client                                 | [[git]]      |
-| git-gutter            | git gutter                                       | [[git]]      |
-| fill-column-indicator | 80 column rule                                   | [[fci]]      |
-| powerline             | A better mode line                               | [[modeline]] |
-| paredit               | structured editing of S-expression data          | [[paren]]    |
-| rainbow-delimiters    | rainbow parentheses                              | [[paren]]    |
-| smex                  | recently and most frequently used commands       | [[smex]]     |
-| markdown-mode         | markdown for emacs                               | [[markdown]] |
-| undo-tree             | undo tree                                        | [[undo]]     |
-| auto-complete         | auto-completion extension for Emac               | [[autoc]]    |
-| company               | Modular in-buffer completion framework for Emacs | [[autoc]]    |
-| windresize            | arrow keys resize the window                     |          |
-| clojure-mode          | Mode for clojure                                 | [[clojure]]  |
-| cider                 | Clojure IDE and REPL for Emacs                   | [[clojure]]  |
-| kibit-mode            | Static code analyzer for Clojure                 | [[clojure]]  |
-| ac-cider              | Emacs auto-complete client for CIDER             | [[clojure]]  |
-| javap-mode            | Load .class file and get javap output            |          |
-| python-mode           | Python mode for emacs                            | [[python]]   |
-| ein                   | Emacs IPython Notebook                           | [[python]]   |
-| jedi                  | Python auto-completion for Emacs                 | [[python]]   |
-| hackernews            | Access the hackernews aggregator from Emacs      | [[hn]]       |
-| sx                    | Stack Exchange for Emacs                         | [[sx]]       |
-|-----------------------+--------------------------------------------------+----------|
+|-------------------------------+--------------------------------------------------+----------+---|
+| package                       | description                                      | anchors  |   |
+|-------------------------------+--------------------------------------------------+----------+---|
+| rw-hunspell                   | spelling                                         | [[spelling]] |   |
+| rw-ispell                     | spelling                                         | [[spelling]] |   |
+| rw-language-and-country-codes | spelling                                         | [[spelling]] |   |
+| magit                         | emacs git client                                 | [[git]]      |   |
+| git-gutter                    | git gutter                                       | [[git]]      |   |
+| fill-column-indicator         | 80 column rule                                   | [[fci]]      |   |
+| powerline                     | A better mode line                               | [[modeline]] |   |
+| paredit                       | structured editing of S-expression data          | [[paren]]    |   |
+| rainbow-delimiters            | rainbow parentheses                              | [[paren]]    |   |
+| smex                          | recently and most frequently used commands       | [[smex]]     |   |
+| markdown-mode                 | markdown for emacs                               | [[markdown]] |   |
+| undo-tree                     | undo tree                                        | [[undo]]     |   |
+| auto-complete                 | auto-completion extension for Emac               | [[autoc]]    |   |
+| company                       | Modular in-buffer completion framework for Emacs | [[autoc]]    |   |
+| windresize                    | arrow keys resize the window                     |          |   |
+| clojure-mode                  | Mode for clojure                                 | [[clojure]]  |   |
+| cider                         | Clojure IDE and REPL for Emacs                   | [[clojure]]  |   |
+| kibit-mode                    | Static code analyzer for Clojure                 | [[clojure]]  |   |
+| ac-cider                      | Emacs auto-complete client for CIDER             | [[clojure]]  |   |
+| javap-mode                    | Load .class file and get javap output            |          |   |
+| python-mode                   | Python mode for emacs                            | [[python]]   |   |
+| ein                           | Emacs IPython Notebook                           | [[python]]   |   |
+| jedi                          | Python auto-completion for Emacs                 | [[python]]   |   |
+| hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |   |
+| sx                            | Stack Exchange for Emacs                         | [[sx]]       |   |
+|-------------------------------+--------------------------------------------------+----------+---|
 
 Download the packages we need.
 
@@ -308,7 +311,8 @@ Download the packages we need.
 #+NAME: spelling
 
 Using hunspell and friends. If on OS X make sure you have dictionaries in
-/Library/Spelling or else you'll get a mysterious error.
+/Library/Spelling or else you'll get a mysterious error. Also =brew install
+hunspell=.
 
 #+BEGIN_SRC emacs-lisp
 (if (file-exists-p "/usr/local/bin/hunspell")
