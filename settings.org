@@ -276,6 +276,7 @@ emacs org mode.
 | git-gutter                    | git gutter                                       | [[git]]      |   |
 | fill-column-indicator         | 80 column rule                                   | [[fci]]      |   |
 | powerline                     | A better mode line                               | [[modeline]] |   |
+| rotate                        | Buffer rotate                                    | [[rotate]]   |   |
 | paredit                       | structured editing of S-expression data          | [[paren]]    |   |
 | rainbow-delimiters            | rainbow parentheses                              | [[paren]]    |   |
 | smex                          | recently and most frequently used commands       | [[smex]]     |   |
@@ -460,4 +461,12 @@ hunspell=.
 #+BEGIN_SRC emacs-lisp
 (require 'sx-load)
  
+#+END_SRC
+
+*** Rotate
+
+#+NAME: rotate
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-o") 'rotate-window)
 #+END_SRC
