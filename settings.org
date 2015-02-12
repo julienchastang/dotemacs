@@ -259,6 +259,27 @@ First define the package archives and where they live.
   (message "Loading settings...done (%.3fs)" elapsed))
 #+END_SRC
 
+
+** Manually Curated Packages
+
+#+tblname: private-packages
+|---------------------------------------------+-------------+---------|
+| package                                     | description | anchors |
+|---------------------------------------------+-------------+---------|
+| ~/.emacs.d/git/emacs-ipython-notebook/lisp/ | ein         | [[python]]  |
+| ~/.emacs.d/git/emacs-websocket/             | for ein     | [[python]]  |
+| ~/.emacs.d/git/emacs-request/               | for ein     | [[python]]  |
+|---------------------------------------------+-------------+---------|
+
+#+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
+(defvar p-packages (mapcar 'car (cdr packs)))
+
+(dolist (pack p-packages)
+   (when (file-directory-p  pack)
+     (add-to-list 'load-path pack)))
+#+END_SRC
+
+
 ** Packages We Will Use
 
 Define all the packages we are going to use. Note if you are viewing this table
@@ -291,7 +312,6 @@ emacs org mode.
 | ac-cider                      | Emacs auto-complete client for CIDER             | [[clojure]]  |   |
 | javap-mode                    | Load .class file and get javap output            |          |   |
 | python-mode                   | Python mode for emacs                            | [[python]]   |   |
-| ein                           | Emacs IPython Notebook                           | [[python]]   |   |
 | jedi                          | Python auto-completion for Emacs                 | [[python]]   |   |
 | hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |   |
 | sx                            | Stack Exchange for Emacs                         | [[sx]]       |   |
@@ -422,6 +442,8 @@ hunspell=.
 #+NAME: python
 
 #+BEGIN_SRC emacs-lisp
+(require 'ein)
+
 ;; autocomplete with Jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'ein:connect-mode-hook 'ein:jedi-setup)
