@@ -95,11 +95,13 @@ Turn on syntax highlighting for all buffers
 Turn off irrelevant stuff.
 
 #+BEGIN_SRC emacs-lisp
-(menu-bar-mode -1)
-(when (window-system)
-  (set-scroll-bar-mode 'nil)
-  (mouse-wheel-mode t)
-  (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode)
+    (menu-bar-mode  -1))
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode  -1))
+(if (fboundp 'set-scroll-bar-mode)
+    (set-scroll-bar-mode 'nil))
+(mouse-wheel-mode t)
 (tooltip-mode -1)
 (blink-cursor-mode -1)
 #+END_SRC
