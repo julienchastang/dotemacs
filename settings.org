@@ -188,6 +188,12 @@ EWW
 (setq eww-search-prefix "https://www.google.com/search?q=")
 #+END_SRC
 
+Buffer Rotation
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-o") 'rotate-window)
+#+END_SRC
+
 ** Org mode Settings
 
 At this point we still have not done anything special outside of what is
@@ -497,10 +503,4 @@ hunspell=.
  
 #+END_SRC
 
-*** Rotate
 
-#+NAME: rotate
-
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-x C-o") 'rotate-window)
-#+END_SRC
