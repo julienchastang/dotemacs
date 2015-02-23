@@ -48,13 +48,16 @@ tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat
                 :foundry "monotype" :family "Andale Mono")))))
 #+END_SRC
 
-Append =/usr/local/bin= to PATH
+Deal with additional paths
 
 #+begin_src emacs-lisp
-(setq usr-local-bin "/usr/local/bin")
-(when (file-directory-p usr-local-bin)
-    (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name usr-local-bin)))
-    (setq exec-path (split-string (getenv "PATH") path-separator)))
+(defvar my-paths '("/usr/local/bin"))
+
+(dolist (pth my-paths)
+    (when (file-directory-p pth)
+        (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name pth)))
+        (setq exec-path (split-string (getenv "PATH") path-separator))))
+
 #+end_src
 
 
