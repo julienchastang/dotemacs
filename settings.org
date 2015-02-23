@@ -245,6 +245,16 @@ Loading babel supported languages:
      (emacs-lisp . t)))
 #+END_SRC
 
+Inline image support
+
+#+BEGIN_SRC emacs-lisp
+(defun jc/do-org-show-all-inline-images ()
+  (interactive)
+  (org-display-inline-images t t))
+(global-set-key (kbd "C-c C-x C v")
+                'do-org-show-all-inline-images)
+#+END_SRC
+
 ** Package Archives
 We have a decent emacs configuration at this point. Now start loading external
 utilities.
