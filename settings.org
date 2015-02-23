@@ -287,7 +287,6 @@ First define the package archives and where they live.
   (message "Loading settings...done (%.3fs)" elapsed))
 #+END_SRC
 
-
 ** Manually Curated Packages
 
 #+tblname: private-packages
@@ -306,7 +305,6 @@ First define the package archives and where they live.
    (when (file-directory-p  pack)
      (add-to-list 'load-path pack)))
 #+END_SRC
-
 
 ** Packages We Will Use
 
@@ -343,6 +341,7 @@ emacs org mode.
 | jedi                          | Python auto-completion for Emacs                 | [[python]]   |   |
 | hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |   |
 | sx                            | Stack Exchange for Emacs                         | [[sx]]       |   |
+| org-present                   | Minimal presentation mode for emacs              |          |   |
 |-------------------------------+--------------------------------------------------+----------+---|
 
 Download the packages we need.
