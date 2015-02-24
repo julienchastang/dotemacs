@@ -362,8 +362,11 @@ Download the packages we need.
 #+NAME: spelling
 
 Using hunspell and friends. If on OS X make sure you have dictionaries in
-/Library/Spelling or else you'll get a mysterious error. Also =brew install
-hunspell=.
+=/Library/Spelling= and/or =~/Library/Spelling= or else you'll get a mysterious
+error. For English language dictionaries, it should be something like
+=default.aff default.dic en_US.aff n_US.dic=. The =default= files are
+soft-linked to the main dictionary of your choice (in this case =en_US=). Also
+make sure to =brew install hunspell=.
 
 #+BEGIN_SRC emacs-lisp
 (if (file-exists-p "/usr/local/bin/hunspell")
