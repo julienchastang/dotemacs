@@ -189,6 +189,7 @@ EWW
 
 #+BEGIN_SRC emacs-lisp
 (setq eww-search-prefix "https://www.google.com/search?q=")
+(setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
 Buffer Rotation
