@@ -340,6 +340,7 @@ emacs org mode.
 | cider                         | Clojure IDE and REPL for Emacs                   | [[clojure]]  |   |
 | kibit-mode                    | Static code analyzer for Clojure                 | [[clojure]]  |   |
 | ac-cider                      | Emacs auto-complete client for CIDER             | [[clojure]]  |   |
+| clojure-snippets              | Yasnippets for clojure                           | [[clojure]]  |   |
 | javap-mode                    | Load .class file and get javap output            |          |   |
 | python-mode                   | Python mode for emacs                            | [[python]]   |   |
 | jedi                          | Python auto-completion for Emacs                 | [[python]]   |   |
@@ -439,26 +440,31 @@ make sure to =brew install hunspell=.
 *** Clojure
 #+NAME: clojure
 
+All the configuration crap recommended by https://github.com/clojure-emacs/cider
+
 #+BEGIN_SRC emacs-lisp
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-
-(setq cider-show-error-buffer nil)
-
-(add-hook 'cider-repl-mode-hook 'company-mode)
-
-(add-hook 'cider-mode-hook 'company-mode)
-
-(add-hook 'cider-repl-mode-hook 'subword-mode)
-
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
-(add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
+(add-hook 'cider-mode-hook #'eldoc-mode)
+
+(add-hook 'cider-repl-mode-hook #'company-mode)
+
+(add-hook 'cider-mode-hook #'company-mode)
+
+(add-hook 'cider-repl-mode-hook #'subword-mode)
+
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
+
+(add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
+
+(setq nrepl-log-messages t)
+
+(setq nrepl-hide-special-buffers t)
 
 (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
 
-(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
 
 (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
 
@@ -467,8 +473,9 @@ make sure to =brew install hunspell=.
 (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 
 (eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-mode))
-
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)))
 #+END_SRC
 
 *** Python
