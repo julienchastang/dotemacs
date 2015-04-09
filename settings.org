@@ -347,6 +347,7 @@ emacs org mode.
 | hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |   |
 | sx                            | Stack Exchange for Emacs                         | [[sx]]       |   |
 | org-present                   | Minimal presentation mode for emacs              |          |   |
+| org-page                      | a static site generator based on org mode        |          |   |
 |-------------------------------+--------------------------------------------------+----------+---|
 
 Download the packages we need.
