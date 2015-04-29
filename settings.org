@@ -1,7 +1,14 @@
 #+TITLE:    Julien's emacs settings file
+#+DATE: <2015-04-28 Tue>
 #+AUTHOR:   Julien Chastang
 #+EMAIL:    julien.c.chastang@gmail.com
 #+LANGUAGE: en
+#+CREATOR: Emacs 24.5.1 (Org mode 8.2.10)
+#+DESCRIPTION: Julien's literate emacs settings file
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:emacs org
+#+LANGUAGE: en
+#+SELECT_TAGS: export
 
 * Literate Emacs Initialization File
 
