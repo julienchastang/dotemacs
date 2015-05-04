@@ -320,13 +320,11 @@ emacs org mode.
 | smex                          | recently and most frequently used commands       | [[smex]]     |   |
 | markdown-mode                 | markdown for emacs                               | [[markdown]] |   |
 | undo-tree                     | undo tree                                        | [[undo]]     |   |
-| auto-complete                 | auto-completion extension for Emac               | [[autoc]]    |   |
 | company                       | Modular in-buffer completion framework for Emacs | [[autoc]]    |   |
 | windresize                    | arrow keys resize the window                     |          |   |
 | clojure-mode                  | Mode for clojure                                 | [[clojure]]  |   |
 | cider                         | Clojure IDE and REPL for Emacs                   | [[clojure]]  |   |
 | kibit-mode                    | Static code analyzer for Clojure                 | [[clojure]]  |   |
-| ac-cider                      | Emacs auto-complete client for CIDER             | [[clojure]]  |   |
 | clojure-snippets              | Yasnippets for clojure                           | [[clojure]]  |   |
 | javap-mode                    | Load .class file and get javap output            |          |   |
 | hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |   |
@@ -415,11 +413,11 @@ make sure to =brew install hunspell=.
   (global-undo-tree-mode)
 #+END_SRC
     
-*** Auto-Complete
+*** Auto-Complete w/ Company
 #+NAME: autoc
 
 #+BEGIN_SRC emacs-lisp
-  (ac-config-default)
+  (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
 
 *** Clojure
@@ -450,17 +448,6 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
 
   (add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
-
-  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-
-  (add-hook 'cider-mode-hook 'ac-cider-setup)
-
-  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-
-  (eval-after-load "auto-complete"
-    '(progn
-       (add-to-list 'ac-modes 'cider-mode)
-       (add-to-list 'ac-modes 'cider-repl-mode)))
 #+END_SRC
 
 *** Markdown
