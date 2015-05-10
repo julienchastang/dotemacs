@@ -204,6 +204,12 @@ Buffer Rotation
   (global-set-key (kbd "C-x C-o") 'rotate-window)
 #+END_SRC
 
+YASnippet
+
+#+BEGIN_SRC emacs-lisp
+  (yas-global-mode 1)
+#+END_SRC
+
 ** Org mode Settings
 
 At this point we still have not done anything special outside of what is
