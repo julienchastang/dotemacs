@@ -333,6 +333,7 @@ emacs org mode.
 | cider                         | Clojure IDE and REPL for Emacs                   | [[clojure]]  |
 | kibit-mode                    | Static code analyzer for Clojure                 | [[clojure]]  |
 | clojure-snippets              | Yasnippets for clojure                           | [[clojure]]  |
+| clj-refactor                  | A collection of clojure refactoring functions    | [[clojure]]  |
 | javap-mode                    | Load .class file and get javap output            |          |
 | hackernews                    | Access the hackernews aggregator from Emacs      | [[hn]]       |
 | sx                            | Stack Exchange for Emacs                         | [[sx]]       |
@@ -455,6 +456,10 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
 
   (add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
+
+  (add-hook 'clojure-mode-hook (lambda ()
+                                 (clj-refactor-mode 1)
+                                 (cljr-add-keybindings-with-prefix "C-c C-m")))
 #+END_SRC
 
 *** Markdown
