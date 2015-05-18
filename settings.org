@@ -465,6 +465,19 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
                                  (cljr-add-keybindings-with-prefix "C-c C-m")))
 #+END_SRC
 
+
+[[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/git/org-mode/lisp")
+
+  (require 'org)
+  (require 'ob-clojure)
+
+  (setq org-babel-clojure-backend 'cider)
+  (require 'cider)
+#+END_SRC
+
 *** Markdown
 #+NAME: markdown
 
