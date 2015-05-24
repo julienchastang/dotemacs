@@ -314,6 +314,7 @@ emacs org mode.
 | yasnippet                     | Yet another snippet extension for Emacs          | [[yasnippet]] |
 | magit                         | emacs git client                                 | [[git]]       |
 | git-gutter                    | git gutter                                       | [[git]]       |
+| git-timemachine               | Walk through git revisions of a file             | [[git]]       |
 | fill-column-indicator         | 80 column rule                                   | [[fci]]       |
 | powerline                     | A better mode line                               | [[modeline]]  |
 | rotate                        | Buffer rotate                                    | [[rotate]]    |
@@ -374,7 +375,6 @@ make sure to =brew install hunspell=.
 #+BEGIN_SRC emacs-lisp
   (yas-global-mode 1)
 #+END_SRC
-
 
 *** git
 #+NAME: git
