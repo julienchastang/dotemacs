@@ -10,9 +10,21 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
+     ____.     .__  .__            /\                                                 
+    |    |__ __|  | |__| ____   ___)/  ______      ____   _____ _____    ____   ______
+    |    |  |  \  | |  |/ __ \ /    \ /  ___/    _/ __ \ /     \\__  \ _/ ___\ /  ___/
+/\__|    |  |  /  |_|  \  ___/|   |  \\___ \     \  ___/|  Y Y  \/ __ \\  \___ \___ \ 
+\________|____/|____/__|\___  >___|  /____  >  /\ \___  >__|_|  (____  /\___  >____  >
+                            \/     \/     \/   \/     \/      \/     \/     \/     \/ 
+
 * Literate Emacs Initialization File
 
-Emacs initialization as org file.
+Emacs initialization as org file. It is a constant work in progress.
+
+** Inspiration
+
+- [[https://github.com/vdemeester/emacs-config][Vincent Demeester’s emacs configuration]]
+- [[https://github.com/dakrone/dakrone-dotfiles/blob/master/.emacs.d/settings.org][Lee’s Emacs settings file]]
 
 ** Disclaimer
 
