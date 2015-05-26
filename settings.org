@@ -265,7 +265,8 @@ Loading babel supported languages:
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((ditaa . t)
-     (emacs-lisp . t)))
+     (emacs-lisp . t)
+     (python . t)))
 #+END_SRC
 
 Inline image support
@@ -541,6 +542,15 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
     
 *** Jython/Python
 #+NAME: python
+
+This base settings.org emacs initialization file has somewhat limited support
+for Python. The 'python' branch of this repository has much better support
+coupled with [[https://github.com/julienchastang/Julien-Dockerfiles/tree/master/python-emacs][this emacs docker machine]]. Using Jython for babel (which yields
+somewhat mixed results).
+
+#+BEGIN_SRC emacs-lisp
+(setq org-babel-python-command "jython")
+#+END_SRC
 
 jython/python mode
 
