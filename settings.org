@@ -341,6 +341,7 @@ emacs org mode.
 | windresize                    | arrow keys resize the window                  |           |
 | clojure-mode                  | Mode for clojure                              | [[clojure]]   |
 | cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]   |
+| ac-cider                      | Clojure auto-complete sources using CIDER     | [[clojure]]   |
 | kibit-mode                    | Static code analyzer for Clojure              | [[clojure]]   |
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure]]   |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]   |
@@ -439,11 +440,15 @@ make sure to =brew install hunspell=.
   (global-undo-tree-mode)
 #+END_SRC
     
-*** Auto-Complete w/ Company
+*** Auto-Complete
 #+NAME: autoc
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'after-init-hook 'global-company-mode)
+  (global-auto-complete-mode t)
+  (require 'auto-complete-config)
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  (ac-config-default)
+
 #+END_SRC
 
 *** Clojure
@@ -456,10 +461,6 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook 'paredit-mode)
 
   (add-hook 'cider-mode-hook #'eldoc-mode)
-
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-
-  (add-hook 'cider-mode-hook #'company-mode)
 
   (add-hook 'cider-repl-mode-hook #'subword-mode)
 
@@ -478,6 +479,20 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook (lambda ()
                                  (clj-refactor-mode 1)
                                  (cljr-add-keybindings-with-prefix "C-c C-m")))
+
+  ;; auto-complete
+  (require 'ac-cider)
+
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+
+  (eval-after-load "auto-complete"
+    '(progn
+       (add-to-list 'ac-modes 'cider-mode)
+       (add-to-list 'ac-modes 'cider-repl-mode)))
 #+END_SRC
 
 
