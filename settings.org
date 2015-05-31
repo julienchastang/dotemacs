@@ -396,8 +396,16 @@ make sure to =brew install hunspell=.
 *** git
 #+NAME: git
 
+git gutter
+
 #+BEGIN_SRC emacs-lisp
   (global-git-gutter-mode t)
+#+END_SRC
+
+Magit stuff
+
+#+BEGIN_SRC emacs-lisp
+  (setq magit-last-seen-setup-instructions "1.4.0")
 #+END_SRC
 
 *** Fill Column Indicator
