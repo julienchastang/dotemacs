@@ -278,6 +278,12 @@ Inline image support
 
   (global-set-key (kbd "C-c C-x C v")
                   'do-org-show-all-inline-images)
+
+  (defun jc/fix-inline-images ()
+      (when org-inline-image-overlays
+        (org-redisplay-inline-images)))
+
+  (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
 ** Package Archives
