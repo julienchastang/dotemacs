@@ -1,5 +1,5 @@
 #+TITLE:    Julien's emacs settings file
-#+DATE: <2015-04-28 Tue>
+#+DATE: <2015-06-08 Tue>
 #+AUTHOR:   Julien Chastang
 #+EMAIL:    julien.c.chastang@gmail.com
 #+LANGUAGE: en
