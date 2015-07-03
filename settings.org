@@ -225,6 +225,74 @@ Buffer Rotation
   (global-set-key (kbd "C-x C-o") 'rotate-window)
 #+END_SRC
 
+** Org mode Settings
+
+At this point we still have not done anything special outside of what is
+possible in a default emacs programming environment. This will continue for this
+section.
+
+Let's get the agenda going.
+
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-ca" 'org-agenda)
+#+END_SRC
+
+Code blocks should be have syntax highlighting
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+
+Clocking commands
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/org-query-clock-out ()
+      "Ask the user before clocking out.
+        This is a useful function for adding to `kill-emacs-query-functions'."
+      (if (and (featurep 'org-clock)
+               (funcall 'org-clocking-p)
+               (y-or-n-p "You are currently clocking time, clock out? "))
+          (org-clock-out)
+        t)) ; only fails on keyboard quit or error
+
+  (add-hook 'kill-emacs-query-functions 'jc/org-query-clock-out)
+#+END_SRC
+
+Ditaa is a command-line utility that converts diagrams drawn using ASCII art
+into bitmap graphics. Here is the Ditta path:
+
+#+BEGIN_SRC emacs-lisp
+  ;; Brew path
+  (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
+#+END_SRC
+
+Loading babel supported languages:
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((ditaa . t)
+     (emacs-lisp . t)
+     (python . t)))
+#+END_SRC
+
+Inline image support
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/do-org-show-all-inline-images ()
+    (interactive)
+    (org-display-inline-images t t))
+
+  (global-set-key (kbd "C-c C-x C v")
+                  'do-org-show-all-inline-images)
+
+  (defun jc/fix-inline-images ()
+      (when org-inline-image-overlays
+        (org-redisplay-inline-images)))
+
+  (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
+#+END_SRC
+
 ** Package Archives
 We have a decent emacs configuration at this point. Now start loading external
 utilities.
@@ -306,70 +374,6 @@ Download the packages we need.
   (dolist (pack install-packages)
      (unless (package-installed-p pack)
        (package-install pack)))
-#+END_SRC
-
-** Org mode Settings
-
-Let's get the agenda going.
-
-#+BEGIN_SRC emacs-lisp
-  (define-key global-map "\C-ca" 'org-agenda)
-#+END_SRC
-
-Code blocks should be have syntax highlighting
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-src-fontify-natively t)
-#+END_SRC
-
-Clocking commands
-
-#+BEGIN_SRC emacs-lisp
-  (defun jc/org-query-clock-out ()
-      "Ask the user before clocking out.
-        This is a useful function for adding to `kill-emacs-query-functions'."
-      (if (and (featurep 'org-clock)
-               (funcall 'org-clocking-p)
-               (y-or-n-p "You are currently clocking time, clock out? "))
-          (org-clock-out)
-        t)) ; only fails on keyboard quit or error
-
-  (add-hook 'kill-emacs-query-functions 'jc/org-query-clock-out)
-#+END_SRC
-
-Ditaa is a command-line utility that converts diagrams drawn using ASCII art
-into bitmap graphics. Here is the Ditta path:
-
-#+BEGIN_SRC emacs-lisp
-  ;; Brew path
-  (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
-#+END_SRC
-
-Loading babel supported languages:
-
-#+BEGIN_SRC emacs-lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((ditaa . t)
-     (emacs-lisp . t)
-     (python . t)))
-#+END_SRC
-
-Inline image support
-
-#+BEGIN_SRC emacs-lisp
-  (defun jc/do-org-show-all-inline-images ()
-    (interactive)
-    (org-display-inline-images t t))
-
-  (global-set-key (kbd "C-c C-x C v")
-                  'do-org-show-all-inline-images)
-
-  (defun jc/fix-inline-images ()
-      (when org-inline-image-overlays
-        (org-redisplay-inline-images)))
-
-  (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
 ** Package Configuration
