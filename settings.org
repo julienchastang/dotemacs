@@ -356,7 +356,6 @@ emacs org mode.
 | clojure-mode                  | Mode for clojure                              | [[clojure]]   |
 | cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]   |
 | ac-cider                      | Clojure auto-complete sources using CIDER     | [[clojure]]   |
-| kibit-mode                    | Static code analyzer for Clojure              | [[clojure]]   |
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure]]   |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]   |
 | javap-mode                    | Load .class file and get javap output         |           |
