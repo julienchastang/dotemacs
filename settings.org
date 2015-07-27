@@ -47,11 +47,39 @@ file. Sorry for the confusion.
 In order to have this file be the emacs initialization file, put the following
 snippet in your =~/.emacs.d/init.el= file.
 
-#+BEGIN_SRC
-(package-initialize)
-(require 'cl)
-(require 'ob-tangle)
-(org-babel-load-file "~/git/dotemacs/settings.org")
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; optionally remove default org install
+  ;; https://lists.gnu.org/archive/html/emacs-orgmode/2013-09/msg00178.html
+
+  (setq load-path
+        (delq nil
+              (mapcar
+               (function (lambda (p)
+                           (unless (string-match "lisp\\(/packages\\)?/org$" p)
+                             p)))
+               load-path)))
+
+  (mapatoms (function
+             (lambda (s)
+               (let ((sn (symbol-name s)))
+                 (when (string-match "^\\(org\\|ob\\|ox\\)\\(-.*\\)?$" sn)
+                   (setplist s nil)
+                   (when (eq 'autoload (car-safe s))
+                     (unintern s)))))))
+
+  ;; if curating org-mode, remember to 'make autoloads'
+
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode/lisp"))
+
+  (add-to-list 'load-path
+               (expand-file-name "~/.emacs.d/git/org-mode/contrib/lisp"))
+
+  ;; now tangle in settings.org
+
+  (package-initialize)
+  (require 'cl)
+  (require 'ob-tangle)
+  (org-babel-load-file "~/git/dotemacs/settings.org")
 #+END_SRC
 
 ** General Settings 
