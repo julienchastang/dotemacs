@@ -247,12 +247,6 @@ EWW
   (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
-Buffer Rotation
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x C-o") 'rotate-window)
-#+END_SRC
-
 ** Org mode Settings
 
 At this point we still have not done anything special outside of what is
@@ -321,6 +315,26 @@ Inline image support
   (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
+** Manually Curated Packages
+
+These package are not in melpa stable so I have to curate them.
+
+#+tblname: private-packages
+|-----------------------------+-------------------------------------+-------------|
+| package                     | description                         | anchors     |
+|-----------------------------+-------------------------------------+-------------|
+| ~/.emacs.d/git/org-present  | Minimal presentation mode for emacs | [[org-present]] |
+| ~/.emacs.d/git/emacs-rotate | Buffer rotate                       | [[rotate]]      |
+|-----------------------------+-------------------------------------+-------------|
+
+#+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
+  (defvar p-packages (mapcar 'car (cdr packs)))
+
+  (dolist (pack p-packages)
+    (when (file-directory-p  pack)
+      (add-to-list 'load-path pack)))
+#+END_SRC
+
 ** Package Archives
 We have a decent emacs configuration at this point. Now start loading external
 utilities.
@@ -336,7 +350,7 @@ First define the package archives and where they live.
 
   ;; define some package archives
   (add-to-list 'package-archives 
-     '("melpa" . "http://melpa.milkbox.net/packages/"))
+     '("melpa" . "http://melpa-stable.milkbox.net/packages/"))
   (add-to-list 'package-archives
     '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
@@ -373,7 +387,6 @@ emacs org mode.
 | git-timemachine               | Walk through git revisions of a file          | [[git]]       |
 | fill-column-indicator         | 80 column rule                                | [[fci]]       |
 | powerline                     | A better mode line                            | [[modeline]]  |
-| rotate                        | Buffer rotate                                 | [[rotate]]    |
 | paredit                       | structured editing of S-expression data       | [[paren]]     |
 | rainbow-delimiters            | rainbow parentheses                           | [[paren]]     |
 | smex                          | recently and most frequently used commands    | [[smex]]      |
@@ -389,7 +402,6 @@ emacs org mode.
 | javap-mode                    | Load .class file and get javap output         |           |
 | hackernews                    | Access the hackernews aggregator from Emacs   | [[hn]]        |
 | sx                            | Stack Exchange for Emacs                      | [[sx]]        |
-| org-present                   | Minimal presentation mode for emacs           |           |
 | python-mode                   | Python mode for emacs                         | [[python]]    |
 |-------------------------------+-----------------------------------------------+-----------|
 
@@ -623,4 +635,21 @@ Fill column indicator
   (add-hook 'python-mode-hook 'fci-mode)
 #+END_SRC
 
+*** org-present
+#+NAME: org-present
 
+org-present
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-present)
+#+END_SRC
+
+*** Rotate
+#+NAME: rotate
+
+Buffer Rotation
+
+#+BEGIN_SRC emacs-lisp
+  (require 'rotate)
+  (global-set-key (kbd "C-x C-o") 'rotate-window)
+#+END_SRC
