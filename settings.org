@@ -317,14 +317,15 @@ Inline image support
 
 ** Manually Curated Packages
 
-These package are not in melpa stable so I have to curate them.
+These package are not in melpa stable so I have to curate them. This is really
+just a template in case I have to manually curate packages not in any package
+manager. Below is a way of handling unstable melpa packages.
 
 #+tblname: private-packages
 |-----------------------------+-------------------------------------+-------------|
 | package                     | description                         | anchors     |
 |-----------------------------+-------------------------------------+-------------|
 | ~/.emacs.d/git/org-present  | Minimal presentation mode for emacs | [[org-present]] |
-| ~/.emacs.d/git/emacs-rotate | Buffer rotate                       | [[rotate]]      |
 |-----------------------------+-------------------------------------+-------------|
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
@@ -350,7 +351,7 @@ First define the package archives and where they live.
 
   ;; define some package archives
   (add-to-list 'package-archives 
-     '("melpa" . "http://melpa-stable.milkbox.net/packages/"))
+     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
   (add-to-list 'package-archives
     '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
@@ -405,6 +406,13 @@ emacs org mode.
 | python-mode                   | Python mode for emacs                         | [[python]]    |
 |-------------------------------+-----------------------------------------------+-----------|
 
+#+tblname: my-packages-unstable
+|--------------+---------------+---------|
+| package      | description   | anchors |
+|--------------+---------------+---------|
+| emacs-rotate | Buffer rotate | [[rotate]]  |
+|--------------+---------------+---------|
+
 Download the packages we need.
 
 #+BEGIN_SRC emacs-lisp :var packs=my-packages :hlines no
@@ -414,6 +422,21 @@ Download the packages we need.
      (unless (package-installed-p pack)
        (package-install pack)))
 #+END_SRC
+
+Now handle unstable packages.
+
+#+BEGIN_SRC emacs-lisp :var packs=my-packages-unstable :hlines no
+  (defvar install-packages-unstable (mapcar 'intern (mapcar 'car (cdr packs))))
+
+  (add-to-list 'package-archives 
+     '("melpa-unstable" . "http://melpa.milkbox.net/packages/"))
+  (package-refresh-contents)
+
+  (dolist (pack install-packages-unstable)
+     (unless (package-installed-p pack)
+       (package-install pack)))
+#+END_SRC
+
 
 ** Package Configuration
 *** Spelling
