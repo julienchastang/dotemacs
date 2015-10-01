@@ -317,9 +317,7 @@ Inline image support
 
 ** Manually Curated Packages
 
-These package are not in melpa stable so I have to curate them. This is really
-just a template in case I have to manually curate packages not in any package
-manager. Below is a way of handling unstable melpa packages.
+These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
 |-----------------------------+---------------+---------|
