@@ -322,11 +322,11 @@ just a template in case I have to manually curate packages not in any package
 manager. Below is a way of handling unstable melpa packages.
 
 #+tblname: private-packages
-|-----------------------------+-------------------------------------+-------------|
-| package                     | description                         | anchors     |
-|-----------------------------+-------------------------------------+-------------|
-| ~/.emacs.d/git/org-present  | Minimal presentation mode for emacs | [[org-present]] |
-|-----------------------------+-------------------------------------+-------------|
+|-----------------------------+---------------+---------|
+| package                     | description   | anchors |
+|-----------------------------+---------------+---------|
+| ~/.emacs.d/git/emacs-rotate | Buffer rotate | [[rotate]]  |
+|-----------------------------+---------------+---------|
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
@@ -407,11 +407,12 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+-----------|
 
 #+tblname: my-packages-unstable
-|--------------+---------------+---------|
-| package      | description   | anchors |
-|--------------+---------------+---------|
-| emacs-rotate | Buffer rotate | [[rotate]]  |
-|--------------+---------------+---------|
+|--------------+-------------------------------------+-------------|
+| package      | description                         | anchors     |
+|--------------+-------------------------------------+-------------|
+| org-present  | Minimal presentation mode for emacs | [[org-present]] |
+|--------------+-------------------------------------+-------------|
+
 
 Download the packages we need.
 
