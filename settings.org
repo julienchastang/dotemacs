@@ -29,8 +29,8 @@ Emacs initialization as org file. It is a constant work in progress.
 
 ** Inspiration
 
+- [[https://github.com/dakrone/dakrone-dotfiles/blob/master/emacs.org][Lee’s Emacs settings file]]
 - [[https://github.com/vdemeester/emacs-config][Vincent Demeester’s emacs configuration]]
-- [[https://github.com/dakrone/dakrone-dotfiles/blob/master/.emacs.d/settings.org][Lee’s Emacs settings file]]
 
 ** Disclaimer
 
