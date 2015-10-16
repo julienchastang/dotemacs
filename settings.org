@@ -490,6 +490,19 @@ Magit stuff
   (add-hook 'org-mode-hook 'fci-mode)
 #+END_SRC
 
+https://github.com/alpaker/Fill-Column-Indicator/issues/45
+
+#+BEGIN_SRC emacs-lisp
+  (defun fci-mode-override-advice (&rest args))
+
+  (advice-add 'org-html-fontify-code :around
+              (lambda (fun &rest args)
+                (advice-add 'fci-mode :override #'fci-mode-override-advice)
+                (let ((result  (apply fun args)))
+                  (advice-remove 'fci-mode #'fci-mode-override-advice)
+                  result)))
+#+END_SRC
+
 *** Mode line
 #+NAME: modeline
 
