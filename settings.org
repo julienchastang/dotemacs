@@ -295,6 +295,9 @@ Loading babel supported languages:
    'org-babel-load-languages
    '((ditaa . t)
      (emacs-lisp . t)
+     (org . t)
+     (clojure . t)
+     (ipython . t)
      (python . t)))
 #+END_SRC
 
