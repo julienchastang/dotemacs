@@ -388,6 +388,7 @@ emacs org mode.
 | rainbow-delimiters            | rainbow parentheses                           | [[paren]]     |
 | smex                          | recently and most frequently used commands    | [[smex]]      |
 | markdown-mode                 | markdown for emacs                            | [[markdown]]  |
+| yaml                          |                                               | [[yaml]]      |
 | undo-tree                     | undo tree                                     | [[undo]]      |
 | auto-complete                 | Auto Completion for GNU Emacs                 | [[autoc]]     |
 | windresize                    | arrow keys resize the window                  |           |
@@ -618,6 +619,18 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 #+END_SRC
 
+*** YAML
+#+NAME: yaml
+
+#+BEGIN_SRC emacs-lisp
+  (require 'yaml-mode)
+      (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+  (add-hook 'yaml-mode-hook
+        '(lambda ()
+          (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+#+END_SRC
+
 *** Hacker News
 #+NAME: hn
 
@@ -701,6 +714,7 @@ Loading babel supported languages:
      (emacs-lisp . t)
      (org . t)
      (sh . t)
+     (yaml . t)
      (clojure . t)
      (python . t)))
 #+END_SRC
