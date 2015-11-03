@@ -700,6 +700,7 @@ Loading babel supported languages:
    '((ditaa . t)
      (emacs-lisp . t)
      (org . t)
+     (sh . t)
      (clojure . t)
      (python . t)))
 #+END_SRC
