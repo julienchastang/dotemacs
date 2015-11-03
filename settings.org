@@ -388,7 +388,7 @@ emacs org mode.
 | rainbow-delimiters            | rainbow parentheses                           | [[paren]]     |
 | smex                          | recently and most frequently used commands    | [[smex]]      |
 | markdown-mode                 | markdown for emacs                            | [[markdown]]  |
-| yaml-mode                     | yaml for emacs                                | [[yaml]]  |
+| yaml-mode                     | yaml for emacs                                | [[yaml]]      |
 | undo-tree                     | undo tree                                     | [[undo]]      |
 | auto-complete                 | Auto Completion for GNU Emacs                 | [[autoc]]     |
 | windresize                    | arrow keys resize the window                  |           |
@@ -713,8 +713,7 @@ Loading babel supported languages:
    '((ditaa . t)
      (emacs-lisp . t)
      (org . t)
-     (sh . t)
-     (yaml . t)
+     (shell . t)
      (clojure . t)
      (python . t)))
 #+END_SRC
