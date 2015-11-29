@@ -437,8 +437,8 @@ Now handle unstable packages.
 
 
 ** Package Configuration
-*** Spelling
-#+NAME: spelling
+*** Spelling 
+<<spelling>>
 
 Using hunspell and friends. If on OS X make sure you have dictionaries in
 =/Library/Spelling= and/or =~/Library/Spelling= or else you'll get a mysterious
@@ -460,14 +460,14 @@ make sure to =brew install hunspell=.
 #+END_SRC
 
 *** YASnippet
-#+NAME: yasnippet
+<<yasnippet>>
 
 #+BEGIN_SRC emacs-lisp
   (yas-global-mode 1)
 #+END_SRC
 
 *** git
-#+NAME: git
+<<git>>
 
 git gutter
 
@@ -486,7 +486,7 @@ Magit stuff
 #+END_SRC
 
 *** Fill Column Indicator
-#+NAME: fci
+<<fci>>
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'clojure-mode-hook 'fci-mode)
@@ -507,14 +507,14 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+END_SRC
 
 *** Mode line
-#+NAME: modeline
+<<modeline>>
 
 #+BEGIN_SRC emacs-lisp
   (powerline-default-theme)
 #+END_SRC
 
 *** Parentheses
-#+NAME: paren
+<<paren>>
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -522,7 +522,7 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+END_SRC
 
 *** Smex
-#+NAME: smex
+<<smex>>
     
 #+BEGIN_SRC emacs-lisp
   (smex-initialize) 
@@ -533,14 +533,14 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+END_SRC
 
 *** Undo
-#+NAME: undo
+<<undo>>
 
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
 #+END_SRC
     
 *** Auto-Complete
-#+NAME: autoc
+<<autoc>>
 
 #+BEGIN_SRC emacs-lisp
   (global-auto-complete-mode t)
@@ -551,7 +551,7 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+END_SRC
 
 *** Clojure
-#+NAME: clojure
+<<clojure>>
 
 All the configuration crap recommended by https://github.com/clojure-emacs/cider
 
@@ -608,7 +608,7 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
 #+END_SRC
 
 *** Markdown
-#+NAME: markdown
+<<markdown>>
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'markdown-mode "markdown-mode"
@@ -620,7 +620,7 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
 #+END_SRC
 
 *** YAML
-#+NAME: yaml
+<<yaml>>
 
 #+BEGIN_SRC emacs-lisp
   (require 'yaml-mode)
@@ -632,7 +632,7 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
 #+END_SRC
 
 *** Hacker News
-#+NAME: hn
+<<hn>>
 
 #+BEGIN_SRC emacs-lisp
   (require 'hackernews)
@@ -643,15 +643,14 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
 #+END_SRC
 
 *** Stack Exchange
-
-#+NAME: sx
+<<sx>>
 
 #+BEGIN_SRC emacs-lisp
   (require 'sx-load) 
 #+END_SRC
     
 *** Jython/Python
-#+NAME: python
+<<python>>
 
 This base settings.org emacs initialization file has somewhat limited support
 for Python. The 'python' branch of this repository has much better support
@@ -686,7 +685,7 @@ Fill column indicator
 #+END_SRC
 
 *** org-present
-#+NAME: org-present
+<<org-present>>
 
 org-present
 
@@ -695,7 +694,7 @@ org-present
 #+END_SRC
 
 *** Rotate
-#+NAME: rotate
+<<rotate>>
 
 Buffer Rotation
 
@@ -704,7 +703,7 @@ Buffer Rotation
   (global-set-key (kbd "C-x C-o") 'rotate-window)
 #+END_SRC
 *** Babel
-
+<<babel>>
 Loading babel supported languages:
 
 #+BEGIN_SRC emacs-lisp
