@@ -173,6 +173,15 @@ Set up the fill-column to 80 characters and set tab width to 2.
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
+Function to join multiple lines.
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/join-lines ()
+    (interactive)
+    (let ((fill-column 999999))
+      (fill-paragraph nil)))
+#+END_SRC
+
 Hide the mouse while typing.
 
 #+BEGIN_SRC emacs-lisp
