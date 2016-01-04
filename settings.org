@@ -322,6 +322,14 @@ Inline image support
   (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
+Latex ([[https://blog.fugue.co/2015-11-11-guide-to-emacs.html][https://blog.fugue.co/2015-11-11-guide-to-emacs.html]])
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-pdf-process
+   '("xelatex -interaction nonstopmode %f"
+    "xelatex -interaction nonstopmode %f"))
+#+END_SRC
+
 ** Manually Curated Packages
 
 These modes are not in any package manager so curate them manually.
