@@ -391,6 +391,7 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+-----------|
 | package                       | description                                   | anchors   |
 |-------------------------------+-----------------------------------------------+-----------|
+| ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
 | rw-hunspell                   | spelling                                      | [[spelling]]  |
 | rw-ispell                     | spelling                                      | [[spelling]]  |
 | rw-language-and-country-codes | spelling                                      | [[spelling]]  |
@@ -453,6 +454,18 @@ Now handle unstable packages.
 #+END_SRC
 
 ** Package Configuration
+*** Ace Jump Mode
+<<ace>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ace-jump-mode)
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+#+END_SRC
+
 *** Spelling 
 <<spelling>>
 
