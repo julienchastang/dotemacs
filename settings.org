@@ -648,6 +648,10 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 #+END_SRC
 
+git flavored markdown
+
+(require 'ox-gfm)
+
 *** YAML
 <<yaml>>
 
