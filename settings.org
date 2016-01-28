@@ -793,3 +793,14 @@ Loading babel supported languages:
   (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
 #+END_SRC
 
+** Emacs Shell Settings
+
+Magit
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/magit ()
+    "Function to open magit-status for the current directory"
+    (interactive)
+    (magit-status default-directory)
+    nil)
+#+END_SRC
