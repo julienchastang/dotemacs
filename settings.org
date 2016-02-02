@@ -804,3 +804,14 @@ Magit
     (magit-status default-directory)
     nil)
 #+END_SRC
+
+Clear buffer
+
+#+BEGIN_SRC emacs-lisp
+  (defun eshell/clear ()
+    "Clear the eshell buffer"
+    (interactive)
+    (let ((eshell-buffer-maximum-lines 0))
+      (eshell-truncate-buffer)))
+#+END_SRC
+
