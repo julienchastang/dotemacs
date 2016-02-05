@@ -236,12 +236,6 @@ rename file and buffer
             (set-visited-file-name new-name t t)))))))
 #+END_SRC
 
-Interactively Do Things
-
-#+BEGIN_SRC emacs-lisp
-  (ido-mode t)
-#+END_SRC
-
 Upcase & Down Case
 
 #+BEGIN_SRC emacs-lisp
@@ -392,6 +386,7 @@ emacs org mode.
 | package                       | description                                   | anchors   |
 |-------------------------------+-----------------------------------------------+-----------|
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
+| flx-ido                       | flx integration for ido                       |           |
 | rw-hunspell                   | spelling                                      | [[spelling]]  |
 | rw-ispell                     | spelling                                      | [[spelling]]  |
 | rw-language-and-country-codes | spelling                                      | [[spelling]]  |
@@ -464,6 +459,21 @@ Now handle unstable packages.
   (add-hook 'org-mode-hook
             (lambda ()
               (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+#+END_SRC
+
+*** COMMENT ido
+<<ido>>
+
+Interactively Do Things
+
+#+BEGIN_SRC emacs-lisp
+  (require 'flx-ido)
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil)
 #+END_SRC
 
 *** Spelling 
