@@ -236,6 +236,12 @@ rename file and buffer
             (set-visited-file-name new-name t t)))))))
 #+END_SRC
 
+Interactively Do Things
+
+#+BEGIN_SRC emacs-lisp
+  (ido-mode t)
+#+END_SRC
+
 Upcase & Down Case
 
 #+BEGIN_SRC emacs-lisp
@@ -386,7 +392,7 @@ emacs org mode.
 | package                       | description                                   | anchors   |
 |-------------------------------+-----------------------------------------------+-----------|
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
-| flx-ido                       | flx integration for ido                       |           |
+| flx-ido                       | flx integration for ido                       | [[ido]]       |
 | rw-hunspell                   | spelling                                      | [[spelling]]  |
 | rw-ispell                     | spelling                                      | [[spelling]]  |
 | rw-language-and-country-codes | spelling                                      | [[spelling]]  |
