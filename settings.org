@@ -467,7 +467,7 @@ Now handle unstable packages.
               (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
 #+END_SRC
 
-*** COMMENT ido
+*** ido
 <<ido>>
 
 Interactively Do Things
@@ -751,6 +751,7 @@ Buffer Rotation
   (require 'rotate)
   (global-set-key (kbd "C-x C-o") 'rotate-window)
 #+END_SRC
+
 *** Babel
 <<babel>>
 Loading babel supported languages:
@@ -784,6 +785,7 @@ Loading babel supported languages:
                  "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"
                  "<src lang=\"emacs-lisp\">\n?\n</src>"))
 #+END_SRC
+
 *** XML
 <<xml>>
 
