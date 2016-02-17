@@ -564,6 +564,9 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+#+END_SRC
+
 #+END_SRC
 
 *** Smex
@@ -809,6 +812,16 @@ Loading babel supported languages:
 
   ;; optional key bindings, easier than hs defaults
   (define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
+#+END_SRC
+
+*** emacs-lisp
+
+eldoc for emacs lisp development
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 #+END_SRC
 
 ** Emacs Shell Settings
