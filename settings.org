@@ -420,6 +420,7 @@ emacs org mode.
 | hackernews                    | Access the hackernews aggregator from Emacs   | [[hn]]        |
 | sx                            | Stack Exchange for Emacs                      | [[sx]]        |
 | python-mode                   | Python mode for emacs                         | [[python]]    |
+| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |           |
 |-------------------------------+-----------------------------------------------+-----------|
 
 #+tblname: my-packages-unstable
