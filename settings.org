@@ -462,6 +462,7 @@ Now handle unstable packages.
 
 #+BEGIN_SRC emacs-lisp
  (require 'helm)
+ (global-set-key (kbd "M-x") 'helm-M-x)
 #+END_SRC
 
 
