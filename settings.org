@@ -391,6 +391,7 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+-----------|
 | package                       | description                                   | anchors   |
 |-------------------------------+-----------------------------------------------+-----------|
+| helm                          | helm completion engine                        | [[helm]]      |
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
 | flx-ido                       | flx integration for ido                       | [[ido]]       |
 | rw-hunspell                   | spelling                                      | [[spelling]]  |
@@ -456,6 +457,14 @@ Now handle unstable packages.
 #+END_SRC
 
 ** Package Configuration
+*** Helm
+<<helm>>
+
+#+BEGIN_SRC emacs-lisp
+ (require 'helm)
+#+END_SRC
+
+
 *** Ace Jump Mode
 <<ace>>
 
