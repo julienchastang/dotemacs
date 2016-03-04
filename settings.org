@@ -236,11 +236,6 @@ rename file and buffer
             (set-visited-file-name new-name t t)))))))
 #+END_SRC
 
-Interactively Do Things
-
-#+BEGIN_SRC emacs-lisp
-  (ido-mode t)
-#+END_SRC
 
 Upcase & Down Case
 
@@ -393,7 +388,6 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+-----------|
 | helm                          | helm completion engine                        | [[helm]]      |
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
-| flx-ido                       | flx integration for ido                       | [[ido]]       |
 | rw-hunspell                   | spelling                                      | [[spelling]]  |
 | rw-ispell                     | spelling                                      | [[spelling]]  |
 | rw-language-and-country-codes | spelling                                      | [[spelling]]  |
@@ -406,7 +400,6 @@ emacs org mode.
 | powerline                     | A better mode line                            | [[modeline]]  |
 | paredit                       | structured editing of S-expression data       | [[paren]]     |
 | rainbow-delimiters            | rainbow parentheses                           | [[paren]]     |
-| smex                          | recently and most frequently used commands    | [[smex]]      |
 | markdown-mode                 | markdown for emacs                            | [[markdown]]  |
 | yaml-mode                     | yaml for emacs                                | [[yaml]]      |
 | undo-tree                     | undo tree                                     | [[undo]]      |
@@ -461,11 +454,13 @@ Now handle unstable packages.
 <<helm>>
 
 #+BEGIN_SRC emacs-lisp
+  (require 'helm-config)
   (require 'helm)
+  (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files) 
   (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+  (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 #+END_SRC
 
 *** Ace Jump Mode
@@ -478,21 +473,6 @@ Now handle unstable packages.
   (add-hook 'org-mode-hook
             (lambda ()
               (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
-#+END_SRC
-
-*** ido
-<<ido>>
-
-Interactively Do Things
-
-#+BEGIN_SRC emacs-lisp
-  (require 'flx-ido)
-  (ido-mode 1)
-  (ido-everywhere 1)
-  (flx-ido-mode 1)
-  ;; disable ido faces to see flx highlights.
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-faces nil)
 #+END_SRC
 
 *** Spelling 
@@ -582,16 +562,6 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 
 #+END_SRC
 
-*** Smex
-<<smex>>
-    
-#+BEGIN_SRC emacs-lisp
-  (smex-initialize) 
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  ;; This is your old M-x.
-  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-#+END_SRC
 
 *** Undo
 <<undo>>
