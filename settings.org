@@ -461,10 +461,12 @@ Now handle unstable packages.
 <<helm>>
 
 #+BEGIN_SRC emacs-lisp
- (require 'helm)
- (global-set-key (kbd "M-x") 'helm-M-x)
+  (require 'helm)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files) 
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  (global-set-key (kbd "C-x C-b") #'helm-buffers-list)
 #+END_SRC
-
 
 *** Ace Jump Mode
 <<ace>>
