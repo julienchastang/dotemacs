@@ -383,39 +383,41 @@ on github, the anchors will not take you anywhere. The anchors only work in
 emacs org mode.
 
 #+tblname: my-packages
-|-------------------------------+-----------------------------------------------+-----------|
-| package                       | description                                   | anchors   |
-|-------------------------------+-----------------------------------------------+-----------|
-| helm                          | helm completion engine                        | [[helm]]      |
-| ace-jump-mode                 | ace-jump-mode                                 | [[ace]]       |
-| rw-hunspell                   | spelling                                      | [[spelling]]  |
-| rw-ispell                     | spelling                                      | [[spelling]]  |
-| rw-language-and-country-codes | spelling                                      | [[spelling]]  |
-| flycheck                      | on-the-fly syntax checking                    |           |
-| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet]] |
-| magit                         | emacs git client                              | [[git]]       |
-| git-gutter                    | git gutter                                    | [[git]]       |
-| git-timemachine               | Walk through git revisions of a file          | [[git]]       |
-| fill-column-indicator         | 80 column rule                                | [[fci]]       |
-| powerline                     | A better mode line                            | [[modeline]]  |
-| paredit                       | structured editing of S-expression data       | [[paren]]     |
-| rainbow-delimiters            | rainbow parentheses                           | [[paren]]     |
-| markdown-mode                 | markdown for emacs                            | [[markdown]]  |
-| yaml-mode                     | yaml for emacs                                | [[yaml]]      |
-| undo-tree                     | undo tree                                     | [[undo]]      |
-| auto-complete                 | Auto Completion for GNU Emacs                 | [[autoc]]     |
-| windresize                    | arrow keys resize the window                  |           |
-| clojure-mode                  | Mode for clojure                              | [[clojure]]   |
-| cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]   |
-| ac-cider                      | Clojure auto-complete sources using CIDER     | [[clojure]]   |
-| clojure-snippets              | Yasnippets for clojure                        | [[clojure]]   |
-| clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]   |
-| javap-mode                    | Load .class file and get javap output         |           |
-| hackernews                    | Access the hackernews aggregator from Emacs   | [[hn]]        |
-| sx                            | Stack Exchange for Emacs                      | [[sx]]        |
-| python-mode                   | Python mode for emacs                         | [[python]]    |
-| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |           |
-|-------------------------------+-----------------------------------------------+-----------|
+|-------------------------------+-----------------------------------------------+------------|
+| package                       | description                                   | anchors    |
+|-------------------------------+-----------------------------------------------+------------|
+| helm                          | helm completion engine                        | [[helm]]       |
+| projectile                    | Project navigation and management library     | [[projectile]] |
+| helm-projectile               | Projectile helm integration                   | [[projectile]] |
+| ace-jump-mode                 | ace-jump-mode                                 | [[ace]]        |
+| rw-hunspell                   | spelling                                      | [[spelling]]   |
+| rw-ispell                     | spelling                                      | [[spelling]]   |
+| rw-language-and-country-codes | spelling                                      | [[spelling]]   |
+| flycheck                      | on-the-fly syntax checking                    |            |
+| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet]]  |
+| magit                         | emacs git client                              | [[git]]        |
+| git-gutter                    | git gutter                                    | [[git]]        |
+| git-timemachine               | Walk through git revisions of a file          | [[git]]        |
+| fill-column-indicator         | 80 column rule                                | [[fci]]        |
+| powerline                     | A better mode line                            | [[modeline]]   |
+| paredit                       | structured editing of S-expression data       | [[paren]]      |
+| rainbow-delimiters            | rainbow parentheses                           | [[paren]]      |
+| markdown-mode                 | markdown for emacs                            | [[markdown]]   |
+| yaml-mode                     | yaml for emacs                                | [[yaml]]       |
+| undo-tree                     | undo tree                                     | [[undo]]       |
+| auto-complete                 | Auto Completion for GNU Emacs                 | [[autoc]]      |
+| windresize                    | arrow keys resize the window                  |            |
+| clojure-mode                  | Mode for clojure                              | [[clojure]]    |
+| cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]    |
+| ac-cider                      | Clojure auto-complete sources using CIDER     | [[clojure]]    |
+| clojure-snippets              | Yasnippets for clojure                        | [[clojure]]    |
+| clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]    |
+| javap-mode                    | Load .class file and get javap output         |            |
+| hackernews                    | Access the hackernews aggregator from Emacs   | [[hn]]         |
+| sx                            | Stack Exchange for Emacs                      | [[sx]]         |
+| python-mode                   | Python mode for emacs                         | [[python]]     |
+| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
+|-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
 |--------------+-------------------------------------+-------------|
@@ -461,6 +463,16 @@ Now handle unstable packages.
   (global-set-key (kbd "C-x C-f") 'helm-find-files) 
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+#+END_SRC
+
+*** Projectile
+<<projectile>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'projectile)
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'helm)
 #+END_SRC
 
 *** Ace Jump Mode
@@ -561,7 +573,6 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+END_SRC
 
 #+END_SRC
-
 
 *** Undo
 <<undo>>
