@@ -413,19 +413,18 @@ emacs org mode.
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure]]    |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]    |
 | javap-mode                    | Load .class file and get javap output         |            |
-| hackernews                    | Access the hackernews aggregator from Emacs   | [[hn]]         |
 | sx                            | Stack Exchange for Emacs                      | [[sx]]         |
 | python-mode                   | Python mode for emacs                         | [[python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
-|--------------+-------------------------------------+-------------|
-| package      | description                         | anchors     |
-|--------------+-------------------------------------+-------------|
-| org-present  | Minimal presentation mode for emacs | [[org-present]] |
-|--------------+-------------------------------------+-------------|
-
+|-------------+-------------------------------------+-------------|
+| package     | description                         | anchors     |
+|-------------+-------------------------------------+-------------|
+| org-present | Minimal presentation mode for emacs | [[org-present]] |
+| emms        | The Emacs Multimedia System         | [[emms]]        |
+|-------------+-------------------------------------+-------------|
 
 Download the packages we need.
 
@@ -677,15 +676,13 @@ git flavored markdown
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
 
-*** Hacker News
-<<hn>>
+*** EMMS
+<<emms>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'hackernews)
-
-  (custom-set-faces 
-   '(hackernews-link-face ((t (:foreground "dark orange")))))
-   
+  (require 'emms-setup)
+  (emms-standard)
+  (emms-default-players)         
 #+END_SRC
 
 *** Stack Exchange
