@@ -419,12 +419,13 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
-|-------------+-------------------------------------+-------------|
-| package     | description                         | anchors     |
-|-------------+-------------------------------------+-------------|
-| org-present | Minimal presentation mode for emacs | [[org-present]] |
-| emms        | The Emacs Multimedia System         | [[emms]]        |
-|-------------+-------------------------------------+-------------|
+|-------------+--------------------------------------+-------------|
+| package     | description                          | anchors     |
+|-------------+--------------------------------------+-------------|
+| org-present | Minimal presentation mode for emacs  | [[org-present]] |
+| emms        | The Emacs Multimedia System          | [[emms]]        |
+| restclient  | An interactive HTTP client for Emacs | [[restclient]]  |
+|-------------+--------------------------------------+-------------|
 
 Download the packages we need.
 
@@ -813,6 +814,13 @@ eldoc for emacs lisp development
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+#+END_SRC
+
+*** restclient
+<<restclient>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'restclient)
 #+END_SRC
 
 ** Emacs Shell Settings
