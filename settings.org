@@ -413,7 +413,7 @@ emacs org mode.
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]    |
 | javap-mode                    | Load .class file and get javap output         |            |
 | sx                            | Stack Exchange for Emacs                      | [[sx]]         |
-| python-mode                   | Python mode for emacs                         | [[python]]     |
+| python                        | Python mode for emacs                         | [[python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 |-------------------------------+-----------------------------------------------+------------|
 
@@ -700,24 +700,10 @@ for Python. The 'python' branch of this repository has much better support
 coupled with [[https://github.com/julienchastang/Julien-Dockerfiles/tree/master/python-emacs][this emacs docker machine]]. Using Jython for babel (which yields
 somewhat mixed results).
 
-#+BEGIN_SRC emacs-lisp
-(setq org-babel-python-command "jython")
-#+END_SRC
-
 jython/python mode
 
 #+BEGIN_SRC emacs-lisp
-  ;; Need to find and install python-mode
-  (let* ((d "~/.emacs.d/elpa/")
-         (p (concat d
-                    (car
-                     (remove-if-not (lambda (x)
-                                      (string-match-p "python-mode" x))
-                                    (directory-files d ))))))
-    (setq py-install-directory p)
-    (add-to-list 'load-path py-install-directory))
-
-  (require 'python-mode)
+(setq org-babel-python-command "jython")
 #+END_SRC
 
 Fill column indicator
