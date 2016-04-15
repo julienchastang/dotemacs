@@ -404,11 +404,9 @@ emacs org mode.
 | markdown-mode                 | markdown for emacs                            | [[markdown]]   |
 | yaml-mode                     | yaml for emacs                                | [[yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo]]       |
-| auto-complete                 | Auto Completion for GNU Emacs                 | [[autoc]]      |
 | windresize                    | arrow keys resize the window                  |            |
 | clojure-mode                  | Mode for clojure                              | [[clojure]]    |
 | cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]    |
-| ac-cider                      | Clojure auto-complete sources using CIDER     | [[clojure]]    |
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure]]    |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]    |
 | javap-mode                    | Load .class file and get javap output         |            |
@@ -579,17 +577,6 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
 #+END_SRC
-    
-*** Auto-Complete
-<<autoc>>
-
-#+BEGIN_SRC emacs-lisp
-  (global-auto-complete-mode nil)
-  (require 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-  (ac-config-default)
-
-#+END_SRC
 
 *** Clojure
 <<clojure>>
@@ -619,20 +606,6 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook (lambda ()
                                  (clj-refactor-mode 1)
                                  (cljr-add-keybindings-with-prefix "C-c C-m")))
-
-  ;; auto-complete
-  (require 'ac-cider)
-
-  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-
-  (add-hook 'cider-mode-hook 'ac-cider-setup)
-
-  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
-
-  (eval-after-load "auto-complete"
-    '(progn
-       (add-to-list 'ac-modes 'cider-mode)
-       (add-to-list 'ac-modes 'cider-repl-mode)))
 #+END_SRC
 
 
