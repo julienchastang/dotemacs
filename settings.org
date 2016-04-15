@@ -584,7 +584,7 @@ https://github.com/alpaker/Fill-Column-Indicator/issues/45
 <<autoc>>
 
 #+BEGIN_SRC emacs-lisp
-  (global-auto-complete-mode t)
+  (global-auto-complete-mode nil)
   (require 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
   (ac-config-default)
