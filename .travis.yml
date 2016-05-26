@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+language: generic
+
+before_install:
+  - git clone https://github.com/julienchastang/emacs-docker
+  - docker build -f emacs-docker/Dockerfile -t julienchastang/emacs:latest .
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - docker push julienchastang/emacs:latest
