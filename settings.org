@@ -413,6 +413,7 @@ emacs org mode.
 | sx                            | Stack Exchange for Emacs                      | [[sx]]         |
 | python                        | Python mode for emacs                         | [[python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
+| csv-mode                      | Major mode for editing comma separated values |            |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
