@@ -402,7 +402,6 @@ emacs org mode.
 | paredit                       | structured editing of S-expression data       | [[paren]]      |
 | rainbow-delimiters            | rainbow parentheses                           | [[paren]]      |
 | markdown-mode                 | markdown for emacs                            | [[markdown]]   |
-| ox-gfm                        | Github Flavored Markdown                      | [[markdown]]   |
 | yaml-mode                     | yaml for emacs                                | [[yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
