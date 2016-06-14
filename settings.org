@@ -610,7 +610,7 @@ This powerline theme is pretty much identical to the default powerline theme exc
                                                                powerline-default-separator
                                                                (cdr powerline-default-separator-dir))))
                               (lhs (list (if (buffer-modified-p)
-                                             (propertize "★" 'face '
+                                             (propertize "%★" 'face '
                                                          (:background "black" :foreground "red"))
                                            (powerline-raw "%*" nil 'l))
                                          (powerline-buffer-size nil 'l)
