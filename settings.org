@@ -425,6 +425,7 @@ emacs org mode.
 | emms        | The Emacs Multimedia System          | [[emms]]        |
 | restclient  | An interactive HTTP client for Emacs | [[restclient]]  |
 | ox-gfm      | Github Flavored Markdown             | [[markdown]]    |
+| synonymous  | Thesaurus                            | [[writing]]     |
 |-------------+--------------------------------------+-------------|
 
 Download the packages we need.
@@ -888,6 +889,10 @@ eldoc for emacs lisp development
               ))
 #+END_SRC
 
+*** Writing
+#+BEGIN_SRC emacs-lisp
+  (require 'synonymous)
+#+END_SRC
 ** Emacs Shell Settings
 
 Magit
