@@ -426,6 +426,7 @@ emacs org mode.
 | restclient  | An interactive HTTP client for Emacs | [[restclient]]  |
 | ox-gfm      | Github Flavored Markdown             | [[markdown]]    |
 | synonymous  | Thesaurus                            | [[writing]]     |
+| info+       | Extensions to info.el                |             |
 |-------------+--------------------------------------+-------------|
 
 Download the packages we need.
@@ -892,6 +893,10 @@ eldoc for emacs lisp development
 *** Writing
 #+BEGIN_SRC emacs-lisp
   (require 'synonymous)
+#+END_SRC
+*** Info
+#+BEGIN_SRC emacs-lisp
+  (require 'info+)
 #+END_SRC
 ** Emacs Shell Settings
 
