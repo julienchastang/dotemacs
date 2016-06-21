@@ -418,16 +418,17 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
-|-------------+--------------------------------------+-------------|
-| package     | description                          | anchors     |
-|-------------+--------------------------------------+-------------|
-| org-present | Minimal presentation mode for emacs  | [[org-present]] |
-| emms        | The Emacs Multimedia System          | [[emms]]        |
-| restclient  | An interactive HTTP client for Emacs | [[restclient]]  |
-| ox-gfm      | Github Flavored Markdown             | [[markdown]]    |
-| synonymous  | Thesaurus                            | [[writing]]     |
-| info+       | Extensions to info.el                | [[info]]        |
-|-------------+--------------------------------------+-------------|
+|---------------+-----------------------------------------+-------------|
+| package       | description                             | anchors     |
+|---------------+-----------------------------------------+-------------|
+| org-present   | Minimal presentation mode for emacs     | [[org-present]] |
+| emms          | The Emacs Multimedia System             | [[emms]]        |
+| restclient    | An interactive HTTP client for Emacs    | [[restclient]]  |
+| ob-restclient | org-babel functions for restclient-mode | [[restclient]]  |
+| ox-gfm        | Github Flavored Markdown                | [[markdown]]    |
+| synonymous    | Thesaurus                               | [[writing]]     |
+| info+         | Extensions to info.el                   | [[info]]        |
+|---------------+-----------------------------------------+-------------|
 
 Download the packages we need.
 
@@ -806,6 +807,7 @@ Loading babel supported languages:
      (org . t)
      (shell . t)
      (clojure . t)
+     (restclient . t)
      (python . t)))
 #+END_SRC
 
