@@ -426,7 +426,7 @@ emacs org mode.
 | restclient  | An interactive HTTP client for Emacs | [[restclient]]  |
 | ox-gfm      | Github Flavored Markdown             | [[markdown]]    |
 | synonymous  | Thesaurus                            | [[writing]]     |
-| info+       | Extensions to info.el                |             |
+| info+       | Extensions to info.el                | [[info]]        |
 |-------------+--------------------------------------+-------------|
 
 Download the packages we need.
