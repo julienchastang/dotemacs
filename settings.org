@@ -87,9 +87,15 @@ snippet in your =~/.emacs.d/init.el= file.
 Everything in this section are general settings that should not need any
 non-default packages.
 
-First let's change to a less horrible color theme. The available default options
-are =adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango
-tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat=
+Keep customize settings in their own file
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file "~/.emacs.d/git/dotemacs/custom.el")
+  (when (file-exists-p custom-file)
+    (load custom-file))
+#+END_SRC
+
+Let's change to a less horrible color theme. The available default options are =adwaita deeper-blue dichromacy leuven light-blue manoj-dark misterioso tango tango-dark tsdh-dark tsdh-light wheatgrass whiteboard wombat=
 
 #+BEGIN_SRC emacs-lisp
   (condition-case nil
@@ -236,7 +242,6 @@ rename file and buffer
             (set-visited-file-name new-name t t)))))))
 #+END_SRC
 
-
 Upcase & Down Case
 
 #+BEGIN_SRC emacs-lisp
@@ -363,11 +368,6 @@ First define the package archives and where they live.
     '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
   (package-refresh-contents)
-
-  ;; keep customize settings in their own file
-  (setq custom-file "~/.emacs.d/custom.el")
-  (when (file-exists-p custom-file)
-    (load custom-file))
 
   ;; Message how long it took to load everything (minus packages)
   (let ((elapsed (float-time (time-subtract (current-time)

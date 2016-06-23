@@ -2,7 +2,6 @@ ac-comphist.dat
 auto-save-list
 .DS_Store
 *~
-*.el
 \#*
 eshell
 elpa
@@ -12,3 +11,4 @@ eproject.lst
 snippets
 .python-environments
 /.projectile
+/settings.el
