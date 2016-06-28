@@ -805,6 +805,7 @@ Loading babel supported languages:
    '((ditaa . t)
      (emacs-lisp . t)
      (org . t)
+     (latex . t)
      (shell . t)
      (clojure . t)
      (restclient . t)
