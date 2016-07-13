@@ -334,11 +334,12 @@ Inline image support
 These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
-|-----------------------------+---------------+---------|
-| package                     | description   | anchors |
-|-----------------------------+---------------+---------|
-| ~/.emacs.d/git/emacs-rotate | Buffer rotate | [[rotate]]  |
-|-----------------------------+---------------+---------|
+|-----------------------------------------+----------------------+---------|
+| package                                 | description          | anchors |
+|-----------------------------------------+----------------------+---------|
+| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate        | [[rotate]]  |
+| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization | [[writing][writing]] |
+|-----------------------------------------+----------------------+---------|
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
@@ -894,9 +895,12 @@ eldoc for emacs lisp development
 #+END_SRC
 
 *** Writing
+<<writing>>
 #+BEGIN_SRC emacs-lisp
   (require 'synonymous)
+  (require 'title-capitalization)
 #+END_SRC
+
 *** Info
 #+BEGIN_SRC emacs-lisp
   (require 'info+)
