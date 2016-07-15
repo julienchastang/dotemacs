@@ -100,14 +100,21 @@ Let's change to a less horrible color theme. The available default options are =
 #+BEGIN_SRC emacs-lisp
   (condition-case nil
       (load-theme 'leuven)
-      ('error (message (format "Could not load leuven theme"))))
+    ('error (message (format "Could not load leuven theme"))))
+
+  (setq preferred-font-family
+    (cond
+     ((string-equal system-type "darwin") ; Mac OS X
+      "Monaco")
+     ((string-equal system-type "gnu/linux") ; linux
+      "DejaVu Sans Mono")))
 
   (custom-set-faces
    '(default ((t (:inherit nil :stipple nil :background "#F6F6EF"
                            :foreground "#333333" :inverse-video nil :box nil
                            :strike-through nil :overline nil :underline nil
                            :slant normal :weight normal :height 98 :width normal 
-                           :foundry "monotype" :family "Andale Mono")))))
+                           :foundry "monotype" :family preferred-font-family)))))
 #+END_SRC
 
 Deal with additional paths
