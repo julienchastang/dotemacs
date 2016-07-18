@@ -102,6 +102,11 @@ Let's change to a less horrible color theme. The available default options are =
       (load-theme 'leuven)
     ('error (message (format "Could not load leuven theme"))))
 
+#+END_SRC
+
+Fonts
+
+#+BEGIN_SRC emacs-lisp
   (defun jc/setup-osx-fonts ()
     (interactive)
     (when (eq system-type 'darwin)
