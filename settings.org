@@ -102,19 +102,27 @@ Let's change to a less horrible color theme. The available default options are =
       (load-theme 'leuven)
     ('error (message (format "Could not load leuven theme"))))
 
-  (setq preferred-font-family
-    (cond
-     ((string-equal system-type "darwin") ; Mac OS X
-      "Monaco")
-     ((string-equal system-type "gnu/linux") ; linux
-      "DejaVu Sans Mono")))
+  (defun jc/setup-osx-fonts ()
+    (interactive)
+    (when (eq system-type 'darwin)
+      (set-fontset-font "fontset-default" 'symbol "Monaco")
+      (set-face-attribute 'default nil :height 120)
+      (set-face-attribute 'fixed-pitch nil :height 120)
+      ;; Anti-aliasing
+      (setq mac-allow-anti-aliasing t)))
 
-  (custom-set-faces
-   '(default ((t (:inherit nil :stipple nil :background "#F6F6EF"
-                           :foreground "#333333" :inverse-video nil :box nil
-                           :strike-through nil :overline nil :underline nil
-                           :slant normal :weight normal :height 98 :width normal 
-                           :foundry "monotype" :family preferred-font-family)))))
+  (when (eq system-type 'darwin)
+    (add-hook 'after-init-hook #'jc/setup-osx-fonts))
+
+  (defun jc/setup-x11-fonts ()
+    (interactive)
+    (when (eq window-system 'x)
+      ;; Font family
+      (set-frame-font "DejaVu Sans Mono")
+      (set-face-attribute 'default nil :height 105)))
+
+  (when (eq window-system 'x)
+    (add-hook 'after-init-hook #'jc/setup-x11-fonts))
 #+END_SRC
 
 Deal with additional paths
