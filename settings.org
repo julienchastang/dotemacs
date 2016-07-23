@@ -430,6 +430,7 @@ emacs org mode.
 | cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]    |
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure]]    |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure]]    |
+| company                       | Modular text completion framework             |            |
 | javap-mode                    | Load .class file and get javap output         |            |
 | sx                            | Stack Exchange for Emacs                      | [[sx]]         |
 | python                        | Python mode for emacs                         | [[python]]     |
@@ -717,6 +718,10 @@ All the configuration crap recommended by https://github.com/clojure-emacs/cider
   (add-hook 'clojure-mode-hook (lambda ()
                                  (clj-refactor-mode 1)
                                  (cljr-add-keybindings-with-prefix "C-c C-m")))
+
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+
+  (add-hook 'cider-mode-hook #'company-mode)
 #+END_SRC
 
 
