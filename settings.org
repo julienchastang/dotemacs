@@ -108,26 +108,23 @@ Fonts
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/setup-osx-fonts ()
-    (interactive)
-    (when (eq system-type 'darwin)
-      (set-fontset-font "fontset-default" 'symbol "Monaco")
-      (set-face-attribute 'default nil :height 120)
-      (set-face-attribute 'fixed-pitch nil :height 120)
-      ;; Anti-aliasing
-      (setq mac-allow-anti-aliasing t)))
-
-  (when (eq system-type 'darwin)
-    (add-hook 'after-init-hook #'jc/setup-osx-fonts))
+    (set-fontset-font "fontset-default" 'symbol "Monaco")
+    (set-face-attribute 'default nil :height 120)
+    (set-face-attribute 'fixed-pitch nil :height 120)
+    ;; Anti-aliasing
+    (setq mac-allow-anti-aliasing t))
 
   (defun jc/setup-x11-fonts ()
-    (interactive)
-    (when (eq window-system 'x)
-      ;; Font family
-      (set-frame-font "DejaVu Sans Mono")
-      (set-face-attribute 'default nil :height 105)))
+    (set-frame-font "DejaVu Sans Mono")
+    (set-face-attribute 'default nil :height 105))
 
-  (when (eq window-system 'x)
+  (cond 
+   ((eq system-type 'darwin)
+    (add-hook 'after-init-hook #'jc/setup-osx-fonts))
+   ((eq window-system 'x)
     (add-hook 'after-init-hook #'jc/setup-x11-fonts))
+   ;; default, do nothing
+   (t nil))
 #+END_SRC
 
 Deal with additional paths
