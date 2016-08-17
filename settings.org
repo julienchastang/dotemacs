@@ -465,7 +465,7 @@ Now handle unstable packages.
   (defvar install-packages-unstable (mapcar 'intern (mapcar 'car (cdr packs))))
 
   (add-to-list 'package-archives 
-     '("melpa-unstable" . "http://melpa.milkbox.net/packages/"))
+     '("melpa-unstable" . "http://melpa.org/packages/"))
   (package-refresh-contents)
 
   (dolist (pack install-packages-unstable)
