@@ -384,7 +384,7 @@ First define the package archives and where they live.
 
   ;; define some package archives
   (add-to-list 'package-archives 
-     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/"))
+     '("melpa-stable" . "http://stable.melpa.org/packages/"))
   (add-to-list 'package-archives
     '("marmalade" . "http://marmalade-repo.org/packages/"))
   (package-initialize)
