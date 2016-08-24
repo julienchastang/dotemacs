@@ -351,12 +351,13 @@ Inline image support
 These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
-|-----------------------------------------+----------------------+---------|
-| package                                 | description          | anchors |
-|-----------------------------------------+----------------------+---------|
-| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate        | [[rotate]]  |
-| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization | [[writing][writing]] |
-|-----------------------------------------+----------------------+---------|
+|-----------------------------------------+------------------------------+----------|
+| package                                 | description                  | anchors  |
+|-----------------------------------------+------------------------------+----------|
+| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate]]   |
+| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]  |
+| ~/.emacs.d/git/emacs-calfw/             | Calendar framework for emacs | [[calendar][calendar]] |
+|-----------------------------------------+------------------------------+----------|
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
@@ -434,6 +435,7 @@ emacs org mode.
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
+| org-gcal                      | Org sync with Google Calendar                 | [[calendar]]   |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -928,6 +930,13 @@ eldoc for emacs lisp development
 #+BEGIN_SRC emacs-lisp
   (require 'info+)
 #+END_SRC
+*** Calendar
+<<calendar>>
+#+BEGIN_SRC emacs-lisp
+  (require 'calfw)
+  (require 'org-gcal)
+#+END_SRC
+
 ** Emacs Shell Settings
 
 Magit
