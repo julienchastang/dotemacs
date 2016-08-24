@@ -924,6 +924,7 @@ eldoc for emacs lisp development
 #+END_SRC
 
 *** Info
+<<info>>
 #+BEGIN_SRC emacs-lisp
   (require 'info+)
 #+END_SRC
