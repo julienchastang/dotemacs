@@ -935,6 +935,7 @@ eldoc for emacs lisp development
 #+BEGIN_SRC emacs-lisp
   (require 'calfw)
   (require 'org-gcal)
+  (require 'calfw-org)
 #+END_SRC
 
 ** Emacs Shell Settings
