@@ -318,8 +318,11 @@ Ditaa is a command-line utility that converts diagrams drawn using ASCII art
 into bitmap graphics. Here is the Ditta path:
 
 #+BEGIN_SRC emacs-lisp
-  ;; Brew path
-  (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar")
+  (cond
+   ((string-equal system-type "darwin")   ; Mac OS X
+    (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar"))
+   ((string-equal system-type "gnu/linux") ; linux
+    (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))  
 #+END_SRC
 
 Inline image support
