@@ -439,6 +439,7 @@ emacs org mode.
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
 | org-gcal                      | Org sync with Google Calendar                 | [[calendar]]   |
+| gnuplot                       | gnuplot                                       | [[gnuplot]]    |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -833,6 +834,7 @@ Loading babel supported languages:
    '((ditaa . t)
      (emacs-lisp . t)
      (org . t)
+     (gnuplot . t)
      (latex . t)
      (shell . t)
      (clojure . t)
@@ -939,6 +941,11 @@ eldoc for emacs lisp development
   (require 'calfw)
   (require 'org-gcal)
   (require 'calfw-org)
+#+END_SRC
+*** Gnuplot
+<<gnuplot>>
+#+BEGIN_SRC emacs-lisp
+  (require 'gnuplot)
 #+END_SRC
 
 ** Emacs Shell Settings
