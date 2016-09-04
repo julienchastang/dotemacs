@@ -319,7 +319,7 @@ into bitmap graphics. Here is the Ditta path:
 
 #+BEGIN_SRC emacs-lisp
   ;; Brew path
-  (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
+  (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar")
 #+END_SRC
 
 Inline image support
