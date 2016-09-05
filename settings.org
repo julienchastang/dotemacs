@@ -948,6 +948,12 @@ eldoc for emacs lisp development
   (require 'gnuplot)
 #+END_SRC
 
+*** Taskjuggler
+<<taskjuggler>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ox-taskjuggler)
+#+END_SRC
 ** Emacs Shell Settings
 
 Magit
