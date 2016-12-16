@@ -421,6 +421,7 @@ These modes are not in any package manager so curate them manually.
 | ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
 | ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
 | ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
+| ~/.emacs.d/git/emacs-zmq/               | https://github.com/dzop/emacs-zmq                   | emacs-zmq             | [[python][python]]      |
 | ~/.emacs.d/wget/infoplus/               | https://www.emacswiki.org/emacs/download/info%2b.el | Extensions to info.el | [[info][info]]        |
 |-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
 
@@ -451,6 +452,9 @@ First define the package archives and where they live.
      '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (add-to-list 'package-archives
     '("marmalade" . "https://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives
+    '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
   (package-initialize)
   (package-refresh-contents)
 
@@ -479,7 +483,6 @@ emacs org mode.
 | rw-ispell                     | spelling                                      | [[spelling][spelling]]   |
 | rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]   |
 | flycheck                      | on-the-fly syntax checking                    |            |
-| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
 | forge                         | access git forges from magit                  | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
@@ -511,7 +514,23 @@ emacs org mode.
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
 | helm-org                      | org mode jump to heading                      | [[helm-org]]   |
+| ipython                       | ipython for emacs                             | [[python][python]]     |
+| jedi                          | Python auto-completion for Emacs              | [[python][python]]     |
+| elpy                          | Emacs Python Development Environment          | [[python][python]]     |
+| ein                           | Emacs IPython Notebook                        | [[python][python]]     |
+| jupyter                       | emacs jupyter                                 | [[python][python]]     |
 |-------------------------------+-----------------------------------------------+------------|
+
+In addition, ~elpy~ implicitly grabs these packages so they are unnecessary to import. And Python files will make use of ~eldoc~, and ~flymake~ modes.
+
+|-----------------------+-----------------------------------------+---------|
+| package               | description                             | anchors |
+|-----------------------+-----------------------------------------+---------|
+| yasnippet             | Yet another snippet extension for Emacs | [[python][python]]  |
+| pyvenv                | Python virtual environment interface    | [[python][python]]  |
+| company               | Modular text completion framework       |         |
+| highlight-indentation | Minor mode to highlight indentation     |         |
+|-----------------------+-----------------------------------------+---------|
 
 #+tblname: my-packages-unstable
 |------------------+-----------------------------------------+--------------|
@@ -846,15 +865,30 @@ git flavored markdown
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
 
-*** Jython/Python
+*** Python
+
 <<python>>
 
-This base ~settings.org~ emacs initialization file has somewhat limited support for Python. The 'python' branch of this repository has much better support coupled with [[https://github.com/julienchastang/Julien-Dockerfiles/tree/master/python-emacs][this emacs docker machine]]. Using Jython for babel (which yields somewhat mixed results).
+elpy
 
-jython/python mode
+See [[https://github.com/gregsexton/ob-ipython/issues/60][here]], [[https://github.com/gregsexton/ob-ipython/issues/61][here]]  and  [[file:custom.el][custome.el]] for why ~(elpy-use-ipython)~ is commented out.
 
 #+BEGIN_SRC emacs-lisp
-(setq org-babel-python-command "jython")
+  (elpy-enable)
+  ;;(elpy-use-ipython)
+#+END_SRC
+
+ein
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ein)
+#+END_SRC
+
+jupyter
+
+#+BEGIN_SRC emacs-lisp
+  (require 'zmq)
+  (require 'jupyter)
 #+END_SRC
 
 Fill column indicator
@@ -862,6 +896,40 @@ Fill column indicator
 #+BEGIN_SRC emacs-lisp
   ;; fill column indicator for python files
   (add-hook 'python-mode-hook 'fci-mode)
+#+END_SRC
+
+jedi
+
+#+BEGIN_SRC emacs-lisp
+  ;; installing jedi server http://tkf.github.io/emacs-jedi/latest/#pyinstall
+  (let ((j
+          (remove-if-not (lambda (x) (string-match "jedi-core" x)) load-path)))
+    (when j
+      (setq jedi:server-command (list (concat (car j) "/jediepcserver.py")))))
+
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+#+END_SRC
+
+Flycheck
+
+#+BEGIN_SRC emacs-lisp
+  ;; fill column indicator for python files
+  (add-hook 'python-mode-hook 'flycheck-mode)
+#+END_SRC
+
+Electric Pair
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode-hook 'electric-pair-mode)
+#+END_SRC
+
+http://emacs.stackexchange.com/questions/24453/weird-shell-output-when-using-ipython-5
+
+
+#+BEGIN_SRC emacs-lisp
+  (setq python-shell-interpreter "ipython"
+        python-shell-interpreter-args "--simple-prompt -i")
 #+END_SRC
 
 *** org-present
@@ -898,7 +966,9 @@ Loading babel supported languages:
      (shell . t)
      (http . t)
      (restclient . t)
-     (python . t)))
+     (ein . t)
+     (python . t)
+     (jupyter . t)))
 #+END_SRC
 
 *** XML
