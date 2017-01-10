@@ -294,6 +294,27 @@ Code blocks should be have syntax highlighting
   (setq org-src-fontify-natively t)
 #+END_SRC
 
+# http://emacs.stackexchange.com/questions/22405/after-executing-org-narrow-to-subtree-how-do-i-move-between-subtrees-of-the-sam
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/org-narrow-backward ()
+    "Move back subtree at same level, and narrow to it."
+    (interactive)
+    (widen)
+    (org-backward-heading-same-level 1)
+    (org-narrow-to-subtree))
+
+  (defun jc/org-narrow-forward ()
+    "Move to the next subtree at same level, and narrow to it."
+    (interactive)
+    (widen)
+    (org-forward-heading-same-level 1)
+    (org-narrow-to-subtree))
+
+  (org-defkey org-mode-map [f7] 'jc/org-narrow-backward)
+  (org-defkey org-mode-map [f9] 'jc/org-narrow-forward)
+#+END_SRC
+
 Clocking commands
 
 #+BEGIN_SRC emacs-lisp
