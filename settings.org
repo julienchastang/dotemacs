@@ -295,6 +295,7 @@ Code blocks should be have syntax highlighting
 #+END_SRC
 
 # http://emacs.stackexchange.com/questions/22405/after-executing-org-narrow-to-subtree-how-do-i-move-between-subtrees-of-the-sam
+Subtree navigation
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/org-narrow-backward ()
