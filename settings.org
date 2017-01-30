@@ -990,3 +990,16 @@ Clear buffer
       (eshell-truncate-buffer)))
 #+END_SRC
 
+** VT100 Escape Codes
+
+# http://www8.cs.umu.se/~isak/snippets/vt100.txt
+# http://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ansi-color)
+
+  (defun jc/display-ansi-colors ()
+    (interactive)
+    (ansi-color-apply-on-region (point-min) (point-max)))
+#+END_SRC
+
