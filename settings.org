@@ -612,9 +612,11 @@ Magit stuff
 *** Fill Column Indicator
 <<fci>>
 
+Turn off fci mode for now.
+
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'clojure-mode-hook 'fci-mode)
-  (add-hook 'org-mode-hook 'fci-mode)
+  ;; (add-hook 'clojure-mode-hook 'fci-mode)
+  ;; (add-hook 'org-mode-hook 'fci-mode)
 #+END_SRC
 
 https://github.com/alpaker/Fill-Column-Indicator/issues/45
