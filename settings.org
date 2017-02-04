@@ -457,6 +457,7 @@ emacs org mode.
 | zoom-window                   | Zoom window like tmux                         |            |
 | org-gcal                      | Org sync with Google Calendar                 | [[calendar][calendar]]   |
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
+| ob-http                       | http request in org-mode babel                | [[http]]       |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -854,6 +855,7 @@ Loading babel supported languages:
      (latex . t)
      (shell . t)
      (clojure . t)
+     (http . t)
      (restclient . t)
      (python . t)))
 #+END_SRC
@@ -962,6 +964,11 @@ eldoc for emacs lisp development
 <<gnuplot>>
 #+BEGIN_SRC emacs-lisp
   (require 'gnuplot)
+#+END_SRC
+
+*** HTTP
+<<http>>
+#+BEGIN_SRC emacs-lisp
 #+END_SRC
 
 *** Taskjuggler
