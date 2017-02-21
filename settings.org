@@ -332,7 +332,7 @@ Clocking commands
 #+END_SRC
 
 Ditaa is a command-line utility that converts diagrams drawn using ASCII art
-into bitmap graphics. Here is the Ditta path:
+into bitmap graphics. Here is the Ditaa path:
 
 #+BEGIN_SRC emacs-lisp
   (cond
