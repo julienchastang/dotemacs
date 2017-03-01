@@ -458,6 +458,7 @@ emacs org mode.
 | org-gcal                      | Org sync with Google Calendar                 | [[calendar][calendar]]   |
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
 | ob-http                       | http request in org-mode babel                | [[http]]       |
+| direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -923,6 +924,7 @@ eldoc for emacs lisp development
 #+END_SRC
 
 *** dired-x
+<<dired>>
 
 [[info:dired-x#Installation][Info on dired-x]]
 
@@ -940,6 +942,13 @@ eldoc for emacs lisp development
               ;; Set dired-x buffer-local variables here.  For example:
               ;; (dired-omit-mode 1)
               ))
+#+END_SRC
+
+direx
+
+#+BEGIN_SRC emacs-lisp
+  (require 'direx)
+  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
 #+END_SRC
 
 *** Writing
