@@ -469,6 +469,7 @@ emacs org mode.
 | emms             | The Emacs Multimedia System             | [[emms][emms]]         |
 | restclient       | An interactive HTTP client for Emacs    | [[restclient][restclient]]   |
 | ob-restclient    | org-babel functions for restclient-mode | [[restclient][restclient]]   |
+| ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
 | synonymous       | Thesaurus                               | [[writing][writing]]      |
 | info+            | Extensions to info.el                   | [[info][info]]         |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
