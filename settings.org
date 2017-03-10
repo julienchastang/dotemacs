@@ -436,6 +436,7 @@ emacs org mode.
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
+| github-issues                 | GitHub project issues                         | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
 | powerline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
@@ -610,6 +611,12 @@ Magit stuff
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x g") 'magit-status)
+#+END_SRC
+
+GitHub Issues
+
+#+BEGIN_SRC emacs-lisp
+  (require 'github-issues)
 #+END_SRC
 
 *** Fill Column Indicator
