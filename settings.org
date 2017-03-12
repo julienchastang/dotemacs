@@ -436,7 +436,6 @@ emacs org mode.
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
-| github-issues                 | GitHub project issues                         | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
 | powerline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
@@ -474,6 +473,7 @@ emacs org mode.
 | synonymous       | Thesaurus                               | [[writing][writing]]      |
 | info+            | Extensions to info.el                   | [[info][info]]         |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
+| github-issues    | GitHub project issues                   | [[git][git]]          |
 |------------------+-----------------------------------------+--------------|
 
 Download the packages we need.
