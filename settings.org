@@ -425,6 +425,7 @@ emacs org mode.
 | package                       | description                                   | anchors    |
 |-------------------------------+-----------------------------------------------+------------|
 | helm                          | helm completion engine                        | [[helm][helm]]       |
+| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]       |
 | projectile                    | Project navigation and management library     | [[projectile][projectile]] |
 | helm-projectile               | Projectile helm integration                   | [[projectile][projectile]] |
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]        |
@@ -518,6 +519,11 @@ Now handle unstable packages.
   (setq helm-candidate-number-limit 75) 
 #+END_SRC
 
+helm-org-rifle
+
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-org-rifle)
+#+END_SRC
 *** Projectile
 <<projectile>>
 
