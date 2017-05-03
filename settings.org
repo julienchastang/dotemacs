@@ -446,7 +446,7 @@ emacs org mode.
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
 | clojure-mode                  | Mode for clojure                              | [[clojure][clojure]]    |
-| cider                         | Clojure IDE and REPL for Emacs                | [[clojure]]    |
+| cider                         | Clojure IDE and REPL for Emacs                | [[clojure][clojure]]    |
 | clojure-snippets              | Yasnippets for clojure                        | [[clojure][clojure]]    |
 | clj-refactor                  | A collection of clojure refactoring functions | [[clojure][clojure]]    |
 | company                       | Modular text completion framework             |            |
@@ -458,8 +458,9 @@ emacs org mode.
 | zoom-window                   | Zoom window like tmux                         |            |
 | org-gcal                      | Org sync with Google Calendar                 | [[calendar][calendar]]   |
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
-| ob-http                       | http request in org-mode babel                | [[http]]       |
+| ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
+| elfeed                        | Emacs feed reader                             | [[elfeed][elfeed]]     |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1006,6 +1007,14 @@ direx
 #+BEGIN_SRC emacs-lisp
   (require 'multiple-cursors)
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+#+END_SRC
+
+*** elfeed
+<<elfeed>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'elfeed)
+  (global-set-key (kbd "C-x w") 'elfeed)
 #+END_SRC
 
 ** Emacs Shell Settings
