@@ -535,6 +535,22 @@ helm-org-rifle
   (setq projectile-completion-system 'helm)
 #+END_SRC
 
+Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jack]].
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/projectile-delete-trailing-white-spaces-from-project-files ()
+    "Deletes trailing spaces from all projectile project files."
+    (interactive)
+    (let ((project-files (projectile-current-project-files)))
+      (dolist (pr project-files)
+        (when (file-exists-p pr)
+          (message "clearing trailing whitespace in %s" pr)
+          (with-temp-buffer
+            (insert-file-contents pr)
+            (delete-trailing-whitespace (point-min) (point-max))
+            (write-file pr))))))
+#+END_SRC
+
 *** Ace Jump Mode
 <<ace>>
 
