@@ -476,6 +476,7 @@ emacs org mode.
 | info+            | Extensions to info.el                   | [[info][info]]         |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | github-issues    | GitHub project issues                   | [[git][git]]          |
+| elfeed-org       | Configure elfeed org                    | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
 
 Download the packages we need.
@@ -1030,6 +1031,7 @@ direx
 
 #+BEGIN_SRC emacs-lisp
   (require 'elfeed)
+  (require 'elfeed-org)
   (global-set-key (kbd "C-x w") 'elfeed)
 #+END_SRC
 
