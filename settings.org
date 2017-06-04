@@ -177,7 +177,8 @@ Turn off irrelevant stuff.
       (tool-bar-mode  -1))
   (if (fboundp 'set-scroll-bar-mode)
       (set-scroll-bar-mode 'nil))
-  (mouse-wheel-mode t)
+  (when (require 'mwheel nil 'noerror)
+    (mouse-wheel-mode t))
   (tooltip-mode -1)
   (blink-cursor-mode -1)
 #+END_SRC
