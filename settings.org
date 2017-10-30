@@ -461,6 +461,7 @@ emacs org mode.
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 | elfeed                        | Emacs feed reader                             | [[elfeed][elfeed]]     |
+| nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -988,6 +989,13 @@ Allow dired to muck with the permissions.
   (require 'elfeed)
   (require 'elfeed-org)
   (global-set-key (kbd "C-x w") 'elfeed)
+#+END_SRC
+
+*** nginx
+<<nginx>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'nginx-mode)
 #+END_SRC
 
 ** Emacs Shell Settings
