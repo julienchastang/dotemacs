@@ -102,7 +102,8 @@ Fonts
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/setup-osx-fonts ()
-    (set-fontset-font "fontset-default" 'symbol "Monaco")
+    (if (fboundp 'set-fontset-set)
+        (set-fontset-font "fontset-default" 'symbol "Monaco"))
     (set-face-attribute 'default nil :height 120)
     (set-face-attribute 'fixed-pitch nil :height 120)
     ;; Anti-aliasing
@@ -124,7 +125,7 @@ Fonts
 Deal with additional paths
 
 #+begin_src emacs-lisp
-  (defvar my-paths '("/usr/local/bin"))
+  (defvar my-paths '("/usr/local/bin" "/Library/TeX/texbin"))
 
   (dolist (pth my-paths)
     (when (file-directory-p pth)
