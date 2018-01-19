@@ -481,28 +481,35 @@ emacs org mode.
 | elfeed-org       | Configure elfeed org                    | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
 
+Convenience function
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/install-packages (pack-list)
+    (dolist (pack pack-list)
+      (unless (package-installed-p pack)
+        (condition-case err
+            (package-install pack)
+          (error (princ (format "Could not install package: %s" pack)))))))
+#+END_SRC
+
 Download the packages we need.
 
 #+BEGIN_SRC emacs-lisp :var packs=my-packages :hlines no
-  (defvar install-packages (mapcar 'intern (mapcar 'car (cdr packs))))
+  (defvar my-package-list (mapcar 'intern (mapcar 'car (cdr packs))))
 
-  (dolist (pack install-packages)
-     (unless (package-installed-p pack)
-       (package-install pack)))
+  (jc/install-packages my-package-list)
 #+END_SRC
 
 Now handle unstable packages.
 
 #+BEGIN_SRC emacs-lisp :var packs=my-packages-unstable :hlines no
-  (defvar install-packages-unstable (mapcar 'intern (mapcar 'car (cdr packs))))
+  (defvar my-package-list-unstable (mapcar 'intern (mapcar 'car (cdr packs))))
 
   (add-to-list 'package-archives 
      '("melpa-unstable" . "http://melpa.org/packages/"))
   (package-refresh-contents)
 
-  (dolist (pack install-packages-unstable)
-     (unless (package-installed-p pack)
-       (package-install pack)))
+  (jc/install-packages my-package-list-unstable)
 #+END_SRC
 
 ** Package Configuration
