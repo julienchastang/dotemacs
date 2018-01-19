@@ -457,11 +457,9 @@ emacs org mode.
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
-| org-gcal                      | Org sync with Google Calendar                 | [[calendar][calendar]]   |
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
-| elfeed                        | Emacs feed reader                             | [[elfeed][elfeed]]     |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 |-------------------------------+-----------------------------------------------+------------|
 
@@ -469,7 +467,6 @@ emacs org mode.
 |------------------+-----------------------------------------+--------------|
 | package          | description                             | anchors      |
 |------------------+-----------------------------------------+--------------|
-| org-present      | Minimal presentation mode for emacs     | [[org-present][org-present]]  |
 | emms             | The Emacs Multimedia System             | [[emms][emms]]         |
 | restclient       | An interactive HTTP client for Emacs    | [[restclient][restclient]]   |
 | ob-restclient    | org-babel functions for restclient-mode | [[restclient][restclient]]   |
@@ -479,6 +476,8 @@ emacs org mode.
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | github-issues    | GitHub project issues                   | [[git][git]]          |
 | elfeed-org       | Configure elfeed org                    | [[elfeed][elfeed]]       |
+| org-gcal         | Org sync with Google Calendar           | [[calendar][calendar]]     |
+| elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
 
 Convenience function
