@@ -372,13 +372,14 @@ Inline image support
 These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
-|-----------------------------------------+------------------------------+----------|
-| package                                 | description                  | anchors  |
-|-----------------------------------------+------------------------------+----------|
-| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate][rotate]]   |
-| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]  |
-| ~/.emacs.d/git/emacs-calfw/             | Calendar framework for emacs | [[calendar][calendar]] |
-|-----------------------------------------+------------------------------+----------|
+|-----------------------------------------+------------------------------+-------------+
+| package                                 | description                  | anchors     |
+|-----------------------------------------+------------------------------+-------------+
+| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate][rotate]]      |
+| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]     |
+| ~/.emacs.d/git/emacs-calfw/             | Calendar framework for emacs | [[calendar][calendar]]    |
+| ~/.emacs.d/git/org-present/             | org presentation mode        | [[org-present]] |
+|-----------------------------------------+------------------------------+-------------+
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
@@ -475,10 +476,11 @@ emacs org mode.
 | info+            | Extensions to info.el                   | [[info][info]]         |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | github-issues    | GitHub project issues                   | [[git][git]]          |
-| elfeed-org       | Configure elfeed org                    | [[elfeed][elfeed]]       |
-| org-gcal         | Org sync with Google Calendar           | [[calendar][calendar]]     |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
+
+# Does not work currently
+# org-gcal          | Org sync with Google Calendar           | [[calendar][calendar]]     |
 
 Convenience function
 
@@ -959,7 +961,10 @@ Allow dired to muck with the permissions.
 #+END_SRC
 *** Calendar
 <<calendar>>
-#+BEGIN_SRC emacs-lisp
+
+Does not work currently
+
+#+BEGIN_SRC emacs-lisp :tangle no :eval no
   (require 'calfw)
   (require 'org-gcal)
   (require 'calfw-org)
@@ -994,7 +999,6 @@ Allow dired to muck with the permissions.
 
 #+BEGIN_SRC emacs-lisp
   (require 'elfeed)
-  (require 'elfeed-org)
   (global-set-key (kbd "C-x w") 'elfeed)
 #+END_SRC
 
