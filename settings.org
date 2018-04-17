@@ -372,14 +372,16 @@ Inline image support
 These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
-|-----------------------------------------+------------------------------+-------------+
+|-----------------------------------------+------------------------------+-------------|
 | package                                 | description                  | anchors     |
-|-----------------------------------------+------------------------------+-------------+
+|-----------------------------------------+------------------------------+-------------|
 | ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate][rotate]]      |
 | ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]     |
 | ~/.emacs.d/git/emacs-calfw/             | Calendar framework for emacs | [[calendar][calendar]]    |
 | ~/.emacs.d/git/org-present/             | org presentation mode        | [[org-present]] |
-|-----------------------------------------+------------------------------+-------------+
+| ~/.emacs.d/wget/infoplus/               | Extensions to info.el        | [[info][info]]        |
+|-----------------------------------------+------------------------------+-------------|
+
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
@@ -473,7 +475,6 @@ emacs org mode.
 | ob-restclient    | org-babel functions for restclient-mode | [[restclient][restclient]]   |
 | ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
 | synonymous       | Thesaurus                               | [[writing][writing]]      |
-| info+            | Extensions to info.el                   | [[info][info]]         |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | github-issues    | GitHub project issues                   | [[git][git]]          |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
