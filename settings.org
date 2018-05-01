@@ -464,6 +464,7 @@ emacs org mode.
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
+| hackernews                    | Hacker News                                   | [[hn][hn]]         |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1008,6 +1009,13 @@ Does not work currently
 
 #+BEGIN_SRC emacs-lisp
   (require 'nginx-mode)
+#+END_SRC
+
+*** HackerNews
+<<hn>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'hackernews)
 #+END_SRC
 
 *** Tramp
