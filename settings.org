@@ -1024,6 +1024,35 @@ Does not work currently
 #+BEGIN_SRC emacs-lisp
   (setq tramp-default-method "ssh")
 #+END_SRC
+*** mu4e
+<<mu4e>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'mu4e)
+#+END_SRC
+
+Generate an app password here:  https://security.google.com/settings/u/1/security/apppasswords
+
+#+BEGIN_SRC emacs-lisp
+    (cond
+     ((string-equal system-type "darwin") ; Mac OS X
+      (setq
+       send-mail-function 'smtpmail-send-it
+       message-send-mail-function 'smtpmail-send-it
+       user-full-name "Julien Chastang"
+       user-mail-address "chastang@ucar.edu"
+       smtpmail-stream-type 'starttls
+       smtpmail-starttls-credentials '(("smtp.gmail.com" "587" nil nil))
+       smtpmail-default-smtp-server "smtp.gmail.com"
+       smtpmail-smtp-server "smtp.gmail.com"
+       smtpmail-auth-credentials (expand-file-name "~/.authinfo.gpg")
+       smtpmail-smtp-service 587
+       smtpmail-debug-info t
+       starttls-gnutls-program "/usr/local/bin/gnutls-cli"
+       starttls-extra-arguments nil
+       starttls-use-gnutls t
+       starttls-extra-arguments '("--x509cafile" "/usr/local/etc/openssl/cert.pem"))))  
+#+END_SRC
 
 ** Emacs Shell Settings
 
