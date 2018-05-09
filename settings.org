@@ -479,6 +479,7 @@ emacs org mode.
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | github-issues    | GitHub project issues                   | [[git][git]]          |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
+| elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
 
 # Does not work currently
