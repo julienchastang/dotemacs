@@ -285,6 +285,8 @@ section.
 
 Let's get the agenda going.
 
+*** General org settings
+
 #+BEGIN_SRC emacs-lisp
   (define-key global-map "\C-ca" 'org-agenda)
 #+END_SRC
@@ -295,8 +297,8 @@ Code blocks should be have syntax highlighting
   (setq org-src-fontify-natively t)
 #+END_SRC
 
+*** Subtree navigation
 # http://emacs.stackexchange.com/questions/22405/after-executing-org-narrow-to-subtree-how-do-i-move-between-subtrees-of-the-sam
-Subtree navigation
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/org-narrow-backward ()
@@ -317,7 +319,7 @@ Subtree navigation
   (org-defkey org-mode-map [f9] 'jc/org-narrow-forward)
 #+END_SRC
 
-Clocking commands
+*** Clocking commands
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/org-query-clock-out ()
@@ -332,6 +334,8 @@ Clocking commands
   (add-hook 'kill-emacs-query-functions 'jc/org-query-clock-out)
 #+END_SRC
 
+*** Ditaa
+
 Ditaa is a command-line utility that converts diagrams drawn using ASCII art
 into bitmap graphics. Here is the Ditaa path:
 
@@ -343,7 +347,7 @@ into bitmap graphics. Here is the Ditaa path:
     (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))  
 #+END_SRC
 
-Inline image support
+*** Inline image support
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/do-org-show-all-inline-images ()
@@ -360,6 +364,7 @@ Inline image support
   (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
+*** bibtex
 [[http://tex.stackexchange.com/questions/32348/problems-with-bbl-in-org-mode#comment594526_39885][bibtex]]
 
 #+BEGIN_SRC emacs-lisp
