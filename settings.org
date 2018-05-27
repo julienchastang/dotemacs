@@ -372,6 +372,15 @@ into bitmap graphics. Here is the Ditaa path:
   (setq org-latex-to-pdf-process (list "latexmk -pdf -bibtex %f"))
 #+END_SRC
 
+*** org-grep
+
+#+BEGIN_SRC emacs-lisp
+  (defun jc/rgrep-org (regexp dir)
+    "rgrep for org files only"
+    (interactive "MRegular Expression:\nMDirectory:")
+    (rgrep regexp "*.org" dir nil))
+#+END_SRC
+
 ** Manually Curated Packages
 
 These modes are not in any package manager so curate them manually.
