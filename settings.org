@@ -73,7 +73,7 @@ snippet in your =~/.emacs.d/init.el= file.
   (package-initialize)
   (require 'cl)
   (require 'ob-tangle)
-  (org-babel-load-file "~/git/dotemacs/settings.org")
+  (org-babel-load-file "~/.emacs.d/git/dotemacs/settings.org")
 #+END_SRC
 
 ** General Settings 
