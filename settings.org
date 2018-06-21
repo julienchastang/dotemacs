@@ -377,7 +377,7 @@ into bitmap graphics. Here is the Ditaa path:
 #+BEGIN_SRC emacs-lisp
   (defun jc/rgrep-org (regexp dir)
     "rgrep for org files only"
-    (interactive "MRegular Expression:\nMDirectory:")
+    (interactive "MRegular Expression: \nMDirectory: ")
     (rgrep regexp "*.org" dir nil))
 #+END_SRC
 
