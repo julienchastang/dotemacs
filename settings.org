@@ -479,6 +479,7 @@ emacs org mode.
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | hackernews                    | Hacker News                                   | [[hn][hn]]         |
+| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1038,7 +1039,9 @@ Does not work currently
 
 #+BEGIN_SRC emacs-lisp
   (setq tramp-default-method "ssh")
+  (define-key global-map (kbd "C-c s") 'helm-tramp)
 #+END_SRC
+
 *** mu4e
 <<mu4e>>
 
