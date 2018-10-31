@@ -1,7 +1,5 @@
 # .emacs
 
-[![Travis Status](https://travis-ci.org/julienchastang/dotemacs.svg?branch=master)](https://travis-ci.org/julienchastang/dotemacs)
-
          ____.     .__  .__            /\                                                 
         |    |__ __|  | |__| ____   ___)/  ______      ____   _____ _____    ____   ______
         |    |  |  \  | |  |/ __ \ /    \ /  ___/    _/ __ \ /     \\__  \ _/ ___\ /  ___/
