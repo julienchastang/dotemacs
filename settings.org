@@ -480,6 +480,7 @@ emacs org mode.
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | hackernews                    | Hacker News                                   | [[hn][hn]]         |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
+| ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1070,6 +1071,14 @@ Generate an app password here:  https://security.google.com/settings/u/1/securit
        starttls-extra-arguments nil
        starttls-use-gnutls t
        starttls-extra-arguments '("--x509cafile" "/usr/local/etc/openssl/cert.pem"))))  
+#+END_SRC
+
+*** Hugo
+<<hugo>>
+
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'ox
+    (require 'ox-hugo))
 #+END_SRC
 
 ** Emacs Shell Settings
