@@ -76,6 +76,24 @@ snippet in your =~/.emacs.d/init.el= file.
   (org-babel-load-file "~/.emacs.d/git/dotemacs/settings.org")
 #+END_SRC
 
+** X11 Key bindings
+
+To have the meta and super key working in X11 emacs insert the following into the =~/.xmodmap=.
+
+#+BEGIN_SRC sh :tangle no
+  clear Mod1
+  clear Mod4
+  clear Mod2
+  keycode 66 = Alt_L
+  keycode 63 = Super_L
+  add Mod2 = Alt_L
+  add Mod4 = Super_L
+#+END_SRC
+
+This configuration requires that "Option keys send Alt_L and Alt_R" checkbox is set in Preferences. Also disable "Enable key equivalents under X11".
+
+[[https://gist.github.com/dreeve/845301][Thanks dreeve]]
+
 ** General Settings 
 
 Everything in this section are general settings that should not need any
