@@ -560,9 +560,9 @@ helm-org-rifle
 
 #+BEGIN_SRC emacs-lisp
   (require 'projectile)
-  (projectile-global-mode)
-  (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'helm)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
 #+END_SRC
 
 Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jack]].
