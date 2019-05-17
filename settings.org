@@ -392,12 +392,20 @@ into bitmap graphics. Here is the Ditaa path:
 
 *** org-grep
 
+
 #+BEGIN_SRC emacs-lisp
   (defun jc/rgrep-org (regexp dir)
     "rgrep for org files only"
-    (interactive "MRegular Expression: \nMDirectory: ")
+    (interactive
+     (progn
+       (grep-compute-defaults)
+       (let* ((regexp (grep-read-regexp))
+              (dir (read-directory-name "Base directory: "
+                                        nil default-directory t)))
+         (list regexp dir))))
     (rgrep regexp "*.org" dir nil))
 #+END_SRC
+
 
 ** Manually Curated Packages
 
