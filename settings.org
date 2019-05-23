@@ -481,6 +481,7 @@ emacs org mode.
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
+| git-link                      | Get git forge  URL for a buffer location      | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
 | spaceline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
@@ -696,6 +697,12 @@ GitHub Issues
 
 #+BEGIN_SRC emacs-lisp
   (require 'github-issues)
+#+END_SRC
+
+git link
+
+#+BEGIN_SRC emacs-lisp
+  (require 'git-link)
 #+END_SRC
 
 *** Fill Column Indicator
