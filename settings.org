@@ -560,6 +560,28 @@ Now handle unstable packages.
 #+END_SRC
 
 ** Package Configuration
+*** IBuffer
+
+ibuffer
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+  (setq ibuffer-saved-filter-groups
+        '(("home"
+           ("readme.org" (filename . "readme.org"))
+           ("Org" (or (mode . org-mode)
+                      (filename . "OrgMode")))
+           ("emacs" (or (name . "^\\*scratch\\*$")
+                        (name . "^\\*Messages\\*$")))
+           ("elisp" (mode . emacs-lisp-mode))
+           ("dired" (mode . dired-mode)))))
+
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-switch-to-saved-filter-groups "home")))
+#+END_SRC
+
 *** Helm
 <<helm>>
 
@@ -570,7 +592,7 @@ Now handle unstable packages.
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files) 
   (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+  ;; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
  
   (setq helm-mode-fuzzy-match t) 
   (setq helm-completion-in-region-fuzzy-match t) 
