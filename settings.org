@@ -210,13 +210,14 @@ Set up the fill-column to 80 characters and set tab width to 2.
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
-Function to join multiple lines.
+Keyboard macro to join lines. Call it with prefix to join multiple.
 
 #+BEGIN_SRC emacs-lisp
-  (defun jc/join-lines ()
-    (interactive)
-    (let ((fill-column 999999))
-      (fill-paragraph nil)))
+  (fset 'jc/join-lines
+        (lambda (&optional arg) "Keyboard macro." (interactive "p")
+          (kmacro-exec-ring-item (quote ([down 1 backspace] 0 "%d")) arg)))
+
+  (global-set-key (kbd "C-c j") 'jc/join-lines)
 #+END_SRC
 
 Hide the mouse while typing.
