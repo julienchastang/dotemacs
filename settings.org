@@ -508,6 +508,7 @@ emacs org mode.
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | hackernews                    | Hacker News                                   | [[hn][hn]]         |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
+| docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 |-------------------------------+-----------------------------------------------+------------|
 
@@ -1079,6 +1080,14 @@ Does not work currently
   (setq tramp-default-method "ssh")
   (define-key global-map (kbd "C-c s") 'helm-tramp)
 #+END_SRC
+
+docker-tramp
+
+
+#+BEGIN_SRC emacs-lisp
+  (require 'docker-tramp)
+#+END_SRC
+
 
 *** mu4e
 <<mu4e>>
