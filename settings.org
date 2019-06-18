@@ -512,7 +512,6 @@ emacs org mode.
 |------------------+-----------------------------------------+--------------|
 | package          | description                             | anchors      |
 |------------------+-----------------------------------------+--------------|
-| emms             | The Emacs Multimedia System             | [[emms][emms]]         |
 | restclient       | An interactive HTTP client for Emacs    | [[restclient][restclient]]   |
 | ob-restclient    | org-babel functions for restclient-mode | [[restclient][restclient]]   |
 | ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
@@ -807,15 +806,6 @@ git flavored markdown
   (add-hook 'yaml-mode-hook
         '(lambda ()
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+END_SRC
-
-*** EMMS
-<<emms>>
-
-#+BEGIN_SRC emacs-lisp
-  (require 'emms-setup)
-  (emms-standard)
-  (emms-default-players)
 #+END_SRC
 
 *** Stack Exchange
