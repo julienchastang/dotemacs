@@ -493,7 +493,6 @@ emacs org mode.
 | windresize                    | arrow keys resize the window                  |            |
 | company                       | Modular text completion framework             |            |
 | javap-mode                    | Load .class file and get javap output         |            |
-| sx                            | Stack Exchange for Emacs                      | [[sx][sx]]         |
 | python                        | Python mode for emacs                         | [[python][python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
@@ -806,13 +805,6 @@ git flavored markdown
   (add-hook 'yaml-mode-hook
         '(lambda ()
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+END_SRC
-
-*** Stack Exchange
-<<sx>>
-
-#+BEGIN_SRC emacs-lisp
-  (require 'sx-load)
 #+END_SRC
 
 *** Jython/Python
