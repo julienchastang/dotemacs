@@ -491,10 +491,6 @@ emacs org mode.
 | yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
-| clojure-mode                  | Mode for clojure                              | [[clojure][clojure]]    |
-| cider                         | Clojure IDE and REPL for Emacs                | [[clojure][clojure]]    |
-| clojure-snippets              | Yasnippets for clojure                        | [[clojure][clojure]]    |
-| clj-refactor                  | A collection of clojure refactoring functions | [[clojure][clojure]]    |
 | company                       | Modular text completion framework             |            |
 | javap-mode                    | Load .class file and get javap output         |            |
 | sx                            | Stack Exchange for Emacs                      | [[sx][sx]]         |
@@ -740,7 +736,6 @@ git link
 Turn off fci mode for now.
 
 #+BEGIN_SRC emacs-lisp
-  ;; (add-hook 'clojure-mode-hook 'fci-mode)
   ;; (add-hook 'org-mode-hook 'fci-mode)
 #+END_SRC
 
@@ -782,53 +777,6 @@ Spaceline.
 
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
-#+END_SRC
-
-*** Clojure
-<<clojure>>
-
-All the configuration crap recommended by https://github.com/clojure-emacs/cider
-
-#+BEGIN_SRC emacs-lisp
-
-  (add-hook 'clojure-mode-hook 'paredit-mode)
-
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-
-  (add-hook 'cider-repl-mode-hook #'subword-mode)
-
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
-
-  (setq nrepl-log-messages t)
-
-  (setq nrepl-hide-special-buffers t)
-
-  (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
-
-  (add-hook 'cider-repl-mode-hook 'prettify-symbols-mode)
-
-  (add-hook 'clojure-mode-hook (lambda ()
-                                 (clj-refactor-mode 1)
-                                 (cljr-add-keybindings-with-prefix "C-c C-m")))
-
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-
-  (add-hook 'cider-mode-hook #'company-mode)
-#+END_SRC
-
-
-[[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/git/org-mode/lisp")
-
-  (require 'org)
-  (require 'ob-clojure)
-
-  (setq org-babel-clojure-backend 'cider)
-  (require 'cider)
 #+END_SRC
 
 *** Markdown
@@ -927,7 +875,6 @@ Loading babel supported languages:
      (gnuplot . t)
      (latex . t)
      (shell . t)
-     (clojure . t)
      (http . t)
      (restclient . t)
      (python . t)))
