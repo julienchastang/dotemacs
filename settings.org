@@ -957,12 +957,6 @@ Allow dired to muck with the permissions.
 #+BEGIN_SRC emacs-lisp
 #+END_SRC
 
-*** Taskjuggler
-<<taskjuggler>>
-
-#+BEGIN_SRC emacs-lisp
-  (require 'ox-taskjuggler)
-#+END_SRC
 *** Multiple-cursors
 <<multi-cursor>>
 
