@@ -14,12 +14,12 @@
 * Literate Emacs Initialization File
 
 #+BEGIN_EXAMPLE
-     ____.     .__  .__            /\                                                 
+     ____.     .__  .__            /\
     |    |__ __|  | |__| ____   ___)/  ______      ____   _____ _____    ____   ______
     |    |  |  \  | |  |/ __ \ /    \ /  ___/    _/ __ \ /     \\__  \ _/ ___\ /  ___/
-/\__|    |  |  /  |_|  \  ___/|   |  \\___ \     \  ___/|  Y Y  \/ __ \\  \___ \___ \ 
+/\__|    |  |  /  |_|  \  ___/|   |  \\___ \     \  ___/|  Y Y  \/ __ \\  \___ \___ \
 \________|____/|____/__|\___  >___|  /____  >  /\ \___  >__|_|  (____  /\___  >____  >
-                            \/     \/     \/   \/     \/      \/     \/     \/     \/ 
+                            \/     \/     \/   \/     \/      \/     \/     \/     \/
 #+END_EXAMPLE
 
 Emacs initialization as org file. It is a constant work in progress.
@@ -94,7 +94,7 @@ This configuration requires that "Option keys send Alt_L and Alt_R" checkbox is 
 
 [[https://gist.github.com/dreeve/845301][Thanks dreeve]]
 
-** General Settings 
+** General Settings
 
 Everything in this section are general settings that should not need any
 non-default packages.
@@ -131,7 +131,7 @@ Fonts
     (set-frame-font "DejaVu Sans Mono")
     (set-face-attribute 'default nil :height 105))
 
-  (cond 
+  (cond
    ((eq system-type 'darwin)
     (add-hook 'after-init-hook #'jc/setup-osx-fonts))
    ((eq window-system 'x)
@@ -363,7 +363,7 @@ into bitmap graphics. Here is the Ditaa path:
    ((string-equal system-type "darwin")   ; Mac OS X
     (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar"))
    ((string-equal system-type "gnu/linux") ; linux
-    (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))  
+    (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))
 #+END_SRC
 
 *** Inline image support
@@ -446,7 +446,7 @@ First define the package archives and where they live.
   (require 'package)
 
   ;; define some package archives
-  (add-to-list 'package-archives 
+  (add-to-list 'package-archives
      '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (add-to-list 'package-archives
     '("marmalade" . "https://marmalade-repo.org/packages/"))
@@ -550,7 +550,7 @@ Now handle unstable packages.
 #+BEGIN_SRC emacs-lisp :var packs=my-packages-unstable :hlines no
   (defvar my-package-list-unstable (mapcar 'intern (mapcar 'car (cdr packs))))
 
-  (add-to-list 'package-archives 
+  (add-to-list 'package-archives
      '("melpa-unstable" . "https://melpa.org/packages/"))
   (package-refresh-contents)
 
@@ -593,13 +593,13 @@ ibuffer
   (require 'helm)
   (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files) 
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x b") 'helm-mini)
   ;; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
- 
-  (setq helm-mode-fuzzy-match t) 
-  (setq helm-completion-in-region-fuzzy-match t) 
-  (setq helm-candidate-number-limit 75) 
+
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-limit 75)
 #+END_SRC
 
 helm-org-rifle
@@ -645,7 +645,7 @@ Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jac
               (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
 #+END_SRC
 
-*** Spelling 
+*** Spelling
 <<spelling>>
 
 Using hunspell and friends. If on OS X make sure you have dictionaries in
@@ -695,7 +695,7 @@ make sure to =brew install hunspell=.
               (signal 'quit "user quit!")
             (cdr (assoc result rmap))))
       nil))
-   
+
   (add-to-list 'yas-prompt-functions 'jc/yas-helm-prompt)
 #+END_SRC
 
@@ -815,16 +815,16 @@ git flavored markdown
 #+BEGIN_SRC emacs-lisp
   (require 'emms-setup)
   (emms-standard)
-  (emms-default-players)         
+  (emms-default-players)
 #+END_SRC
 
 *** Stack Exchange
 <<sx>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'sx-load) 
+  (require 'sx-load)
 #+END_SRC
-    
+
 *** Jython/Python
 <<python>>
 
@@ -952,7 +952,7 @@ direx
 
 Allow dired to muck with the permissions.
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
   (setq wdired-allow-to-change-permissions t)
 #+END_SRC
 
@@ -1039,7 +1039,6 @@ docker-tramp
 #+BEGIN_SRC emacs-lisp
   (require 'docker-tramp)
 #+END_SRC
-
 
 *** Hugo
 <<hugo>>
@@ -1153,7 +1152,7 @@ Handles lists of :tangle files."
           ;; language.
           (let ((by-lang (assoc src-lang blocks))
             (block (org-babel-tangle-single-block counter)))
-        (setcdr (assoc :tangle (nth 4 block)) src-tfile) ; Tobias: 
+        (setcdr (assoc :tangle (nth 4 block)) src-tfile) ; Tobias:
         (if by-lang (setcdr by-lang (cons block (cdr by-lang)))
           (push (cons src-lang (list block)) blocks)))))))) ; Tobias: just ()
     ;; Ensure blocks are in the correct order.
