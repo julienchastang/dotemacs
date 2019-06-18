@@ -418,7 +418,6 @@ These modes are not in any package manager so curate them manually.
 |-----------------------------------------+------------------------------+-------------|
 | ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate][rotate]]      |
 | ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]     |
-| ~/.emacs.d/git/emacs-calfw/             | Calendar framework for emacs | [[calendar][calendar]]    |
 | ~/.emacs.d/git/org-present/             | org presentation mode        | [[org-present]] |
 | ~/.emacs.d/wget/infoplus/               | Extensions to info.el        | [[info][info]]        |
 |-----------------------------------------+------------------------------+-------------|
@@ -520,9 +519,6 @@ emacs org mode.
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
-
-# Does not work currently
-# org-gcal          | Org sync with Google Calendar           | [[calendar][calendar]]     |
 
 Convenience function
 
@@ -949,16 +945,6 @@ Allow dired to muck with the permissions.
 <<info>>
 #+BEGIN_SRC emacs-lisp
   (require 'info+)
-#+END_SRC
-*** Calendar
-<<calendar>>
-
-Does not work currently
-
-#+BEGIN_SRC emacs-lisp :tangle no :eval no
-  (require 'calfw)
-  (require 'org-gcal)
-  (require 'calfw-org)
 #+END_SRC
 *** Gnuplot
 <<gnuplot>>
