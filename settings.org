@@ -413,14 +413,14 @@ into bitmap graphics. Here is the Ditaa path:
 These modes are not in any package manager so curate them manually.
 
 #+tblname: private-packages
-|-----------------------------------------+------------------------------+-------------|
-| package                                 | description                  | anchors     |
-|-----------------------------------------+------------------------------+-------------|
-| ~/.emacs.d/git/emacs-rotate/            | Buffer rotate                | [[rotate][rotate]]      |
-| ~/.emacs.d/git/title-capitalization.el/ | Title capitalization         | [[writing][writing]]     |
-| ~/.emacs.d/git/org-present/             | org presentation mode        | [[org-present]] |
-| ~/.emacs.d/wget/infoplus/               | Extensions to info.el        | [[info][info]]        |
-|-----------------------------------------+------------------------------+-------------|
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
+| package                                 | Location                                            | description           | anchors     |
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
+| ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
+| ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
+| ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
+| ~/.emacs.d/wget/infoplus/               | https://www.emacswiki.org/emacs/download/info%2b.el | Extensions to info.el | [[info][info]]        |
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
 
 
 #+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
