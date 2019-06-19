@@ -56,6 +56,7 @@ snippet in your =~/.emacs.d/init.el= file.
                    (when (eq 'autoload (car-safe s))
                      (unintern s)))))))
 
+  ;; git clone https://code.orgmode.org/bzg/org-mode.git
   ;; if curating org-mode, remember to 'make autoloads'
 
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode/lisp"))
