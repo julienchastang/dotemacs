@@ -568,7 +568,8 @@ ibuffer
            ("elisp" (mode . emacs-lisp-mode))
            ("sh" (mode . shell-script-mode))
            ("yaml" (mode . yaml-mode))
-           ("dired" (mode . dired-mode)))))
+           ("dired" (mode . dired-mode))
+           ("Magit" (name . "^magit")))))
 
   (add-hook 'ibuffer-mode-hook
             '(lambda ()
