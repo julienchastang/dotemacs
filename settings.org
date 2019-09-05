@@ -500,6 +500,7 @@ emacs org mode.
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 | docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
+| org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1005,6 +1006,14 @@ docker-tramp
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'ox
     (require 'ox-hugo))
+#+END_SRC
+
+*** org-bullets
+<<bullets>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'org-bullets)
+  (add-hook 'org-mode-hook 'org-bullets-mode)
 #+END_SRC
 
 ** Emacs Shell Settings
