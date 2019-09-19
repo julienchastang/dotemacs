@@ -1062,10 +1062,10 @@ Clear buffer
 
   (defun jc/org-custom-id-get (&optional pom create prefix)
     "Get the CUSTOM_ID property of the entry at point-or-marker POM.  If POM is
-     nil, refer to the entry at point. If the entry does not have an CUSTOM_ID,
-     the function returns nil. However, when CREATE is non nil, create a CUSTOM_ID
-     if none is present already. PREFIX will be passed through to `org-id-new'. In
-     any case, the CUSTOM_ID of the entry is returned."
+       nil, refer to the entry at point. If the entry does not have an CUSTOM_ID,
+       the function returns nil. However, when CREATE is non nil, create a CUSTOM_ID
+       if none is present already. PREFIX will be passed through to `jc/org-id-new'. In
+       any case, the CUSTOM_ID of the entry is returned."
     (interactive)
     (org-with-point-at pom
       (let ((id (org-entry-get nil "CUSTOM_ID")))
@@ -1073,21 +1073,53 @@ Clear buffer
          ((and id (stringp id) (string-match "\\S-" id))
           id)
          (create
-          (setq id (org-id-new (concat prefix "h")))
+          (setq id (jc/org-id-new (concat prefix "h")))
           (org-entry-put pom "CUSTOM_ID" (substring id 0 10))
           (org-id-add-location id (buffer-file-name (buffer-base-buffer)))
           id)))))
 
   (defun jc/org-add-ids-to-headlines-in-file ()
     "Add CUSTOM_ID properties to all headlines in the current file which do not
-     already have one. Only adds ids if the `auto-id' option is set to `t' in the
-     file somewher, i.e., #+OPTIONS: auto-id:t"
+       already have one. Only adds ids if the `auto-id' option is set to `t' in the
+       file somewher, i.e., #+OPTIONS: auto-id:t"
     (interactive)
     (save-excursion
       (widen)
       (goto-char (point-min))
       (when (re-search-forward "^#\\+OPTIONS:.*auto-id:t" (point-max) t)
         (org-map-entries (lambda () (jc/org-custom-id-get (point) 'create))))))
+
+  (defun jc/org-id-new (&optional prefix)
+    "Create a new globally unique ID.
+
+  An ID consists of two parts separated by a dash-
+  - a prefix
+  - a unique part that will be created according to `org-id-method'.
+
+  PREFIX can specify the prefix, the default is given by the variable
+  `org-id-prefix'.  However, if PREFIX is the symbol `none', don't use any
+  prefix even if `org-id-prefix' specifies one.
+
+  So a typical ID could look like \"Org-4nd91V40HI\"."
+    (let* ((prefix (if (eq prefix 'none)
+                       ""
+                     (concat (or prefix org-id-prefix) "-")))
+           unique)
+      (if (equal prefix "-") (setq prefix ""))
+      (cond
+       ((memq org-id-method '(uuidgen uuid))
+        (setq unique (org-trim (shell-command-to-string org-id-uuid-program)))
+        (unless (org-uuidgen-p unique)
+          (setq unique (org-id-uuid))))
+       ((eq org-id-method 'org)
+        (let* ((etime (org-reverse-string (org-id-time-to-b36)))
+               (postfix (if org-id-include-domain
+                            (progn
+                              (require 'message)
+                              (concat "@" (message-make-fqdn))))))
+          (setq unique (concat etime postfix))))
+       (t (error "Invalid `org-id-method'")))
+      (concat prefix unique)))
 #+END_SRC
 
 ** Tangle Same src Block To Different Files
