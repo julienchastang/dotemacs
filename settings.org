@@ -211,7 +211,7 @@ Keyboard macro to join lines. Call it with prefix to join multiple.
 #+BEGIN_SRC emacs-lisp
   (fset 'jc/join-lines
         (lambda (&optional arg) "Keyboard macro." (interactive "p")
-          (kmacro-exec-ring-item (quote ([down 1 backspace] 0 "%d")) arg)))
+          (kmacro-exec-ring-item (quote ([5 32 down 1 backspace] 0 "%d")) arg)))
 
   (global-set-key (kbd "C-c j") 'jc/join-lines)
 #+END_SRC
