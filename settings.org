@@ -561,6 +561,7 @@ ibuffer
            ("readme.org" (filename . "readme.org"))
            ("Org" (or (mode . org-mode)
                       (filename . "OrgMode")))
+           ("dockerfile" (mode . dockerfile-mode))
            ("emacs" (or (name . "^\\*scratch\\*$")
                         (name . "^\\*Messages\\*$")
                         (name . "^\\*Help\\*$")
@@ -569,7 +570,11 @@ ibuffer
            ("elisp" (mode . emacs-lisp-mode))
            ("sh" (mode . shell-script-mode))
            ("yaml" (mode . yaml-mode))
+           ("md" (mode . markdown-mode))
+           ("html" (mode . mhtml-mode))
+           ("xml" (mode . nxml-mode))
            ("dired" (mode . dired-mode))
+           ("helm" (mode . helm-major-mode))
            ("Magit" (name . "^magit")))))
 
   (add-hook 'ibuffer-mode-hook
