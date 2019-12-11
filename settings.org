@@ -561,6 +561,7 @@ ibuffer
            ("readme.org" (filename . "readme.org"))
            ("Org" (or (mode . org-mode)
                       (filename . "OrgMode")))
+           ("eshell" (mode . eshell-mode))
            ("dockerfile" (mode . dockerfile-mode))
            ("emacs" (or (name . "^\\*scratch\\*$")
                         (name . "^\\*Messages\\*$")
