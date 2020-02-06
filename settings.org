@@ -1022,6 +1022,13 @@ docker-tramp
   (add-hook 'org-mode-hook 'org-bullets-mode)
 #+END_SRC
 
+*** rss
+<<rss>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'ox-rss)
+#+END_SRC
+
 ** Emacs Shell Settings
 
 Magit
