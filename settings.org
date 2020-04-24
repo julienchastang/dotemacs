@@ -623,12 +623,14 @@ Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jac
     (interactive)
     (let ((project-files (projectile-current-project-files)))
       (dolist (pr project-files)
-        (when (file-exists-p pr)
-          (message "clearing trailing whitespace in %s" pr)
-          (with-temp-buffer
-            (insert-file-contents pr)
-            (delete-trailing-whitespace (point-min) (point-max))
-            (write-file pr))))))
+        (let ((pf (concat (projectile-project-root) pr)))
+          (when (and (file-exists-p pf)
+                     (not (string-match "tiff$\\|pdf$\\|png$\\|gif$\\|jpg$" pf)))
+            (message "clearing trailing whitespace in %s" pf)
+            (with-temp-buffer
+              (insert-file-contents pf)
+              (delete-trailing-whitespace (point-min) (point-max))
+              (write-file pf)))))))
 #+END_SRC
 
 *** Ace Jump Mode
