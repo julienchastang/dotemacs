@@ -475,6 +475,7 @@ emacs org mode.
 | flycheck                      | on-the-fly syntax checking                    |            |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
+| forge                         | access git forges from magit                  | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
 | git-link                      | Get git forge  URL for a buffer location      | [[git][git]]        |
@@ -515,7 +516,6 @@ emacs org mode.
 | ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
 | synonymous       | Thesaurus                               | [[writing][writing]]      |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
-| github-issues    | GitHub project issues                   | [[git][git]]          |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
@@ -714,17 +714,9 @@ git gutter
 Magit stuff
 
 #+BEGIN_SRC emacs-lisp
-  (setq magit-last-seen-setup-instructions "1.4.0")
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x g") 'magit-status)
-#+END_SRC
-
-GitHub Issues
-
-#+BEGIN_SRC emacs-lisp
-  (require 'github-issues)
+  (with-eval-after-load 'magit
+    (require 'forge))
 #+END_SRC
 
 git link
