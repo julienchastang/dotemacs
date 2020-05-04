@@ -505,6 +505,7 @@ emacs org mode.
 | docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
+| helm-org                      | org mode jump to heading                      | [[helm-org]]   |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1050,6 +1051,14 @@ docker-tramp
 #+BEGIN_SRC emacs-lisp
   (with-eval-after-load 'ox
     (require 'ox-hugo))
+#+END_SRC
+
+*** helm-org
+<<helm-org>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-org)
+  (global-set-key (kbd "C-c o") 'helm-org-agenda-files-headings)
 #+END_SRC
 
 *** org-bullets
