@@ -475,10 +475,8 @@ emacs org mode.
 | flycheck                      | on-the-fly syntax checking                    |            |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
-| forge                         | access git forges from magit                  | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
-| git-link                      | Get git forge  URL for a buffer location      | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
 | spaceline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
@@ -519,6 +517,7 @@ emacs org mode.
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
+| forge            | access git forges from magit            | [[git][git]]          |
 |------------------+-----------------------------------------+--------------|
 
 Convenience function
@@ -718,12 +717,6 @@ Magit stuff
   (global-set-key (kbd "C-x g") 'magit-status)
   (with-eval-after-load 'magit
     (require 'forge))
-#+END_SRC
-
-git link
-
-#+BEGIN_SRC emacs-lisp
-  (require 'git-link)
 #+END_SRC
 
 *** Fill Column Indicator
