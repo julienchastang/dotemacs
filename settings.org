@@ -292,6 +292,12 @@ EWW
   (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
+[[http://liwen.name/tools/2017/03/21/emacs-easypg.html][Pinentry]]
+
+#+BEGIN_SRC emacs-lisp
+  (setf epa-pinentry-mode 'loopback)
+#+END_SRC
+
 ** Org mode Settings
 
 At this point we still have not done anything special outside of what is
