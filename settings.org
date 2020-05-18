@@ -616,6 +616,7 @@ helm-org-rifle
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
+  (setq projectile-switch-project-action #'projectile-dired)
 #+END_SRC
 
 Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jack]].
