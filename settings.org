@@ -970,6 +970,12 @@ Allow dired to muck with the permissions.
   (setq wdired-allow-to-change-permissions t)
 #+END_SRC
 
+Easily copy from one dired buffer to another
+
+#+BEGIN_SRC emacs-lisp
+  (setq dired-dwim-target t)
+#+END_SRC
+
 *** Writing
 <<writing>>
 #+BEGIN_SRC emacs-lisp
