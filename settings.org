@@ -481,6 +481,7 @@ emacs org mode.
 | flycheck                      | on-the-fly syntax checking                    |            |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
+| forge                         | access git forges from magit                  | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
@@ -523,7 +524,6 @@ emacs org mode.
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
-| forge            | access git forges from magit            | [[git][git]]          |
 |------------------+-----------------------------------------+--------------|
 
 Convenience function
