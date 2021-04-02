@@ -115,25 +115,8 @@ Let's change to a less horrible color theme. The available default options are =
 Fonts
 
 #+BEGIN_SRC emacs-lisp
-  (defun jc/setup-osx-fonts ()
-    (if (fboundp 'set-fontset-set)
-        (set-fontset-font "fontset-default" 'symbol "Monaco"))
-    (set-face-attribute 'default nil :height 120)
-    (set-face-attribute 'fixed-pitch nil :height 120)
-    ;; Anti-aliasing
-    (setq mac-allow-anti-aliasing t))
-
-  (defun jc/setup-x11-fonts ()
-    (set-frame-font "DejaVu Sans Mono")
-    (set-face-attribute 'default nil :height 105))
-
-  (cond
-   ((eq system-type 'darwin)
-    (add-hook 'after-init-hook #'jc/setup-osx-fonts))
-   ((eq window-system 'x)
-    (add-hook 'after-init-hook #'jc/setup-x11-fonts))
-   ;; default, do nothing
-   (t nil))
+  ;; Inconsolata can be installed through a package manager
+  (set-frame-font "Inconsolata 12" nil t)
 #+END_SRC
 
 Deal with additional paths
