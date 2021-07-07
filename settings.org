@@ -381,13 +381,6 @@ into bitmap graphics. Here is the Ditaa path:
   (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
-*** bibtex
-[[http://tex.stackexchange.com/questions/32348/problems-with-bbl-in-org-mode#comment594526_39885][bibtex]]
-
-#+BEGIN_SRC emacs-lisp
-  (require 'ox-bibtex)
-  (setq org-latex-to-pdf-process (list "latexmk -pdf -bibtex %f"))
-#+END_SRC
 
 *** org-grep
 
@@ -1077,15 +1070,6 @@ docker-tramp
 
 #+BEGIN_SRC emacs-lisp
   (require 'ox-rss)
-#+END_SRC
-
-*** org citation
-<<citation>>
-
-#+BEGIN_SRC emacs-lisp
-  (require 'oc-bibtex)
-  (require 'oc-csl)
-  (require 'citeproc nil t)
 #+END_SRC
 
 *** ChatGPT
