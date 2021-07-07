@@ -500,14 +500,20 @@ emacs org mode.
 |------------------+-----------------------------------------+--------------|
 | package          | description                             | anchors      |
 |------------------+-----------------------------------------+--------------|
-| restclient       | An interactive HTTP client for Emacs    | [[restclient][restclient]]   |
-| ob-restclient    | org-babel functions for restclient-mode | [[restclient][restclient]]   |
 | ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
 | synonymous       | Thesaurus                               | [[writing][writing]]      |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
 |------------------+-----------------------------------------+--------------|
+
+#+tblname: my-packages-dead
+|---------------+-----------------------------------------+------------|
+| package       | description                             | anchors    |
+|---------------+-----------------------------------------+------------|
+| restclient    | An interactive HTTP client for Emacs    | [[restclient][restclient]] |
+| ob-restclient | org-babel functions for restclient-mode | [[restclient][restclient]] |
+|---------------+-----------------------------------------+------------|
 
 Convenience function
 
@@ -880,9 +886,9 @@ Loading babel supported languages:
      (latex . t)
      (shell . t)
      (http . t)
-     (restclient . t)
      (python . t)))
-#+END_SRC
+  ;; currently dead: (restclient . t)
+     #+END_SRC
 
 *** XML
 <<xml>>
@@ -923,7 +929,8 @@ eldoc for emacs lisp development
 <<restclient>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'restclient)
+  ;; dead at present
+  ;; (require 'restclient)
 #+END_SRC
 
 *** dired-x
