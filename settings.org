@@ -501,7 +501,6 @@ emacs org mode.
 | package          | description                             | anchors      |
 |------------------+-----------------------------------------+--------------|
 | ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
-| synonymous       | Thesaurus                               | [[writing][writing]]      |
 | multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
 | elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
 | elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
@@ -511,6 +510,7 @@ emacs org mode.
 |---------------+-----------------------------------------+------------|
 | package       | description                             | anchors    |
 |---------------+-----------------------------------------+------------|
+| synonymous    | Thesaurus                               | [[writing][writing]]    |
 | restclient    | An interactive HTTP client for Emacs    | [[restclient][restclient]] |
 | ob-restclient | org-babel functions for restclient-mode | [[restclient][restclient]] |
 |---------------+-----------------------------------------+------------|
@@ -976,7 +976,8 @@ Easily copy from one dired buffer to another
 *** Writing
 <<writing>>
 #+BEGIN_SRC emacs-lisp
-  (require 'synonymous)
+  ;; currently dead
+  ;; (require 'synonymous)
   (require 'title-capitalization)
 #+END_SRC
 
