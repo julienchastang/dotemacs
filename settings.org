@@ -464,7 +464,6 @@ emacs org mode.
 | flycheck                      | on-the-fly syntax checking                    |            |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
-| forge                         | access git forges from magit                  | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
 | fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
@@ -711,8 +710,6 @@ Magit stuff
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x g") 'magit-status)
-  (with-eval-after-load 'magit
-    (require 'forge))
 #+END_SRC
 
 *** Fill Column Indicator
