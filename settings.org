@@ -39,6 +39,9 @@ snippet in your =~/.emacs.d/init.el= file.
 #+BEGIN_SRC emacs-lisp :tangle no
   ;; optionally remove default org install
   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2013-09/msg00178.html
+  ;;
+  ;; if you are having trouble w/ org-mode, remember to enter the org-mode repo
+  ;; and run make autoloads
 
   (setq load-path
         (delq nil
@@ -48,6 +51,7 @@ snippet in your =~/.emacs.d/init.el= file.
                              p)))
                load-path)))
 
+  ;;remove property list to defeat cus-load and remove autoloads
   (mapatoms (function
              (lambda (s)
                (let ((sn (symbol-name s)))
@@ -56,20 +60,16 @@ snippet in your =~/.emacs.d/init.el= file.
                    (when (eq 'autoload (car-safe s))
                      (unintern s)))))))
 
-  ;; git clone https://code.orgmode.org/bzg/org-mode.git
-  ;; if curating org-mode, remember to 'make autoloads'
+  (add-to-list 'load-path
+               (expand-file-name "~/.emacs.d/git/org-contrib/lisp"))
 
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode/lisp"))
 
-  (add-to-list 'load-path
-               (expand-file-name "~/.emacs.d/git/org-mode/contrib/lisp"))
-
-  ;; now tangle in settings.org
-
-  (package-initialize)
-  (require 'cl)
+  (require 'org)
   (require 'ob-tangle)
   (org-babel-load-file "~/.emacs.d/git/dotemacs/settings.org")
+  (put 'dired-find-alternate-file 'disabled nil)
+  (put 'erase-buffer 'disabled nil)
 #+END_SRC
 
 ** X11 Key bindings
