@@ -126,10 +126,9 @@ Deal with additional paths
 
   (dolist (pth my-paths)
     (when (file-directory-p pth)
-      (setenv "PATH" (concat (getenv "PATH") ":" (expand-file-name pth)))
+      (setenv "PATH" (concat (expand-file-name pth) ":" (getenv "PATH")))
       (setq exec-path (split-string (getenv "PATH") path-separator))))
 #+end_src
-
 
 Increase auto-save rate.
 
@@ -475,6 +474,10 @@ emacs org mode.
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
 | python                        | Python mode for emacs                         | [[python][python]]     |
+| ipython                       | ipython for emacs                             | [[python][python]]     |
+| jedi                          | Python auto-completion for Emacs              | [[python][python]]     |
+| elpy                          | Emacs Python Development Environment          | [[python][python]]     |
+| jupyter                       | emacs jupyter                                 | [[python][python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
@@ -785,15 +788,21 @@ git flavored markdown
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+END_SRC
 
-*** Jython/Python
+*** Python
 <<python>>
 
-This base ~settings.org~ emacs initialization file has somewhat limited support for Python. The 'python' branch of this repository has much better support coupled with [[https://github.com/julienchastang/Julien-Dockerfiles/tree/master/python-emacs][this emacs docker machine]]. Using Jython for babel (which yields somewhat mixed results).
+Python 3
 
-jython/python mode
+elpy
 
 #+BEGIN_SRC emacs-lisp
-(setq org-babel-python-command "jython")
+  (elpy-enable)
+#+END_SRC
+
+jupyter
+
+#+BEGIN_SRC emacs-lisp
+  (require 'jupyter)
 #+END_SRC
 
 Fill column indicator
@@ -801,6 +810,32 @@ Fill column indicator
 #+BEGIN_SRC emacs-lisp
   ;; fill column indicator for python files
   (add-hook 'python-mode-hook 'fci-mode)
+#+END_SRC
+
+jedi
+
+#+BEGIN_SRC emacs-lisp
+  ;; installing jedi server http://tkf.github.io/emacs-jedi/latest/#pyinstall
+  (let ((j
+          (remove-if-not (lambda (x) (string-match "jedi-core" x)) load-path)))
+    (when j
+      (setq jedi:server-command (list (concat (car j) "/jediepcserver.py")))))
+
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+#+END_SRC
+
+Flycheck
+
+#+BEGIN_SRC emacs-lisp
+  ;; fill column indicator for python files
+  (add-hook 'python-mode-hook 'flycheck-mode)
+#+END_SRC
+
+Electric Pair
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode-hook 'electric-pair-mode)
 #+END_SRC
 
 *** org-present
@@ -836,6 +871,7 @@ Loading babel supported languages:
      (latex . t)
      (shell . t)
      (http . t)
+     (jupyter . t)
      (python . t)))
      #+END_SRC
 
