@@ -474,11 +474,6 @@ emacs org mode.
 | yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
-| clojure-mode                  | Mode for clojure                              | [[clojure][clojure]]    |
-| cider                         | Clojure IDE and REPL for Emacs                | [[clojure][clojure]]    |
-| aggressive-indent             | keep your code always indented                | [[clojure][clojure]]    |
-| company                       | Modular text completion framework             |            |
-| javap-mode                    | Load .class file and get javap output         |            |
 | python                        | Python mode for emacs                         | [[python][python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
@@ -487,7 +482,6 @@ emacs org mode.
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
-| hackernews                    | Hacker News                                   | [[hn][hn]]         |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 | docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
@@ -761,47 +755,6 @@ Spaceline.
   (global-undo-tree-mode)
 #+END_SRC
 
-*** Clojure
-<<clojure>>
-
-All the configuration crap recommended by https://github.com/clojure-emacs/cider
-
-#+BEGIN_SRC emacs-lisp
-
-  (add-hook 'clojure-mode-hook #'cider-mode)
-  (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-  (add-hook 'clojure-mode-hook #'prettify-symbols-mode)
-
-  (add-hook 'cider-mode-hook #'company-mode)
-  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
-
-  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-  (add-hook 'cider-repl-mode-hook #'subword-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'cider-repl-mode-hook #'prettify-symbols-mode)
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-
-  (setq nrepl-log-messages t)
-  (setq nrepl-hide-special-buffers t)
-#+END_SRC
-
-[[http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-clojure.html][Org-babel-clojure]]
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/git/org-mode/lisp")
-
-  (require 'org)
-  (require 'ob-clojure)
-
-  (setq org-babel-clojure-backend 'cider)
-  (require 'cider)
-#+END_SRC
-
 *** Markdown
 <<markdown>>
 
@@ -884,7 +837,6 @@ Loading babel supported languages:
      (shell . t)
      (http . t)
      (python . t)))
-  ;; currently dead: (restclient . t)
      #+END_SRC
 
 *** XML
@@ -920,14 +872,6 @@ eldoc for emacs lisp development
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
-#+END_SRC
-
-*** restclient
-<<restclient>>
-
-#+BEGIN_SRC emacs-lisp
-  ;; dead at present
-  ;; (require 'restclient)
 #+END_SRC
 
 *** dired-x
@@ -989,11 +933,6 @@ Easily copy from one dired buffer to another
   (require 'gnuplot)
 #+END_SRC
 
-*** HTTP
-<<http>>
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
-
 *** Multiple-cursors
 <<multi-cursor>>
 
@@ -1015,13 +954,6 @@ Easily copy from one dired buffer to another
 
 #+BEGIN_SRC emacs-lisp
   (require 'nginx-mode)
-#+END_SRC
-
-*** HackerNews
-<<hn>>
-
-#+BEGIN_SRC emacs-lisp
-  (require 'hackernews)
 #+END_SRC
 
 *** Tramp
@@ -1242,5 +1174,3 @@ If the :tangle header arg is a list of files. Handle all files"
 (advice-add 'org-babel-tangle-collect-blocks :override #'jc/org-babel-tangle-collect-blocks)
 (advice-add 'org-babel-tangle-single-block :around #'jc/org-babel-tangle-single-block)
 #+END_SRC
-
-#+RESULTS:
