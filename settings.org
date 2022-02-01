@@ -490,6 +490,7 @@ emacs org mode.
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
 | helm-org                      | org mode jump to heading                      | [[helm-org]]   |
+| citeproc                      | citeproc                                      | [[citation][citation]]   |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1036,6 +1037,14 @@ docker-tramp
 
 #+BEGIN_SRC emacs-lisp
   (require 'ox-rss)
+#+END_SRC
+
+*** org citation
+<<citation>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'oc-csl)
+  (require 'citeproc nil t)
 #+END_SRC
 
 ** Emacs Shell Settings
