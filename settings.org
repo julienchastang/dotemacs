@@ -11,6 +11,8 @@
 #+EXCLUDE_TAGS: noexport
 #+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
 
+#+PROPERTY: header-args :eval yes :results none
+
 * Literate Emacs Initialization File
 
 #+BEGIN_EXAMPLE
