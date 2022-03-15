@@ -456,50 +456,49 @@ on github, the anchors will not take you anywhere. The anchors only work in
 emacs org mode.
 
 #+tblname: my-packages
-|-------------------------------+-----------------------------------------------+--------------------|
-| package                       | description                                   | anchors            |
-|-------------------------------+-----------------------------------------------+--------------------|
-| exec-path-from-shell          | env vars such as $PATH from the shell         |                    |
-| helm                          | helm completion engine                        | [[helm][helm]]               |
-| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]               |
-| projectile                    | Project navigation and management library     | [[projectile][projectile]]         |
-| helm-projectile               | Projectile helm integration                   | [[projectile][projectile]]         |
-| ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]                |
-| rw-hunspell                   | spelling                                      | [[spelling][spelling]]           |
-| rw-ispell                     | spelling                                      | [[spelling][spelling]]           |
-| rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]           |
-| flycheck                      | on-the-fly syntax checking                    |                    |
-| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]          |
-| magit                         | emacs git client                              | [[git][git]]                |
-| git-gutter                    | git gutter                                    | [[git][git]]                |
-| git-timemachine               | Walk through git revisions of a file          | [[git][git]]                |
-| fill-column-indicator         | 80 column rule                                | [[fci][fci]]                |
-| spaceline                     | A better mode line                            | [[modeline][modeline]]           |
-| paredit                       | structured editing of S-expression data       | [[paren][paren]]              |
-| rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]              |
-| markdown-mode                 | markdown for emacs                            | [[markdown][markdown]]           |
-| yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]               |
-| undo-tree                     | undo tree                                     | [[undo][undo]]               |
-| windresize                    | arrow keys resize the window                  |                    |
-| python                        | Python mode for emacs                         | [[python][python]]             |
-| ipython                       | ipython for emacs                             | [[python][python]]             |
-| jedi                          | Python auto-completion for Emacs              | [[python][python]]             |
-| elpy                          | Emacs Python Development Environment          | [[python][python]]             |
-| jupyter                       | emacs jupyter                                 | [[python][python]]             |
-| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |                    |
-| csv-mode                      | Major mode for editing comma separated values |                    |
-| zoom-window                   | Zoom window like tmux                         |                    |
-| gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]            |
-| ob-http                       | http request in org-mode babel                | [[http][http]]               |
-| direx                         | Simple tree directory explorer                | [[dired][dired]]              |
-| nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]              |
-| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]              |
-| docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]              |
-| ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]               |
-| org-bullets                   | Show bullets in org-mode                      | [[bullets]]            |
-| helm-org                      | org mode jump to heading                      | [[helm-org]]           |
-| citeproc                      | citeproc                                      | [[citation][citation]]           |
-|-------------------------------+-----------------------------------------------+--------------------|
+|-------------------------------+-----------------------------------------------+------------|
+| package                       | description                                   | anchors    |
+|-------------------------------+-----------------------------------------------+------------|
+| exec-path-from-shell          | env vars such as $PATH from the shell         |            |
+| helm                          | helm completion engine                        | [[helm][helm]]       |
+| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]       |
+| projectile                    | Project navigation and management library     | [[projectile][projectile]] |
+| helm-projectile               | Projectile helm integration                   | [[projectile][projectile]] |
+| ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]        |
+| rw-hunspell                   | spelling                                      | [[spelling][spelling]]   |
+| rw-ispell                     | spelling                                      | [[spelling][spelling]]   |
+| rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]   |
+| flycheck                      | on-the-fly syntax checking                    |            |
+| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
+| magit                         | emacs git client                              | [[git][git]]        |
+| git-gutter                    | git gutter                                    | [[git][git]]        |
+| git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
+| fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
+| spaceline                     | A better mode line                            | [[modeline][modeline]]   |
+| paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
+| rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]      |
+| markdown-mode                 | markdown for emacs                            | [[markdown][markdown]]   |
+| yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
+| undo-tree                     | undo tree                                     | [[undo][undo]]       |
+| windresize                    | arrow keys resize the window                  |            |
+| python                        | Python mode for emacs                         | [[python][python]]     |
+| ipython                       | ipython for emacs                             | [[python][python]]     |
+| jedi                          | Python auto-completion for Emacs              | [[python][python]]     |
+| elpy                          | Emacs Python Development Environment          | [[python][python]]     |
+| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
+| csv-mode                      | Major mode for editing comma separated values |            |
+| zoom-window                   | Zoom window like tmux                         |            |
+| gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
+| ob-http                       | http request in org-mode babel                | [[http][http]]       |
+| direx                         | Simple tree directory explorer                | [[dired][dired]]      |
+| nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
+| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
+| docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
+| ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
+| org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
+| helm-org                      | org mode jump to heading                      | [[helm-org]]   |
+| citeproc                      | citeproc                                      | [[citation][citation]]   |
+|-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
 |------------------+-----------------------------------------+--------------|
@@ -840,11 +839,6 @@ elpy
   (setq python-shell-interpreter "python" python-shell-interpreter-args "-i")
 #+END_SRC
 
-jupyter
-
-#+BEGIN_SRC emacs-lisp
-  (require 'jupyter)
-#+END_SRC
 
 Fill column indicator
 
@@ -905,7 +899,6 @@ Loading babel supported languages:
      (latex . t)
      (shell . t)
      (http . t)
-     (jupyter . t)
      (python . t)))
      #+END_SRC
 
