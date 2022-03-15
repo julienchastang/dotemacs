@@ -460,6 +460,7 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+------------|
 | package                       | description                                   | anchors    |
 |-------------------------------+-----------------------------------------------+------------|
+| exec-path-from-shell          | env vars such as $PATH from the shell         |            |
 | helm                          | helm completion engine                        | [[helm][helm]]       |
 | helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]       |
 | projectile                    | Project navigation and management library     | [[projectile][projectile]] |
@@ -549,6 +550,16 @@ Now handle unstable packages.
   (package-refresh-contents)
 
   (jc/install-packages my-package-list-unstable)
+#+END_SRC
+
+Path sanity
+
+#+BEGIN_SRC emacs-lisp
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+
+  (when (daemonp)
+    (exec-path-from-shell-initialize))
 #+END_SRC
 
 ** Package Configuration
