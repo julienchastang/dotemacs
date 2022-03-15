@@ -302,6 +302,12 @@ Code blocks should be have syntax highlighting
   (setq org-src-fontify-natively t)
 #+END_SRC
 
+Making Latex fragments legible:
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+#+END_SRC
+
 *** Subtree navigation
 # http://emacs.stackexchange.com/questions/22405/after-executing-org-narrow-to-subtree-how-do-i-move-between-subtrees-of-the-sam
 
