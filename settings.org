@@ -669,7 +669,7 @@ soft-linked to the main dictionary of your choice (in this case =en_US=). Also
 make sure to =brew install hunspell=.
 
 #+BEGIN_SRC emacs-lisp
-  (if (file-exists-p "/usr/local/bin/hunspell")
+  (if (file-exists-p "/opt/homebrew/bin/hunspell")
       (progn
         ;; Add english-hunspell as a dictionary
         (setq-default ispell-program-name "hunspell"))
