@@ -118,7 +118,7 @@ Fonts
 
 #+BEGIN_SRC emacs-lisp
   ;; Inconsolata can be installed through a package manager
-  (set-frame-font "Inconsolata 14" nil t)
+  (set-frame-font "iosevka 16" nil t)
 #+END_SRC
 
 Deal with additional paths
