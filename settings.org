@@ -11,7 +11,7 @@
 #+EXCLUDE_TAGS: noexport
 #+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
 
-#+PROPERTY: header-args :eval yes :results none
+#+PROPERTY: header-args :eval yes :results none :tangle yes
 
 * Literate Emacs Initialization File
 
@@ -96,6 +96,12 @@ This configuration requires that "Option keys send Alt_L and Alt_R" checkbox is 
 
 Everything in this section are general settings that should not need any
 non-default packages.
+
+Backup files in one place to not pollute file system
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+END_SRC
 
 Keep customize settings in their own file
 
@@ -411,6 +417,7 @@ These modes are not in any package manager so curate them manually.
 | ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
 | ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
 | ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
+| ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss               | org rss  mode         | [[rss][rss]]         |
 | ~/.emacs.d/wget/infoplus/               | https://www.emacswiki.org/emacs/download/info%2b.el | Extensions to info.el | [[info][info]]        |
 |-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
 
@@ -774,6 +781,8 @@ Spaceline.
 
 #+BEGIN_SRC emacs-lisp
   (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 #+END_SRC
 
 *** Markdown
@@ -809,14 +818,31 @@ git flavored markdown
 *** Python
 <<python>>
 
-Python 3
+If you see this message
+
+#+BEGIN_EXAMPLE :eval no
+  Searching for program: No such file or directory, python
+#+END_EXAMPLE
+
+You may have to
+
+#+begin_src sh :eval no
+  cd /opt/homebrew/bin/
+  sudo ln -sf python3 python
+#+end_src
+
+Virtual env stuff
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "WORKON_HOME" (concat (getenv "HOME") "/.emacs.d/elpy"))
+#+END_SRC
 
 elpy
 
 #+BEGIN_SRC emacs-lisp
   (elpy-enable)
-  (setq elpy-rpc-python-command "python3")
-  (setq python-shell-interpreter  "python3")
+  (setq elpy-rpc-python-command "/opt/homebrew/bin/python")
+  (setq python-shell-interpreter "python" python-shell-interpreter-args "-i")
 #+END_SRC
 
 jupyter
@@ -843,13 +869,6 @@ jedi
 
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
-#+END_SRC
-
-Flycheck
-
-#+BEGIN_SRC emacs-lisp
-  ;; fill column indicator for python files
-  (add-hook 'python-mode-hook 'flycheck-mode)
 #+END_SRC
 
 Electric Pair
