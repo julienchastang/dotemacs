@@ -1191,6 +1191,22 @@ Clear buffer
        (t (error "Invalid `org-id-method'")))
       (concat prefix unique)))
 #+END_SRC
+** Word frequency
+
+#+begin_src emacs-lisp
+  (defun jc/word-frequency ()
+    "Print word frequencies in the current buffer."
+    (interactive)
+    (let ((word-freq (make-hash-table :test 'equal)))
+      (save-excursion
+        (goto-char (point-min))
+        (while (not (eobp))
+          (let ((word (thing-at-point 'word)))
+            (when word
+              (puthash word (1+ (gethash word word-freq 0)) word-freq)))
+          (forward-word)))
+      (maphash (lambda (k v) (message "%s: %d" k v)) word-freq)))
+#+end_src
 
 ** Tangle Same src Block To Different Files
 
