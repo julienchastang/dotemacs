@@ -828,13 +828,14 @@ You may have to
 
 #+begin_src sh :eval no
   cd /opt/homebrew/bin/
-  sudo ln -sf python3 python
+  sudo ln -sf python3 python3.10
 #+end_src
 
 Virtual env stuff
 
 #+BEGIN_SRC emacs-lisp
   (setenv "WORKON_HOME" (concat (getenv "HOME") "/.emacs.d/elpy"))
+  (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1")
 #+END_SRC
 
 elpy
