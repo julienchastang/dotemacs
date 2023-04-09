@@ -414,6 +414,7 @@ These modes are not in any package manager so curate them manually.
 |-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
 | package                                 | Location                                            | description           | anchors     |
 |-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
+| ~/.emacs.d/git/chatgpt-shell/           | https://github.com/xenodium/chatgpt-shel            | ChatGPT Shell         | [[chatgpt]]     |
 | ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
 | ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
 | ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
@@ -1085,6 +1086,15 @@ docker-tramp
   (require 'oc-csl)
   (require 'citeproc nil t)
 #+END_SRC
+
+*** ChatGPT
+<<chatgpt>>
+
+#+BEGIN_SRC emacs-lisp
+  (require 'chatgpt-shell)
+  (setq chatgpt-shell-openai-key
+          (auth-source-pick-first-password :host "api.openai.com" :user "chastang@ucar.edu"))
+  #+END_SRC
 
 ** Emacs Shell Settings
 
