@@ -1083,6 +1083,7 @@ docker-tramp
 <<citation>>
 
 #+BEGIN_SRC emacs-lisp
+  (require 'oc-bibtex)
   (require 'oc-csl)
   (require 'citeproc nil t)
 #+END_SRC
@@ -1093,7 +1094,7 @@ docker-tramp
 #+BEGIN_SRC emacs-lisp
   (require 'chatgpt-shell)
   (setq chatgpt-shell-openai-key
-          (auth-source-pick-first-password :host "api.openai.com" :user "chastang@ucar.edu"))
+          (auth-source-pick-first-password :host "api.openai.com" :user "julien.c.chastang@gmail.com"))
   #+END_SRC
 
 ** Emacs Shell Settings
