@@ -493,6 +493,7 @@ emacs org mode.
 | direx                         | Simple tree directory explorer                | [[dired][dired]]      |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
+| docker                        | docker                                        |            |
 | docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
