@@ -498,25 +498,26 @@ emacs org mode.
 | zoom-window                   | Zoom window like tmux                         |                    |
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]            |
 | ob-http                       | http request in org-mode babel                | [[http][http]]               |
-| direx                         | Simple tree directory explorer                | [[dired][dired]]              |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]              |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]              |
-| docker-tramp                  | Tramp for docker containers                   | [[tramp][tramp]]              |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]               |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]            |
-| helm-org                      | org mode jump to heading                      | [[helm-org]]           |
 | citeproc                      | citeproc                                      | [[citation][citation]]           |
 |-------------------------------+-----------------------------------------------+--------------------|
 
 #+tblname: my-packages-unstable
-|------------------+-----------------------------------------+--------------|
-| package          | description                             | anchors      |
-|------------------+-----------------------------------------+--------------|
-| ox-gfm           | Github Flavored Markdown                | [[markdown][markdown]]     |
-| multiple-cursors | Multiple cursors for Emacs              | [[multi-cursor][multi-cursor]] |
-| elfeed           | Emacs feed reader                       | [[elfeed][elfeed]]       |
-| elfeed-org       | Emacs feed reader for org-mode          | [[elfeed][elfeed]]       |
-|------------------+-----------------------------------------+--------------|
+|------------------+--------------------------------+--------------|
+| package          | description                    | anchors      |
+|------------------+--------------------------------+--------------|
+| helm-org         | org mode jump to heading       | [[helm-org]]     |
+| direx            | Simple tree directory explorer | [[dired][dired]]        |
+| ox-gfm           | Github Flavored Markdown       | [[markdown][markdown]]     |
+| multiple-cursors | Multiple cursors for Emacs     | [[multi-cursor][multi-cursor]] |
+| elfeed           | Emacs feed reader              | [[elfeed][elfeed]]       |
+| elfeed-org       | Emacs feed reader for org-mode | [[elfeed][elfeed]]       |
+|------------------+--------------------------------+--------------|
+
+Packages that are not working or dead, but hope to see alive again.
 
 #+tblname: my-packages-dead
 |---------------+-----------------------------------------+------------|
@@ -607,7 +608,6 @@ ibuffer
 <<helm>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'helm-config)
   (require 'helm)
   (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x)
@@ -701,7 +701,7 @@ make sure to =brew install hunspell=.
     "Use helm to select a snippet. Put this into `yas-prompt-functions.'"
     (interactive)
     (setq display-fn (or display-fn 'identity))
-    (if (require 'helm-config)
+    (if (require 'helm)
         (let (tmpsource cands result rmap)
           (setq cands (mapcar (lambda (x) (funcall display-fn x)) choices))
           (setq rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
@@ -726,6 +726,7 @@ make sure to =brew install hunspell=.
 git gutter
 
 #+BEGIN_SRC emacs-lisp
+  (setq global-linum-mode nil)
   (global-git-gutter-mode t)
 #+END_SRC
 
@@ -1039,13 +1040,6 @@ Easily copy from one dired buffer to another
 #+BEGIN_SRC emacs-lisp
   (setq tramp-default-method "ssh")
   (define-key global-map (kbd "C-c s") 'helm-tramp)
-#+END_SRC
-
-docker-tramp
-
-
-#+BEGIN_SRC emacs-lisp
-  (require 'docker-tramp)
 #+END_SRC
 
 *** Hugo
