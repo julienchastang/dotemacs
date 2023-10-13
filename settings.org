@@ -97,10 +97,18 @@ This configuration requires that "Option keys send Alt_L and Alt_R" checkbox is 
 Everything in this section are general settings that should not need any
 non-default packages.
 
-Backup files in one place to not pollute file system
+Backup files in one place to not pollute file system.
 
 #+BEGIN_SRC emacs-lisp
+  ;; https://idiomdrottning.org/bad-emacs-defaults
+  (setq backup-by-copying t)
   (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+END_SRC
+
+Fix for obvious reasons
+
+#+BEGIN_SRC emacs-lisp
+  (setq sentence-end-double-space nil)
 #+END_SRC
 
 Keep customize settings in their own file
