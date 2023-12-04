@@ -413,7 +413,6 @@ into bitmap graphics. Here is the Ditaa path:
     (rgrep regexp "*.org" dir nil))
 #+END_SRC
 
-
 ** Manually Curated Packages
 
 These modes are not in any package manager so curate them manually.
@@ -514,16 +513,17 @@ emacs org mode.
 |-------------------------------+-----------------------------------------------+--------------------|
 
 #+tblname: my-packages-unstable
-|------------------+--------------------------------+--------------|
-| package          | description                    | anchors      |
-|------------------+--------------------------------+--------------|
-| helm-org         | org mode jump to heading       | [[helm-org]]     |
-| direx            | Simple tree directory explorer | [[dired][dired]]        |
-| ox-gfm           | Github Flavored Markdown       | [[markdown][markdown]]     |
-| multiple-cursors | Multiple cursors for Emacs     | [[multi-cursor][multi-cursor]] |
-| elfeed           | Emacs feed reader              | [[elfeed][elfeed]]       |
-| elfeed-org       | Emacs feed reader for org-mode | [[elfeed][elfeed]]       |
-|------------------+--------------------------------+--------------|
+|--------------------+-------------------------------------+--------------|
+| package            | description                         | anchors      |
+|--------------------+-------------------------------------+--------------|
+| helm-org           | org mode jump to heading            | [[helm-org]]     |
+| direx              | Simple tree directory explorer      | [[dired][dired]]        |
+| ox-gfm             | Github Flavored Markdown            | [[markdown][markdown]]     |
+| multiple-cursors   | Multiple cursors for Emacs          | [[multi-cursor][multi-cursor]] |
+| elfeed             | Emacs feed reader                   | [[elfeed][elfeed]]       |
+| elfeed-org         | Emacs feed reader for org-mode      | [[elfeed][elfeed]]       |
+| flymake-shellcheck | Flymake handler for bash/sh scripts | [[shell]]        |
+|--------------------+-------------------------------------+--------------|
 
 Packages that are not working or dead, but hope to see alive again.
 
@@ -578,6 +578,13 @@ Path sanity
 #+END_SRC
 
 ** Package Configuration
+*** Shell
+<<shell>>
+#+begin_src emacs-lisp
+  (require 'flymake-shellcheck)
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load)
+#+end_src
+
 *** IBuffer
 
 ibuffer
