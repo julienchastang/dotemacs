@@ -290,11 +290,17 @@ EWW
   (setq browse-url-browser-function 'eww-browse-url)
 #+END_SRC
 
-[[http://liwen.name/tools/2017/03/21/emacs-easypg.html][Pinentry]]
+GPG and [[http://liwen.name/tools/2017/03/21/emacs-easypg.html][Pinentry]]. Also [[https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources][see]].
 
 #+BEGIN_SRC emacs-lisp
   (setf epa-pinentry-mode 'loopback)
 #+END_SRC
+
+If running into problems with GPG upon save, may have to:
+
+#+begin_src emacs-lisp
+ ; (fset 'epg-wait-for-status 'ignore)
+#+end_src
 
 ** Org mode Settings
 
