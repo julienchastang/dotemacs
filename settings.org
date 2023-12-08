@@ -1215,17 +1215,38 @@ Clear buffer
 
 #+begin_src emacs-lisp
   (defun jc/word-frequency ()
-    "Print word frequencies in the current buffer."
+    "Prints word frequencies in the current buffer, sorted by their frequency in descending order."
     (interactive)
-    (let ((word-freq (make-hash-table :test 'equal)))
+    (let ((word-hash (make-hash-table :test 'equal))
+          (word-list '())
+          (word-freq '())
+          (output-buffer-name "*Word Frequency Output*"))
+
+      ;; Traverse the buffer and populate the hash table
       (save-excursion
         (goto-char (point-min))
-        (while (not (eobp))
-          (let ((word (thing-at-point 'word)))
-            (when word
-              (puthash word (1+ (gethash word word-freq 0)) word-freq)))
-          (forward-word)))
-      (maphash (lambda (k v) (message "%s: %d" k v)) word-freq)))
+        (while (re-search-forward "\\b\\w+\\b" nil t)
+          (let ((word (downcase (match-string 0))))
+            (puthash word (1+ (gethash word word-hash 0)) word-hash))))
+
+      ;; Extract word and frequency pairs
+      (maphash (lambda (key value)
+                 (setq word-freq (cons (list key value) word-freq)))
+               word-hash)
+
+      ;; Sort the list
+      (setq word-freq (sort word-freq (lambda (a b) (> (cadr a) (cadr b)))))
+
+      ;; Handle empty buffers or buffers with no words
+      (if (null word-freq)
+          (message "No words found in the buffer.")
+        ;; Create and populate the output buffer
+        (with-current-buffer (get-buffer-create output-buffer-name)
+          (erase-buffer)
+          (dolist (pair word-freq)
+            (insert (format "%s: %d\n" (car pair) (cadr pair))))
+          ;; Switch to the output buffer
+          (switch-to-buffer-other-window output-buffer-name)))))
 #+end_src
 
 ** Tangle Same src Block To Different Files
