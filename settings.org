@@ -1322,3 +1322,33 @@ If the :tangle header arg is a list of files. Handle all files"
 (advice-add 'org-babel-tangle-collect-blocks :override #'jc/org-babel-tangle-collect-blocks)
 (advice-add 'org-babel-tangle-single-block :around #'jc/org-babel-tangle-single-block)
 #+END_SRC
+
+** Vacation
+
+#+begin_src emacs-lisp
+  (defun jc/org-vacation (start-date end-date)
+    "Generate date entries for the range from START-DATE to END-DATE, avoiding weekends."
+    (let ((current (date-to-time start-date))
+          (end (date-to-time end-date))
+          entries)
+      (while (time-less-p current end)
+        (let ((weekday (string-to-number (format-time-string "%u" current))))
+          ;; Skip weekends (6 = Saturday, 7 = Sunday)
+          (when (< weekday 6)
+            (let ((day (format-time-string "%Y-%m-%d %A" current))
+                  (start-time (format-time-string "%Y-%m-%d %a 09:00" current))
+                  (end-time (format-time-string "%Y-%m-%d %a 17:00" current)))
+              (push (concat "*** " day "\n**** PTO\n:LOGBOOK:\nCLOCK: ["
+                            start-time "]--[" end-time "] =>  8:00\n:END:") entries))))
+        ;; Increment the date by one day
+        (setq current (time-add current (days-to-time 1))))
+      ;; Reverse the list to maintain the order
+      (reverse entries)))
+
+  ;; Example usage
+  ;; (setq entries (jc/org-vacation "2023-03-27" "2023-04-02"))
+
+  ;; Print the results
+  ;; (dolist (entry entries)
+  ;;    (insert entry "\n\n"))
+#+end_src
