@@ -35,7 +35,36 @@ Emacs initialization as org file. It is a constant work in progress.
 
 ** Preamble
 
-In order to have this file be the emacs initialization file, put the following
+You'll first have to grab some stuff:
+
+#+begin_src emacs-lisp :tangle no :eval no
+    (defun jc/clone-repositories-if-needed (repo-list)
+      "Clone each repository in REPO-LIST into ~/.emacs.d/git/ if not already cloned."
+      (let ((base-dir "~/.emacs.d/git/"))
+        (dolist (repo repo-list)
+          (let ((repo-name (car (last (split-string repo "/"))))
+                (full-path))
+            (setq full-path (concat base-dir repo-name))
+            (unless (file-directory-p full-path)
+              (shell-command (concat "git clone " repo " " full-path)))))))
+
+    (jc/clone-repositories-if-needed '("https://github.com/julienchastang/dotemacs"
+                                    "https://github.com/daichirata/emacs-rotate"
+                                    "https://git.sr.ht/~bzg/org-contrib"
+                                    "https://git.savannah.gnu.org/emacs/org-mode"
+                                    "https://github.com/rlister/org-present"
+                                    "https://github.com/emacsmirror/ox-rss"
+                                    "https://github.com/novoid/title-capitalization.el"))
+
+#+end_src
+
+Also
+
+#+begin_src sh :tangle no :eval no
+  mkdir -p ~/.emacs.d/wget/infoplus/ && wget -O ~/.emacs.d/wget/infoplus/info+.el https://raw.githubusercontent.com/emacsmirror/info-plus/master/info%2B.el
+#+end_src
+
+Next, in order to have this file be the emacs initialization file, put the following
 snippet in your =~/.emacs.d/init.el= file.
 
 #+BEGIN_SRC emacs-lisp :tangle no
