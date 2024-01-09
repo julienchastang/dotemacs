@@ -58,7 +58,8 @@ You'll first have to grab some stuff:
                                   "git://git.savannah.gnu.org/emacs/org-mode.git"
                                   "https://github.com/rlister/org-present"
                                   "https://github.com/emacsmirror/ox-rss"
-                                  "https://github.com/novoid/title-capitalization.el"))
+                                  "https://github.com/novoid/title-capitalization.el"
+                                  "https://github.com/xenodium/chatgpt-shell"))
 #+end_src
 
 *** Wget
