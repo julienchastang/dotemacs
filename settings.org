@@ -34,6 +34,10 @@ Emacs initialization as org file. It is a constant work in progress.
 #+END_SRC
 
 ** Preamble
+*** Intro
+Set up what you'll need for your =~/.emacs.d/init.el= to work.
+
+*** Git repos
 
 You'll first have to grab some stuff:
 
@@ -55,19 +59,29 @@ You'll first have to grab some stuff:
                                     "https://github.com/rlister/org-present"
                                     "https://github.com/emacsmirror/ox-rss"
                                     "https://github.com/novoid/title-capitalization.el"))
-
 #+end_src
 
+*** Wget
+
 Also
+
+#+BEGIN_SRC emacs-lisp :tangle no :eval no
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((sh . t)))
+#+END_SRC
 
 #+begin_src sh :tangle no :eval no
   mkdir -p ~/.emacs.d/wget/infoplus/ && wget -O ~/.emacs.d/wget/infoplus/info+.el https://raw.githubusercontent.com/emacsmirror/info-plus/master/info%2B.el
 #+end_src
 
+*** Init.el
+
 Next, in order to have this file be the emacs initialization file, put the following
 snippet in your =~/.emacs.d/init.el= file.
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src sh :tangle no :eval no
+  cat << EOF > ~/.emacs.d/init.el
   ;; optionally remove default org install
   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2013-09/msg00178.html
   ;;
@@ -101,7 +115,8 @@ snippet in your =~/.emacs.d/init.el= file.
   (org-babel-load-file "~/.emacs.d/git/dotemacs/settings.org")
   (put 'dired-find-alternate-file 'disabled nil)
   (put 'erase-buffer 'disabled nil)
-#+END_SRC
+  EOF
+  #+END_SRC
 
 ** X11 Key bindings
 
@@ -721,12 +736,14 @@ soft-linked to the main dictionary of your choice (in this case =en_US=). Also
 make sure to =brew install hunspell=.
 
 #+BEGIN_SRC emacs-lisp
-  (if (file-exists-p "/opt/homebrew/bin/hunspell")
+  (if (or (file-exists-p "/opt/homebrew/bin/hunspell")
+          (file-exists-p "/usr/bin/hunspell"))
       (progn
-        ;; Add english-hunspell as a dictionary
         (setq-default ispell-program-name "hunspell"))
-    (progn (setq-default ispell-program-name "aspell")
-           (setq ispell-extra-args '("--sug-mode=normal" "--ignore=3"))))
+    (progn
+      ;; Set aspell as the default spell checker
+      (setq-default ispell-program-name "aspell")
+      (setq ispell-extra-args '("--sug-mode=normal" "--ignore=3"))))
 
   (add-to-list 'ispell-skip-region-alist '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:"))
   (add-to-list 'ispell-skip-region-alist '("#\\+BEGIN" . "#\\+END"))
@@ -888,7 +905,9 @@ elpy
 
 #+BEGIN_SRC emacs-lisp
   (elpy-enable)
-  (setq elpy-rpc-python-command "/opt/homebrew/bin/python")
+  (setq elpy-rpc-python-command (if (eq system-type 'darwin)
+                                    "/opt/homebrew/bin/python" ; macOS
+                                  "/usr/bin/python3"))        ; Linux
   (setq python-shell-interpreter "python" python-shell-interpreter-args "-i")
 #+END_SRC
 
@@ -959,7 +978,7 @@ Loading babel supported languages:
      (http . t)
      (jupyter . t)
      (python . t)))
-     #+END_SRC
+#+END_SRC
 
 *** XML
 <<xml>>
