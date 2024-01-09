@@ -42,23 +42,23 @@ Set up what you'll need for your =~/.emacs.d/init.el= to work.
 You'll first have to grab some stuff:
 
 #+begin_src emacs-lisp :tangle no :eval no
-    (defun jc/clone-repositories-if-needed (repo-list)
-      "Clone each repository in REPO-LIST into ~/.emacs.d/git/ if not already cloned."
-      (let ((base-dir "~/.emacs.d/git/"))
-        (dolist (repo repo-list)
-          (let ((repo-name (car (last (split-string repo "/"))))
-                (full-path))
-            (setq full-path (concat base-dir repo-name))
-            (unless (file-directory-p full-path)
-              (shell-command (concat "git clone " repo " " full-path)))))))
+  (defun jc/clone-repositories-if-needed (repo-list)
+    "Clone each repository in REPO-LIST into ~/.emacs.d/git/ if not already cloned."
+    (let ((base-dir "~/.emacs.d/git/"))
+      (dolist (repo repo-list)
+        (let ((repo-name (car (last (split-string repo "/"))))
+              (full-path))
+          (setq full-path (concat base-dir repo-name))
+          (unless (file-directory-p full-path)
+            (shell-command (concat "git clone " repo " " full-path)))))))
 
-    (jc/clone-repositories-if-needed '("https://github.com/julienchastang/dotemacs"
-                                    "https://github.com/daichirata/emacs-rotate"
-                                    "https://git.sr.ht/~bzg/org-contrib"
-                                    "https://git.savannah.gnu.org/emacs/org-mode"
-                                    "https://github.com/rlister/org-present"
-                                    "https://github.com/emacsmirror/ox-rss"
-                                    "https://github.com/novoid/title-capitalization.el"))
+  (jc/clone-repositories-if-needed '("https://github.com/julienchastang/dotemacs"
+                                  "https://github.com/daichirata/emacs-rotate"
+                                  "https://git.sr.ht/~bzg/org-contrib"
+                                  "git://git.savannah.gnu.org/emacs/org-mode.git"
+                                  "https://github.com/rlister/org-present"
+                                  "https://github.com/emacsmirror/ox-rss"
+                                  "https://github.com/novoid/title-capitalization.el"))
 #+end_src
 
 *** Wget
@@ -68,7 +68,7 @@ Also
 #+BEGIN_SRC emacs-lisp :tangle no :eval no
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((sh . t)))
+   '((shell . t)))
 #+END_SRC
 
 #+begin_src sh :tangle no :eval no
