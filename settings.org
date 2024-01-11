@@ -35,13 +35,27 @@ Emacs initialization as org file. It is a constant work in progress.
 
 ** Preamble
 *** Intro
+
 Set up what you'll need for your =~/.emacs.d/init.el= to work.
 
 *** Git repos
 
 You'll first have to grab some stuff:
 
-#+begin_src emacs-lisp :tangle no :eval no
+#+tblname: git-repos
+|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
+| package                                 | Location                                          | description           | anchors     |
+|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
+| ~/.emacs.d/git/chatgpt-shell/           | https://github.com/xenodium/chatgpt-shell         | ChatGPT Shell         | [[chatgpt]]     |
+| ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate        | Buffer rotate         | [[rotate][rotate]]      |
+| ~/.emacs.d/git/org-contrib/             | https://git.sr.ht/~bzg/org-contrib                | org contrib           |             |
+| ~/.emacs.d/git/org-mode.git/            | git://git.savannah.gnu.org/emacs/org-mode.git     | org                   |             |
+| ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present            | org presentation mode | [[org-present]] |
+| ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss             | org rss  mode         | [[rss][rss]]         |
+| ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el | Title capitalization  | [[writing][writing]]     |
+|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
+
+#+begin_src emacs-lisp :tangle no :eval no :var repos=git-repos :hlines no
   (defun jc/clone-repositories-if-needed (repo-list)
     "Clone each repository in REPO-LIST into ~/.emacs.d/git/ if not already cloned."
     (let ((base-dir "~/.emacs.d/git/"))
@@ -52,14 +66,9 @@ You'll first have to grab some stuff:
           (unless (file-directory-p full-path)
             (shell-command (concat "git clone " repo " " full-path)))))))
 
-  (jc/clone-repositories-if-needed '("https://github.com/julienchastang/dotemacs"
-                                  "https://github.com/daichirata/emacs-rotate"
-                                  "https://git.sr.ht/~bzg/org-contrib"
-                                  "git://git.savannah.gnu.org/emacs/org-mode.git"
-                                  "https://github.com/rlister/org-present"
-                                  "https://github.com/emacsmirror/ox-rss"
-                                  "https://github.com/novoid/title-capitalization.el"
-                                  "https://github.com/xenodium/chatgpt-shell"))
+  (defvar my-repos (mapcar (lambda (row) (nth 1 row)) (cdr repos)))
+
+  (jc/clone-repositories-if-needed my-repos)
 #+end_src
 
 *** Wget
@@ -109,7 +118,7 @@ snippet in your =~/.emacs.d/init.el= file.
   (add-to-list 'load-path
                (expand-file-name "~/.emacs.d/git/org-contrib/lisp"))
 
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode/lisp"))
+  (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode.git/lisp"))
 
   (require 'org)
   (require 'ob-tangle)
@@ -118,6 +127,10 @@ snippet in your =~/.emacs.d/init.el= file.
   (put 'erase-buffer 'disabled nil)
   EOF
   #+END_SRC
+
+** Info on swapping ctrl and cap locks
+
+https://www.emacswiki.org/emacs/MovingTheCtrlKey
 
 ** X11 Key bindings
 
@@ -462,25 +475,14 @@ into bitmap graphics. Here is the Ditaa path:
 
 These modes are not in any package manager so curate them manually.
 
-#+tblname: private-packages
-|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
-| package                                 | Location                                            | description           | anchors     |
-|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
-| ~/.emacs.d/git/chatgpt-shell/           | https://github.com/xenodium/chatgpt-shel            | ChatGPT Shell         | [[chatgpt]]     |
-| ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
-| ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
-| ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
-| ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss               | org rss  mode         | [[rss][rss]]         |
-| ~/.emacs.d/wget/infoplus/               | https://www.emacswiki.org/emacs/download/info%2b.el | Extensions to info.el | [[info][info]]        |
-|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
-
-
-#+BEGIN_SRC emacs-lisp :var packs=private-packages :hlines no
+#+BEGIN_SRC emacs-lisp :var packs=git-repos :hlines no
   (defvar p-packages (mapcar 'car (cdr packs)))
 
   (dolist (pack p-packages)
     (when (file-directory-p  pack)
       (add-to-list 'load-path pack)))
+
+  (add-to-list 'load-path " ~/.emacs.d/wget/infoplus/info+.el")
 #+END_SRC
 
 ** Package Archives
@@ -906,9 +908,10 @@ elpy
 
 #+BEGIN_SRC emacs-lisp
   (elpy-enable)
-  (setq elpy-rpc-python-command (if (eq system-type 'darwin)
-                                    "/opt/homebrew/bin/python" ; macOS
-                                  "/usr/bin/python3"))        ; Linux
+  (setq elpy-rpc-python-command (cond
+                                ((eq system-type 'darwin) "/opt/homebrew/bin/python")  ; macOS
+                                ((eq system-type 'gnu/linux) "/usr/bin/python3")       ; GNU/Linux
+                                (t "/usr/bin/python3")))
   (setq python-shell-interpreter "python" python-shell-interpreter-args "-i")
 #+END_SRC
 
