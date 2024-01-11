@@ -188,6 +188,13 @@ Let's change to a less horrible color theme. The available default options are =
 
 Fonts
 
+On Linux, may have to do something like this before installation:
+
+#+begin_src shell :eval no
+  wget https://phd-sid.ethz.ch/debian/fonts-iosevka/fonts-iosevka-22.0.0+ds/fonts-iosevka_22.0.0+ds-1_all.deb
+  sudo dpkg -i fonts-iosevka_22.0.0+ds-1_all.deb
+#+end_src
+
 #+BEGIN_SRC emacs-lisp
   ;; Inconsolata can be installed through a package manager
   (set-frame-font "iosevka 16" nil t)
@@ -482,7 +489,7 @@ These modes are not in any package manager so curate them manually.
     (when (file-directory-p  pack)
       (add-to-list 'load-path pack)))
 
-  (add-to-list 'load-path " ~/.emacs.d/wget/infoplus/")
+  (add-to-list 'load-path "~/.emacs.d/wget/infoplus/")
 #+END_SRC
 
 ** Package Archives
