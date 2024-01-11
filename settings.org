@@ -482,7 +482,7 @@ These modes are not in any package manager so curate them manually.
     (when (file-directory-p  pack)
       (add-to-list 'load-path pack)))
 
-  (add-to-list 'load-path " ~/.emacs.d/wget/infoplus/info+.el")
+  (add-to-list 'load-path " ~/.emacs.d/wget/infoplus/")
 #+END_SRC
 
 ** Package Archives
