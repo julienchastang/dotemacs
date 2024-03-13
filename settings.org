@@ -190,10 +190,10 @@ Fonts
 
 On Linux, may have to do something like this before installation:
 
-#+begin_src shell :eval no
+#+begin_example
   wget https://phd-sid.ethz.ch/debian/fonts-iosevka/fonts-iosevka-22.0.0+ds/fonts-iosevka_22.0.0+ds-1_all.deb
   sudo dpkg -i fonts-iosevka_22.0.0+ds-1_all.deb
-#+end_src
+#+end_example
 
 #+BEGIN_SRC emacs-lisp
   ;; Inconsolata can be installed through a package manager
@@ -920,10 +920,10 @@ If you see this message
 
 You may have to
 
-#+begin_src sh :eval no
+#+begin_example sh :eval no
   cd /opt/homebrew/bin/
   sudo ln -sf python3 python3.10
-#+end_src
+#+end_example
 
 Virtual env stuff
 
