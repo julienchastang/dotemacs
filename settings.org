@@ -320,17 +320,26 @@ rename file and buffer
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/rename-file-and-buffer ()
-    "Rename the current buffer and file it is visiting."
+    "Rename the current buffer and its associated file."
     (interactive)
     (let ((filename (buffer-file-name)))
-      (if (not (and filename (file-exists-p filename)))
-          (message "Buffer is not visiting a file!")
-        (let ((new-name (read-file-name "New name: " filename)))
-          (cond
-           ((vc-backend filename) (vc-rename-file filename new-name))
-           (t
-            (rename-file filename new-name t)
-            (set-visited-file-name new-name t t)))))))
+      (when (not (and filename (file-exists-p filename)))
+        (message "Buffer is not visiting a file!"))
+      (let ((new-name (read-file-name "New name: " filename)))
+        (when (file-exists-p new-name)
+          (if (yes-or-no-p (format "File %s already exists. Overwrite? " new-name))
+              (delete-file new-name)
+            (user-error "Operation cancelled")))
+        (cond
+         ((vc-backend filename)
+          (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name 1)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil)
+          (when (not (string-equal (file-name-extension filename)
+                                   (file-name-extension new-name)))
+            (set-auto-mode)))))))
 #+END_SRC
 
 Upcase & Down Case
