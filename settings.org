@@ -46,7 +46,6 @@ You'll first have to grab some stuff:
 |-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
 | package                                 | Location                                          | description           | anchors     |
 |-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
-| ~/.emacs.d/git/chatgpt-shell/           | https://github.com/xenodium/chatgpt-shell         | ChatGPT Shell         | [[chatgpt]]     |
 | ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate        | Buffer rotate         | [[rotate][rotate]]      |
 | ~/.emacs.d/git/org-contrib/             | https://git.sr.ht/~bzg/org-contrib                | org contrib           |             |
 | ~/.emacs.d/git/org-mode.git/            | git://git.savannah.gnu.org/emacs/org-mode.git     | org                   |             |
@@ -533,47 +532,48 @@ on github, the anchors will not take you anywhere. The anchors only work in
 emacs org mode.
 
 #+tblname: my-packages
-|-------------------------------+-----------------------------------------------+--------------------|
-| package                       | description                                   | anchors            |
-|-------------------------------+-----------------------------------------------+--------------------|
-| exec-path-from-shell          | env vars such as $PATH from the shell         |                    |
-| helm                          | helm completion engine                        | [[helm][helm]]               |
-| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]               |
-| projectile                    | Project navigation and management library     | [[projectile][projectile]]         |
-| helm-projectile               | Projectile helm integration                   | [[projectile][projectile]]         |
-| ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]                |
-| rw-hunspell                   | spelling                                      | [[spelling][spelling]]           |
-| rw-ispell                     | spelling                                      | [[spelling][spelling]]           |
-| rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]           |
-| flycheck                      | on-the-fly syntax checking                    |                    |
-| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]          |
-| magit                         | emacs git client                              | [[git][git]]                |
-| git-gutter                    | git gutter                                    | [[git][git]]                |
-| git-timemachine               | Walk through git revisions of a file          | [[git][git]]                |
-| fill-column-indicator         | 80 column rule                                | [[fci][fci]]                |
-| spaceline                     | A better mode line                            | [[modeline][modeline]]           |
-| paredit                       | structured editing of S-expression data       | [[paren][paren]]              |
-| rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]              |
-| markdown-mode                 | markdown for emacs                            | [[markdown][markdown]]           |
-| yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]               |
-| undo-tree                     | undo tree                                     | [[undo][undo]]               |
-| windresize                    | arrow keys resize the window                  |                    |
-| python                        | Python mode for emacs                         | [[python][python]]             |
-| ipython                       | ipython for emacs                             | [[python][python]]             |
-| jedi                          | Python auto-completion for Emacs              | [[python][python]]             |
-| elpy                          | Emacs Python Development Environment          | [[python][python]]             |
-| jupyter                       | emacs jupyter                                 | [[python][python]]             |
-| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |                    |
-| csv-mode                      | Major mode for editing comma separated values |                    |
-| zoom-window                   | Zoom window like tmux                         |                    |
-| gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]            |
-| ob-http                       | http request in org-mode babel                | [[http][http]]               |
-| nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]              |
-| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]              |
-| ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]               |
-| org-bullets                   | Show bullets in org-mode                      | [[bullets]]            |
-| citeproc                      | citeproc                                      | [[citation][citation]]           |
-|-------------------------------+-----------------------------------------------+--------------------|
+|-------------------------------+-----------------------------------------------+------------|
+| package                       | description                                   | anchors    |
+|-------------------------------+-----------------------------------------------+------------|
+| exec-path-from-shell          | env vars such as $PATH from the shell         |            |
+| helm                          | helm completion engine                        | [[helm][helm]]       |
+| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]       |
+| projectile                    | Project navigation and management library     | [[projectile][projectile]] |
+| helm-projectile               | Projectile helm integration                   | [[projectile][projectile]] |
+| ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]        |
+| rw-hunspell                   | spelling                                      | [[spelling][spelling]]   |
+| rw-ispell                     | spelling                                      | [[spelling][spelling]]   |
+| rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]   |
+| flycheck                      | on-the-fly syntax checking                    |            |
+| yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
+| magit                         | emacs git client                              | [[git][git]]        |
+| git-gutter                    | git gutter                                    | [[git][git]]        |
+| git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
+| fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
+| spaceline                     | A better mode line                            | [[modeline][modeline]]   |
+| paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
+| rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]      |
+| markdown-mode                 | markdown for emacs                            | [[markdown][markdown]]   |
+| yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
+| undo-tree                     | undo tree                                     | [[undo][undo]]       |
+| windresize                    | arrow keys resize the window                  |            |
+| python                        | Python mode for emacs                         | [[python][python]]     |
+| ipython                       | ipython for emacs                             | [[python][python]]     |
+| jedi                          | Python auto-completion for Emacs              | [[python][python]]     |
+| elpy                          | Emacs Python Development Environment          | [[python][python]]     |
+| jupyter                       | emacs jupyter                                 | [[python][python]]     |
+| dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
+| csv-mode                      | Major mode for editing comma separated values |            |
+| zoom-window                   | Zoom window like tmux                         |            |
+| gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
+| ob-http                       | http request in org-mode babel                | [[http][http]]       |
+| nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
+| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
+| ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
+| org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
+| citeproc                      | citeproc                                      | [[citation][citation]]   |
+| gptel                         | LLM client                                    |            |
+|-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
 |--------------------+-------------------------------------+--------------|
@@ -1177,14 +1177,23 @@ Easily copy from one dired buffer to another
   (require 'citeproc nil t)
 #+END_SRC
 
-*** ChatGPT
-<<chatgpt>>
+*** LLM
+<<llm>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'chatgpt-shell)
-  (setq chatgpt-shell-openai-key
-          (auth-source-pick-first-password :host "api.openai.com" :user "julien.c.chastang@gmail.com"))
-  #+END_SRC
+  (require 'gptel)
+  (let ((api-keys-file "~/.emacs-api-keys.el"))
+    (when (file-readable-p api-keys-file)
+      (load-file api-keys-file)))
+#+END_SRC
+
+#+begin_src emacs-lisp
+  (setq
+   gptel-model "gemini-pro"
+   gptel-backend (gptel-make-gemini "Gemini"
+                   :key jc/gemini-api-key
+                   :stream t))
+#+end_src
 
 ** Emacs Shell Settings
 
