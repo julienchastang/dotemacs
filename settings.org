@@ -462,7 +462,22 @@ into bitmap graphics. Here is the Ditaa path:
   (add-hook 'org-babel-after-execute-hook 'jc/fix-inline-images)
 #+END_SRC
 
-*** bibtex
+*** latex
+**** document classes
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes
+                 '("IEEEtran"
+                   "\\documentclass[conference]{IEEEtran}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+#+end_src
+
+**** bibtex
 [[http://tex.stackexchange.com/questions/32348/problems-with-bbl-in-org-mode#comment594526_39885][bibtex]]
 
 #+BEGIN_SRC emacs-lisp
@@ -1187,12 +1202,22 @@ Easily copy from one dired buffer to another
       (load-file api-keys-file)))
 #+END_SRC
 
+Gemini
+
 #+begin_src emacs-lisp
   (setq
    gptel-model "gemini-pro"
    gptel-backend (gptel-make-gemini "Gemini"
                    :key jc/gemini-api-key
                    :stream t))
+#+end_src
+
+Anthropic Claude
+
+#+begin_src emacs-lisp
+  (gptel-make-anthropic "Claude"
+    :key jc/anthropic-api-key
+    :stream t)
 #+end_src
 
 ** Emacs Shell Settings
@@ -1435,9 +1460,9 @@ If the :tangle header arg is a list of files. Handle all files"
       (reverse entries)))
 
   ;; Example usage
-  ;; (setq entries (jc/org-vacation "2023-03-27" "2023-04-02"))
+  ;; (setq entries (jc/org-vacation "2024-03-25" "2024-03-29"))
 
   ;; Print the results
-  ;; (dolist (entry entries)
-  ;;    (insert entry "\n\n"))
+  ;; (dolist (entry entries) (insert entry "\n\n"))
+  ;;
 #+end_src
