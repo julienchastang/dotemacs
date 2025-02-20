@@ -1148,8 +1148,27 @@ Easily copy from one dired buffer to another
 <<tramp>>
 
 #+BEGIN_SRC emacs-lisp
-  (setq tramp-default-method "ssh")
   (define-key global-map (kbd "C-c s") 'helm-tramp)
+  (add-hook 'helm-tramp-pre-command-hook
+            '(lambda ()
+  	     (projectile-mode 0)))
+  (add-hook 'helm-tramp-quit-hook
+            '(lambda ()
+  	     (projectile-mode 1)))
+
+  (defun disable-remote-file-backups-autosaves-locks ()
+    "Disable backups, auto-save, and lock files for remote files."
+    (when (tramp-tramp-file-p (buffer-file-name))
+      (setq-local make-backup-files nil)
+      (setq-local auto-save-default nil)
+      (setq-local create-lockfiles nil)))
+
+  (add-hook 'find-file-hook #'disable-remote-file-backups-autosaves-locks)
+
+  (setq tramp-copy-size-limit (* 5 1024 1024))  ; 5MB threshold for external copying
+  (setq tramp-inline-compress-start-size (* 2 1024 1024))  ; Compress files > 2MB
+  ;; (setq tramp-default-method "rsync")
+  (setq tramp-default-method "ssh")
 #+END_SRC
 
 *** Hugo
@@ -1460,9 +1479,10 @@ If the :tangle header arg is a list of files. Handle all files"
       (reverse entries)))
 
   ;; Example usage
-  ;; (setq entries (jc/org-vacation "2024-03-25" "2024-03-29"))
+  ;; (setq entries (jc/org-vacation "2024-07-22" "2024-07-25"))
 
   ;; Print the results
   ;; (dolist (entry entries) (insert entry "\n\n"))
   ;;
 #+end_src
+
