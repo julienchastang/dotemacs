@@ -1226,8 +1226,8 @@ Gemini
 
 #+begin_src emacs-lisp
   (setq
-   gptel-model "gemini-pro"
-   gptel-backend (gptel-make-gemini "Gemini"
+   gptel-model 'gemini-2.0-flash
+   gptel-backend (gptel-make-gemini "gemini-2.0-flash"
                    :key jc/gemini-api-key
                    :stream t))
 #+end_src
@@ -1480,7 +1480,7 @@ If the :tangle header arg is a list of files. Handle all files"
       (reverse entries)))
 
   ;; Example usage
-  ;; (setq entries (jc/org-vacation "2024-07-22" "2024-07-25"))
+  ;; (setq entries (jc/org-vacation "2025-03-21" "2025-03-28"))
 
   ;; Print the results
   ;; (dolist (entry entries) (insert entry "\n\n"))
