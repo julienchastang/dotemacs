@@ -1220,24 +1220,29 @@ Easily copy from one dired buffer to another
   (let ((api-keys-file "~/.emacs-api-keys.el"))
     (when (file-readable-p api-keys-file)
       (load-file api-keys-file)))
-#+END_SRC
 
-Gemini
+  (gptel-make-openai "Jetstream2"
+    :host "llm.jetstream-cloud.org"
+    :endpoint "/api/chat/completions"
+    :protocol "https"
+    :stream t
+    :key jc/jetstream-api-key
+    :models '(llama-4-scout DeepSeek-R1))
 
-#+begin_src emacs-lisp
-  (setq
-   gptel-model 'gemini-2.0-flash
-   gptel-backend (gptel-make-gemini "gemini-2.0-flash"
-                   :key jc/gemini-api-key
-                   :stream t))
-#+end_src
-
-Anthropic Claude
-
-#+begin_src emacs-lisp
-  (gptel-make-anthropic "Claude"
-    :key jc/anthropic-api-key
+  (gptel-make-gemini "Gemini"
+    :key jc/gemini-api-key
+    :models '(gemini-2.0-flash)
     :stream t)
+
+  (setq gptel-backend (gptel-get-backend "Gemini"))
+
+  (defun jc/select-gptel-backend ()
+    "Interactively select a GPTel backend from the available ones."
+    (interactive)
+    (let* ((backends '("Jetstream2" "Gemini")) ; extend this list as needed
+           (choice (completing-read "Choose GPTel backend: " backends nil t)))
+      (setq gptel-backend (gptel-get-backend choice))
+      (message "GPTel backend set to: %s" choice)))
 #+end_src
 
 ** Emacs Shell Settings
@@ -1486,4 +1491,3 @@ If the :tangle header arg is a list of files. Handle all files"
   ;; (dolist (entry entries) (insert entry "\n\n"))
   ;;
 #+end_src
-
