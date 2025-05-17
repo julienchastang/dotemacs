@@ -52,6 +52,7 @@ You'll first have to grab some stuff:
 | ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present            | org presentation mode | [[org-present]] |
 | ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss             | org rss  mode         | [[rss][rss]]         |
 | ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el | Title capitalization  | [[writing][writing]]     |
+| ~/.emacs.d/git/gptel/                   | https://github.com/karthink/gptel                 | gptel                 | [[llm][llm]]         |
 |-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
 
 #+begin_src emacs-lisp :tangle no :eval no :var repos=git-repos :hlines no
@@ -587,7 +588,6 @@ emacs org mode.
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
 | citeproc                      | citeproc                                      | [[citation][citation]]   |
-| gptel                         | LLM client                                    |            |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -1216,7 +1216,15 @@ Easily copy from one dired buffer to another
 <<llm>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'gptel)
+  (dolist (gpt-mod
+           '(gptel
+             gptel-gemini
+             gptel-curl
+             gptel-context
+             gptel-transient
+             gptel-rewrite))
+    (require gpt-mod))
+
   (let ((api-keys-file "~/.emacs-api-keys.el"))
     (when (file-readable-p api-keys-file)
       (load-file api-keys-file)))
@@ -1234,15 +1242,44 @@ Easily copy from one dired buffer to another
     :models '(gemini-2.0-flash)
     :stream t)
 
-  (setq gptel-backend (gptel-get-backend "Gemini"))
+  (setq gptel-backend (gptel-get-backend "Jetstream2"))
 
   (defun jc/select-gptel-backend ()
     "Interactively select a GPTel backend from the available ones."
     (interactive)
-    (let* ((backends '("Jetstream2" "Gemini")) ; extend this list as needed
+    (let* ((backends '("Jetstream2" "Gemini"))
            (choice (completing-read "Choose GPTel backend: " backends nil t)))
       (setq gptel-backend (gptel-get-backend choice))
       (message "GPTel backend set to: %s" choice)))
+
+  (gptel-make-preset 'llama4scout-readme
+    :description "Assistant for writing README files"
+    :backend "Jetstream2"
+    :model 'llama-4-scout
+    :system "You are an expert technical writer and open-source contributor. Your task is to generate clear, brief, concise language suitable for an open-source README file. Follow modern documentation best practices: prioritize clarity, accuracy, and relevance for a technically literate audience. Avoid filler, hype, and repetition. Maintain factual integrity—omit anything you're unsure of rather than speculate. Use a neutral, professional tone. Keep the output focused, free of boilerplate, and formatted as a single ASCII paragraph."
+    :temperature 0.5
+    :stream t)
+
+  (gptel-make-preset 'llama4scout-generic
+    :description "llama4scout"
+    :backend "Jetstream2"
+    :model 'llama-4-scout
+    :temperature 0.5
+    :stream t)
+
+  (gptel-make-preset 'llama4scout-generic
+    :description "llama4scout"
+    :backend "Jetstream2"
+    :model 'llama-4-scout
+    :temperature 0.5
+    :stream t)
+
+  (gptel-make-preset 'deepseek-generic
+    :description "deepseek"
+    :backend "Jetstream2"
+    :model 'DeepSeek-R1
+    :temperature 0.5
+    :stream t)
 #+end_src
 
 ** Emacs Shell Settings
