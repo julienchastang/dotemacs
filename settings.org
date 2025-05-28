@@ -353,8 +353,8 @@ Text scale bigger or smaller
 
 #+BEGIN_SRC emacs-lisp
 ;; Font size
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 #+END_SRC
 
 EWW
@@ -380,8 +380,10 @@ Let's get the agenda going.
 
 *** General org settings
 
+Org agenda
+
 #+BEGIN_SRC emacs-lisp
-  (define-key global-map "\C-ca" 'org-agenda)
+  (global-set-key "\C-ca" 'org-agenda)
 #+END_SRC
 
 Code blocks should be have syntax highlighting
@@ -752,7 +754,7 @@ Clean up white space. [[https://emacs.stackexchange.com/a/27794/8424][Thanks Jac
 
 #+BEGIN_SRC emacs-lisp
   (require 'ace-jump-mode)
-  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
   (add-hook 'org-mode-hook
             (lambda ()
@@ -1148,7 +1150,7 @@ Easily copy from one dired buffer to another
 <<tramp>>
 
 #+BEGIN_SRC emacs-lisp
-  (define-key global-map (kbd "C-c s") 'helm-tramp)
+  (global-set-key (kbd "C-c s") 'helm-tramp)
   (add-hook 'helm-tramp-pre-command-hook
             '(lambda ()
   	     (projectile-mode 0)))
