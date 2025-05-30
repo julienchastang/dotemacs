@@ -1217,71 +1217,9 @@ Easily copy from one dired buffer to another
 *** LLM
 <<llm>>
 
-#+BEGIN_SRC emacs-lisp
-  (dolist (gpt-mod
-           '(gptel
-             gptel-gemini
-             gptel-curl
-             gptel-context
-             gptel-transient
-             gptel-rewrite))
-    (require gpt-mod))
-
-  (let ((api-keys-file "~/.emacs-api-keys.el"))
-    (when (file-readable-p api-keys-file)
-      (load-file api-keys-file)))
-
-  (gptel-make-openai "Jetstream2"
-    :host "llm.jetstream-cloud.org"
-    :endpoint "/api/chat/completions"
-    :protocol "https"
-    :stream t
-    :key jc/jetstream-api-key
-    :models '(llama-4-scout DeepSeek-R1))
-
-  (gptel-make-gemini "Gemini"
-    :key jc/gemini-api-key
-    :models '(gemini-2.0-flash)
-    :stream t)
-
-  (setq gptel-backend (gptel-get-backend "Jetstream2"))
-
-  (defun jc/select-gptel-backend ()
-    "Interactively select a GPTel backend from the available ones."
-    (interactive)
-    (let* ((backends '("Jetstream2" "Gemini"))
-           (choice (completing-read "Choose GPTel backend: " backends nil t)))
-      (setq gptel-backend (gptel-get-backend choice))
-      (message "GPTel backend set to: %s" choice)))
-
-  (gptel-make-preset 'llama4scout-readme
-    :description "Assistant for writing README files"
-    :backend "Jetstream2"
-    :model 'llama-4-scout
-    :system "You are an expert technical writer and open-source contributor. Your task is to generate clear, brief, concise language suitable for an open-source README file. Follow modern documentation best practices: prioritize clarity, accuracy, and relevance for a technically literate audience. Avoid filler, hype, and repetition. Maintain factual integrity—omit anything you're unsure of rather than speculate. Use a neutral, professional tone. Keep the output focused, free of boilerplate, and formatted as a single ASCII paragraph."
-    :temperature 0.5
-    :stream t)
-
-  (gptel-make-preset 'llama4scout-generic
-    :description "llama4scout"
-    :backend "Jetstream2"
-    :model 'llama-4-scout
-    :temperature 0.5
-    :stream t)
-
-  (gptel-make-preset 'llama4scout-generic
-    :description "llama4scout"
-    :backend "Jetstream2"
-    :model 'llama-4-scout
-    :temperature 0.5
-    :stream t)
-
-  (gptel-make-preset 'deepseek-generic
-    :description "deepseek"
-    :backend "Jetstream2"
-    :model 'DeepSeek-R1
-    :temperature 0.5
-    :stream t)
+#+begin_src emacs-lisp
+  (org-babel-load-file "~/.emacs.d/git/dotemacs/gptel-presets.org")
+  (jc/rebuild-gptel-presets)
 #+end_src
 
 ** Emacs Shell Settings

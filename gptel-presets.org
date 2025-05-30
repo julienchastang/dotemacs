@@ -1,0 +1,164 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil expand-links:t f:t inline:t num:t p:nil pri:nil prop:nil
+#+options: stat:t tags:t tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: gptel-presets
+#+date: <2025-05-29 Thu>
+#+author: Julien Chastang
+#+email: julien.c.chastang@gmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.7.27)
+
+#+PROPERTY: header-args :eval yes :results none :tangle yes
+
+* Imports
+
+#+begin_src emacs-lisp
+  (dolist (gpt-mod
+           '(gptel
+             gptel-gemini
+             gptel-curl
+             gptel-context
+             gptel-transient
+             gptel-rewrite))
+    (require gpt-mod))
+#+end_src
+
+* API Keys
+
+#+begin_src emacs-lisp
+  (let ((api-keys-file "~/.emacs-api-keys.el"))
+    (when (file-readable-p api-keys-file)
+      (load-file api-keys-file)))
+#+end_src
+
+* Define backends
+
+#+begin_src emacs-lisp
+  (gptel-make-openai "Jetstream2"
+    :host "llm.jetstream-cloud.org"
+    :endpoint "/api/chat/completions"
+    :protocol "https"
+    :stream t
+    :key jc/jetstream-api-key
+    :models '(llama-4-scout DeepSeek-R1))
+
+  (gptel-make-gemini "Gemini"
+    :key jc/gemini-api-key
+    :models '(gemini-2.0-flash)
+    :stream t)
+
+  (defvar gptel-backend (gptel-get-backend "Jetstream2"))
+  (defvar gptel-model 'llama-4-scout)
+
+  (defun jc/select-gptel-backend ()
+    (interactive)
+    (let* ((backends '("Jetstream2" "Gemini"))
+           (choice (completing-read "Choose GPTel backend: " backends nil t)))
+      (setq gptel-backend (gptel-get-backend choice))
+      (message "GPTel backend set to: %s" choice)
+      (jc/rebuild-gptel-presets)))
+
+  (defun jc/select-gptel-model ()
+    (interactive)
+    (let* ((available-models '(llama-4-scout DeepSeek-R1 gemini-2.0-flash))
+           (choice (intern (completing-read "Choose GPTel model: " (mapcar #'symbol-name available-models) nil t))))
+      (setq gptel-model choice)
+      (message "GPTel model set to: %s" choice)
+      (jc/rebuild-gptel-presets)))
+
+  (defvar jc/gptel-backend-model-pairs
+    '(("Jetstream2" . llama-4-scout)
+      ("Gemini" . gemini-2.0-flash)))
+
+  (defun jc/select-gptel-backend+model ()
+    (interactive)
+    (let* ((choices (mapcar #'car jc/gptel-backend-model-pairs))
+           (choice (completing-read "Choose GPTel backend: " choices nil t))
+           (model (cdr (assoc choice jc/gptel-backend-model-pairs))))
+      (setq gptel-backend (gptel-get-backend choice))
+      (setq gptel-model model)
+      (message "GPTel backend: %s, model: %s" choice model)
+      (jc/rebuild-gptel-presets)))
+#+end_src
+
+* Directives
+
+#+begin_src emacs-lisp
+  (setq gptel-directives
+        '((default
+           . "You are a helpful assistant focused on clear, accurate, concise answers. Do not speculate. If unsure, say so.")
+          (coding
+           . "You are a careful programming assistant. Always prefer real, well-documented APIs. Avoid hallucinating function names or libraries. If you are unsure about the existence of a feature, say so. Provide minimal, correct code. Add comments only if necessary for clarity.")
+          (shell-scripting
+           . "You are a UNIX command-line expert. Give tested, POSIX-compatible shell scripts when possible. Explain assumptions about system environment clearly. Avoid speculative flags or commands.")
+          (emacs-lisp
+           . "You are an Emacs Lisp expert. Always validate code against current Emacs APIs. Explain side effects. Avoid deprecated functions unless necessary, and prefer standard libraries over external packages.")
+          (python
+           . "You are a Python coding assistant. Avoid speculative libraries or undocumented APIs. When giving examples, be concise and correct. Do not invent modules. Clarify assumptions (e.g., Python version or environment).")
+          (writing
+           . "You are a writing assistant focused on clarity and concision. Avoid filler, repetition, or elaborate phrasing. Use plain, direct language. Do not use idioms or metaphors. If the topic is ambiguous, ask for clarification rather than guessing.")
+          (tech-writer
+           . "You are a professional technical writer. Focus on documentation clarity, factual accuracy, and minimalism. Avoid boilerplate and hype. Do not describe functionality unless you are sure it exists. Favor imperative voice and clean formatting.")
+          (proofreading
+           . "You are a precise proofreader. Correct grammar, punctuation, clarity, and conciseness. Do not alter meaning. Avoid stylistic embellishments or rewording unless clarity is improved.")
+          (copy-editor
+           . "You are a professional copy editor. Focus on correcting grammar, punctuation, and sentence clarity. Preserve the author’s voice and intent. Do not rephrase for style unless clarity or correctness is compromised. Avoid embellishments and do not add content.")
+          (rewriter
+           . "You are a professional writing assistant. Your task is to rewrite rough or informal text into polished, professional language while preserving its meaning and approximate length. Do not add new content, embellish, or make the text longer. Improve clarity, grammar, and tone without altering substance.")
+          (devops
+           . "You are a DevOps engineer. Provide commands and configurations that are production-safe and well-tested. Clearly explain environment assumptions. Avoid experimental tools unless explicitly requested.")))
+#+end_src
+
+* Presets
+
+#+begin_src emacs-lisp
+  (defun jc/rebuild-gptel-presets ()
+    "Rebuild all GPTel presets using current backend and model."
+    (interactive)
+    (gptel-make-preset 'root-preset
+      :description "Default base preset for LLM interactions"
+      :backend gptel-backend
+      :model gptel-model
+      :system 'default
+      :stream t
+      :temperature 0.3
+      :max-tokens 1024
+      :use-context 'user
+      :include-reasoning nil
+      :confirm-tool-calls nil)
+
+  (gptel-make-preset 'coding-preset
+    :description "Focused coding assistant; avoids hallucinated APIs"
+    :parents '(root-preset)
+    :system 'coding
+    :temperature 0.2)
+
+  (gptel-make-preset 'writing-preset
+    :description "Concise, clear, high-quality writing"
+    :parents '(root-preset)
+    :system 'writing
+    :temperature 0.3)
+
+  (gptel-make-preset 'tech-writer
+    :description "Technical editor for documentation (e.g. READMEs)"
+    :parents '(writing-preset)
+    :system 'tech-writer
+    :max-tokens 512)
+
+  (gptel-make-preset 'copy-editor
+  :description "Copy editor for clarity, grammar, and correctness"
+  :parents '(root-preset)
+  :system 'copy-editor
+  :temperature 0.2
+  :max-tokens 1024)
+
+  (gptel-make-preset 'rewriter
+  :description "Rewrite rough or informal text into polished, professional form without changing length or meaning"
+  :parents '(root-preset)
+  :system 'rewriter
+  :temperature 0.3
+  :max-tokens 1024))
+#+end_src
