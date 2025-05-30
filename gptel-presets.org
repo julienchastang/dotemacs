@@ -64,7 +64,10 @@
   (defun jc/select-gptel-model ()
     (interactive)
     (let* ((available-models '(llama-4-scout DeepSeek-R1 gemini-2.0-flash))
-           (choice (intern (completing-read "Choose GPTel model: " (mapcar #'symbol-name available-models) nil t))))
+           (choice
+            (intern (completing-read "Choose GPTel model: "
+                                     (mapcar #'symbol-name available-models)
+                                     nil t))))
       (setq gptel-model choice)
       (message "GPTel model set to: %s" choice)
       (jc/rebuild-gptel-presets)))
