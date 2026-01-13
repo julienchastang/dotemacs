@@ -589,7 +589,7 @@ emacs org mode.
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
-| citeproc                      | citeproc                                      | [[citation][citation]]   |
+| mermaid-mode                  | Mermaid diagram mode                          |            |
 |-------------------------------+-----------------------------------------------+------------|
 
 #+tblname: my-packages-unstable
@@ -603,6 +603,7 @@ emacs org mode.
 | elfeed             | Emacs feed reader                   | [[elfeed][elfeed]]       |
 | elfeed-org         | Emacs feed reader for org-mode      | [[elfeed][elfeed]]       |
 | flymake-shellcheck | Flymake handler for bash/sh scripts | [[shell]]        |
+| citeproc           | citeproc                            | [[citation][citation]]     |
 |--------------------+-------------------------------------+--------------|
 
 Packages that are not working or dead, but hope to see alive again.
@@ -888,11 +889,15 @@ GPG data should not be leaked out.
 
 #+begin_src emacs-lisp
   (defun jc/disable-backups-for-gpg ()
-    (when (and (buffer-file-name)
-               (s-ends-with-p ".gpg" (buffer-file-name) t))
+    (when (and buffer-file-name
+               (string-match-p "\\.gpg\\'" buffer-file-name))
       (setq-local backup-inhibited t)
-      (setq-local undo-tree-auto-save-history nil)
-      (auto-save-mode -1)))
+      (setq-local make-backup-files nil)
+      (setq-local create-lockfiles nil)
+      (auto-save-mode -1)
+      (when (boundp 'undo-tree-auto-save-history)
+        (setq undo-tree-auto-save-history nil))))
+
   (add-hook 'find-file-hook #'jc/disable-backups-for-gpg)
 #+end_src
 
@@ -1020,13 +1025,13 @@ Loading babel supported languages:
    'org-babel-load-languages
    '((ditaa . t)
      (emacs-lisp . t)
-     (org . t)
      (gnuplot . t)
-     (latex . t)
-     (shell . t)
      (http . t)
      (jupyter . t)
-     (python . t)))
+     (latex . t)
+     (org . t)
+     (python . t)
+     (shell . t)))
 #+END_SRC
 
 *** XML
@@ -1153,10 +1158,10 @@ Easily copy from one dired buffer to another
   (global-set-key (kbd "C-c s") 'helm-tramp)
   (add-hook 'helm-tramp-pre-command-hook
             '(lambda ()
-  	     (projectile-mode 0)))
+             (projectile-mode 0)))
   (add-hook 'helm-tramp-quit-hook
             '(lambda ()
-  	     (projectile-mode 1)))
+             (projectile-mode 1)))
 
   (defun disable-remote-file-backups-autosaves-locks ()
     "Disable backups, auto-save, and lock files for remote files."
