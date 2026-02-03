@@ -824,7 +824,7 @@ make sure to =brew install hunspell=.
 git gutter
 
 #+BEGIN_SRC emacs-lisp
-  (setq global-linum-mode nil)
+  (global-display-line-numbers-mode 0)
   (global-git-gutter-mode t)
 #+END_SRC
 
