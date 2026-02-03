@@ -943,7 +943,6 @@ Loading babel supported languages:
      (emacs-lisp . t)
      (gnuplot . t)
      (http . t)
-     (jupyter . t)
      (latex . t)
      (org . t)
      (python . t)
@@ -1103,7 +1102,6 @@ Easily copy from one dired buffer to another
             (or (executable-find "/opt/homebrew/bin/rsync")
                 (executable-find "/usr/local/bin/rsync")))
     (setq tramp-rsync-program (executable-find "rsync")))
-  ;; (setq tramp-default-method "rsync")
   (setq tramp-default-method "ssh")
 #+END_SRC
 
