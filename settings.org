@@ -588,7 +588,7 @@ emacs org mode.
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
-| org-bullets                   | Show bullets in org-mode                      | [[bullets]]    |
+| org-modern                    | Modern org-mode visuals                       | [[bullets]]    |
 | mermaid-mode                  | Mermaid diagram mode                          |            |
 |-------------------------------+-----------------------------------------------+------------|
 
@@ -1182,12 +1182,12 @@ Easily copy from one dired buffer to another
   (global-set-key (kbd "C-c o") 'helm-org-agenda-files-headings)
 #+END_SRC
 
-*** org-bullets
+*** org-modern
 <<bullets>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'org-bullets)
-  (add-hook 'org-mode-hook 'org-bullets-mode)
+  (require 'org-modern)
+  (add-hook 'org-mode-hook #'org-modern-mode)
 #+END_SRC
 
 *** rss
