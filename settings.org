@@ -1090,7 +1090,19 @@ Easily copy from one dired buffer to another
 
   (setq tramp-copy-size-limit (* 5 1024 1024))  ; 5MB threshold for external copying
   (setq tramp-inline-compress-start-size (* 2 1024 1024))  ; Compress files > 2MB
-  ;; (setq tramp-rsync-program "/opt/homebrew/bin/rsync")
+  (defun jc/tramp-toggle-default-method ()
+    "Toggle `tramp-default-method' between \"rsync\" and \"ssh\"."
+    (interactive)
+    (setq tramp-default-method
+          (if (string= tramp-default-method "ssh")
+              "rsync"
+            "ssh"))
+    (message "TRAMP default method: %s" tramp-default-method))
+  (if (eq system-type 'darwin)
+      (setq tramp-rsync-program
+            (or (executable-find "/opt/homebrew/bin/rsync")
+                (executable-find "/usr/local/bin/rsync")))
+    (setq tramp-rsync-program (executable-find "rsync")))
   ;; (setq tramp-default-method "rsync")
   (setq tramp-default-method "ssh")
 #+END_SRC
