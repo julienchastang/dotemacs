@@ -575,11 +575,6 @@ emacs org mode.
 | yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
-| python                        | Python mode for emacs                         | [[python][python]]     |
-| ipython                       | ipython for emacs                             | [[python][python]]     |
-| jedi                          | Python auto-completion for Emacs              | [[python][python]]     |
-| elpy                          | Emacs Python Development Environment          | [[python][python]]     |
-| jupyter                       | emacs jupyter                                 | [[python][python]]     |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
@@ -916,72 +911,6 @@ git flavored markdown
   (add-hook 'yaml-mode-hook
         '(lambda ()
           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-#+END_SRC
-
-*** Python
-<<python>>
-
-If you see this message
-
-#+BEGIN_EXAMPLE :eval no
-  Searching for program: No such file or directory, python
-#+END_EXAMPLE
-
-You may have to
-
-#+begin_example sh :eval no
-  cd /opt/homebrew/bin/
-  sudo ln -sf python3 python3.10
-#+end_example
-
-Virtual env stuff
-
-#+BEGIN_SRC emacs-lisp
-  (setenv "WORKON_HOME" (concat (getenv "HOME") "/.emacs.d/elpy"))
-  (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1")
-#+END_SRC
-
-elpy
-
-#+BEGIN_SRC emacs-lisp
-  (elpy-enable)
-  (setq elpy-rpc-python-command (cond
-                                ((eq system-type 'darwin) "/opt/homebrew/bin/python")  ; macOS
-                                ((eq system-type 'gnu/linux) "/usr/bin/python3")       ; GNU/Linux
-                                (t "/usr/bin/python3")))
-  (setq python-shell-interpreter "python" python-shell-interpreter-args "-i")
-#+END_SRC
-
-jupyter
-
-#+BEGIN_SRC emacs-lisp
-  (require 'jupyter)
-#+END_SRC
-
-Fill column indicator
-
-#+BEGIN_SRC emacs-lisp
-  ;; fill column indicator for python files
-  (add-hook 'python-mode-hook #'display-fill-column-indicator-mode)
-#+END_SRC
-
-jedi
-
-#+BEGIN_SRC emacs-lisp
-  ;; installing jedi server http://tkf.github.io/emacs-jedi/latest/#pyinstall
-  (let ((j
-          (remove-if-not (lambda (x) (string-match "jedi-core" x)) load-path)))
-    (when j
-      (setq jedi:server-command (list (concat (car j) "/jediepcserver.py")))))
-
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-#+END_SRC
-
-Electric Pair
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'python-mode-hook 'electric-pair-mode)
 #+END_SRC
 
 *** org-present
