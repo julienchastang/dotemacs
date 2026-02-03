@@ -567,7 +567,7 @@ emacs org mode.
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
-| fill-column-indicator         | 80 column rule                                | [[fci][fci]]        |
+| display-fill-column-indicator | Built-in 80 column rule                       | [[fci][fci]]        |
 | spaceline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
 | rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]      |
@@ -837,23 +837,10 @@ Magit stuff
 *** Fill Column Indicator
 <<fci>>
 
-Turn off fci mode for now.
+Turn off fill column indicator for now.
 
 #+BEGIN_SRC emacs-lisp
-  ;; (add-hook 'org-mode-hook 'fci-mode)
-#+END_SRC
-
-https://github.com/alpaker/Fill-Column-Indicator/issues/45
-
-#+BEGIN_SRC emacs-lisp
-  (defun fci-mode-override-advice (&rest args))
-
-  (advice-add 'org-html-fontify-code :around
-              (lambda (fun &rest args)
-                (advice-add 'fci-mode :override #'fci-mode-override-advice)
-                (let ((result  (apply fun args)))
-                  (advice-remove 'fci-mode #'fci-mode-override-advice)
-                  result)))
+  ;; (add-hook 'org-mode-hook #'display-fill-column-indicator-mode)
 #+END_SRC
 
 *** Mode line
@@ -975,7 +962,7 @@ Fill column indicator
 
 #+BEGIN_SRC emacs-lisp
   ;; fill column indicator for python files
-  (add-hook 'python-mode-hook 'fci-mode)
+  (add-hook 'python-mode-hook #'display-fill-column-indicator-mode)
 #+END_SRC
 
 jedi
