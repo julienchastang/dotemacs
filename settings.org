@@ -554,10 +554,10 @@ emacs org mode.
 | package                       | description                                   | anchors    |
 |-------------------------------+-----------------------------------------------+------------|
 | exec-path-from-shell          | env vars such as $PATH from the shell         |            |
-| helm                          | helm completion engine                        | [[helm][helm]]       |
-| helm-org-rifle                | Rifle through your Org files                  | [[helm][helm]]       |
+| vertico                       | Minibuffer completion UI                      | [[completion][completion]] |
+| orderless                     | Flexible completion matching style            | [[completion][completion]] |
+| consult                       | Enhanced completion commands                  | [[completion][completion]] |
 | projectile                    | Project navigation and management library     | [[projectile][projectile]] |
-| helm-projectile               | Projectile helm integration                   | [[projectile][projectile]] |
 | ace-jump-mode                 | ace-jump-mode                                 | [[ace][ace]]        |
 | rw-hunspell                   | spelling                                      | [[spelling][spelling]]   |
 | rw-ispell                     | spelling                                      | [[spelling][spelling]]   |
@@ -581,7 +581,6 @@ emacs org mode.
 | gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
-| helm-tramp                    | Tramp helm interface for ssh, docker, vagrant | [[tramp][tramp]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
 | org-modern                    | Modern org-mode visuals                       | [[bullets]]    |
 | mermaid-mode                  | Mermaid diagram mode                          |            |
@@ -591,7 +590,6 @@ emacs org mode.
 |--------------------+-------------------------------------+--------------|
 | package            | description                         | anchors      |
 |--------------------+-------------------------------------+--------------|
-| helm-org           | org mode jump to heading            | [[helm-org]]     |
 | direx              | Simple tree directory explorer      | [[dired][dired]]        |
 | ox-gfm             | Github Flavored Markdown            | [[markdown][markdown]]     |
 | multiple-cursors   | Multiple cursors for Emacs          | [[multi-cursor][multi-cursor]] |
@@ -687,7 +685,6 @@ ibuffer
            ("html" (mode . mhtml-mode))
            ("xml" (mode . nxml-mode))
            ("dired" (mode . dired-mode))
-           ("helm" (mode . helm-major-mode))
            ("Magit" (name . "^magit")))))
 
   (add-hook 'ibuffer-mode-hook
@@ -695,27 +692,40 @@ ibuffer
                (ibuffer-switch-to-saved-filter-groups "home")))
 #+END_SRC
 
-*** Helm
-<<helm>>
+*** Completion
+<<completion>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'helm)
-  (helm-mode 1)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  ;; (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+  (require 'vertico)
+  (require 'vertico-directory)
+  (vertico-mode 1)
+  (setq vertico-cycle t)
+  (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
+  (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-char)
+  (define-key vertico-map (kbd "M-DEL") #'vertico-directory-delete-word)
 
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-limit 75)
+  (require 'orderless)
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles basic partial-completion))))
+  (setq completion-ignore-case t
+        read-buffer-completion-ignore-case t
+        read-file-name-completion-ignore-case t)
+
+  (require 'consult)
+  (global-set-key (kbd "C-x b") #'consult-buffer)
+  (global-set-key (kbd "M-y") #'consult-yank-pop)
+  (global-set-key (kbd "M-g g") #'consult-goto-line)
+  (global-set-key (kbd "M-s l") #'consult-line)
+  (global-set-key (kbd "M-s r") #'consult-ripgrep)
+
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+  (advice-add 'register-preview :override #'consult-register-window)
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
 #+END_SRC
 
-helm-org-rifle
-
-#+BEGIN_SRC emacs-lisp
-  (require 'helm-org-rifle)
-#+END_SRC
 *** Projectile
 <<projectile>>
 
@@ -789,28 +799,19 @@ make sure to =brew install hunspell=.
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/git/yasnippet-snippets/")
   (yas-global-mode +1)
 
-  ;; https://www.emacswiki.org/emacs/Yasnippet#toc4
-  (defun jc/yas-helm-prompt (prompt choices &optional display-fn)
-    "Use helm to select a snippet. Put this into `yas-prompt-functions.'"
+  ;; Use built-in completion for snippet selection.
+  (defun jc/yas-completing-read-prompt (prompt choices &optional display-fn)
+    "Use `completing-read' to select a snippet for `yas-prompt-functions'."
     (interactive)
     (setq display-fn (or display-fn 'identity))
-    (if (require 'helm)
-        (let (tmpsource cands result rmap)
-          (setq cands (mapcar (lambda (x) (funcall display-fn x)) choices))
-          (setq rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
-          (setq tmpsource
-                (list
-                 (cons 'name prompt)
-                 (cons 'candidates cands)
-                 '(action . (("Expand" . (lambda (selection) selection))))
-                 ))
-          (setq result (helm-other-buffer '(tmpsource) "*helm-select-yasnippet"))
-          (if (null result)
-              (signal 'quit "user quit!")
-            (cdr (assoc result rmap))))
-      nil))
+    (let* ((cands (mapcar (lambda (x) (funcall display-fn x)) choices))
+           (rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
+           (result (completing-read prompt cands nil t)))
+      (if (string-empty-p result)
+          (signal 'quit "user quit!")
+        (cdr (assoc result rmap)))))
 
-  (add-to-list 'yas-prompt-functions 'jc/yas-helm-prompt)
+  (add-to-list 'yas-prompt-functions 'jc/yas-completing-read-prompt)
 #+END_SRC
 
 *** git
@@ -1070,13 +1071,16 @@ Easily copy from one dired buffer to another
 <<tramp>>
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c s") 'helm-tramp)
-  (add-hook 'helm-tramp-pre-command-hook
-            '(lambda ()
-             (projectile-mode 0)))
-  (add-hook 'helm-tramp-quit-hook
-            '(lambda ()
-             (projectile-mode 1)))
+  (defun jc/tramp-find-file ()
+    "Open a remote file using the current `tramp-default-method'."
+    (interactive)
+    (let ((prefix (format "/%s:" tramp-default-method)))
+      (find-file
+       (read-file-name
+        (format "TRAMP (%s) path: " tramp-default-method)
+        prefix))))
+
+  (global-set-key (kbd "C-c s") #'jc/tramp-find-file)
 
   (defun disable-remote-file-backups-autosaves-locks ()
     "Disable backups, auto-save, and lock files for remote files."
@@ -1113,12 +1117,11 @@ Easily copy from one dired buffer to another
     (require 'ox-hugo))
 #+END_SRC
 
-*** helm-org
-<<helm-org>>
+*** Org heading search
+<<org-heading-search>>
 
 #+BEGIN_SRC emacs-lisp
-  (require 'helm-org)
-  (global-set-key (kbd "C-c o") 'helm-org-agenda-files-headings)
+  (global-set-key (kbd "C-c o") 'org-occur-in-agenda-files)
 #+END_SRC
 
 *** org-modern
