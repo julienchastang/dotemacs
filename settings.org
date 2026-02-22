@@ -85,6 +85,29 @@ Also
   mkdir -p ~/.emacs.d/wget/infoplus/ && wget -O ~/.emacs.d/wget/infoplus/info+.el https://raw.githubusercontent.com/emacsmirror/info-plus/master/info%2B.el
 #+end_src
 
+*** Early-init.el
+
+For a faster startup, add this minimal snippet to =~/.emacs.d/early-init.el=.
+
+#+begin_src sh :tangle no :eval no
+  cat << EOF > ~/.emacs.d/early-init.el
+  ;; Improve startup responsiveness during initialization.
+  (setq gc-cons-threshold most-positive-fixnum)
+  (setq gc-cons-percentage 0.6)
+
+  (defvar jc/default-file-name-handler-alist file-name-handler-alist)
+  (setq file-name-handler-alist nil)
+
+  (add-hook
+   'emacs-startup-hook
+   (lambda ()
+     ;; Restore sensible defaults once startup is complete.
+     (setq gc-cons-threshold (* 64 1024 1024))
+     (setq gc-cons-percentage 0.1)
+     (setq file-name-handler-alist jc/default-file-name-handler-alist)))
+  EOF
+#+END_SRC
+
 *** Init.el
 
 Next, in order to have this file be the emacs initialization file, put the following
@@ -92,37 +115,15 @@ snippet in your =~/.emacs.d/init.el= file.
 
 #+begin_src sh :tangle no :eval no
   cat << EOF > ~/.emacs.d/init.el
-  ;; optionally remove default org install
-  ;; https://lists.gnu.org/archive/html/emacs-orgmode/2013-09/msg00178.html
-  ;;
-  ;; if you are having trouble w/ org-mode, remember to enter the org-mode repo
-  ;; and run make autoloads
-
-  (setq load-path
-        (delq nil
-              (mapcar
-               (function (lambda (p)
-                           (unless (string-match "lisp\\(/packages\\)?/org$" p)
-                             p)))
-               load-path)))
-
-  ;;remove property list to defeat cus-load and remove autoloads
-  (mapatoms (function
-             (lambda (s)
-               (let ((sn (symbol-name s)))
-                 (when (string-match "^\\(org\\|ob\\|ox\\)\\(-.*\\)?$" sn)
-                   (setplist s nil)
-                   (when (eq 'autoload (car-safe s))
-                     (unintern s)))))))
-
   (add-to-list 'load-path
-               (expand-file-name "~/.emacs.d/git/org-contrib/lisp"))
-
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/git/org-mode.git/lisp"))
+               (expand-file-name "git/org-contrib/lisp" user-emacs-directory))
+  (add-to-list 'load-path
+               (expand-file-name "git/org-mode.git/lisp" user-emacs-directory))
 
   (require 'org)
   (require 'ob-tangle)
-  (org-babel-load-file "~/.emacs.d/git/dotemacs/settings.org")
+  (org-babel-load-file
+   (expand-file-name "git/dotemacs/settings.org" user-emacs-directory))
   (put 'dired-find-alternate-file 'disabled nil)
   (put 'erase-buffer 'disabled nil)
   EOF
@@ -534,7 +535,6 @@ First define the package archives and where they live.
   ;; define some package archives
   (add-to-list 'package-archives
      '("melpa-stable" . "https://stable.melpa.org/packages/"))
-  (package-initialize)
 
   ;; Message how long it took to load everything (minus packages)
   (let ((elapsed (float-time (time-subtract (current-time)
