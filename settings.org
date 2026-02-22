@@ -535,7 +535,6 @@ First define the package archives and where they live.
   (add-to-list 'package-archives
      '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (package-initialize)
-  (package-refresh-contents)
 
   ;; Message how long it took to load everything (minus packages)
   (let ((elapsed (float-time (time-subtract (current-time)
@@ -614,11 +613,20 @@ Convenience function
 
 #+BEGIN_SRC emacs-lisp
   (defun jc/install-packages (pack-list)
+    "Install packages in PACK-LIST, refreshing archives only if needed."
+    (let ((did-refresh nil))
     (dolist (pack pack-list)
       (unless (package-installed-p pack)
-        (condition-case err
+        (condition-case _
             (package-install pack)
-          (error (princ (format "Could not install package: %s" pack)))))))
+          (error
+           (unless did-refresh
+             (package-refresh-contents)
+             (setq did-refresh t))
+           (condition-case _
+               (package-install pack)
+             (error
+              (princ (format "Could not install package: %s" pack))))))))))
 #+END_SRC
 
 Download the packages we need.
@@ -636,7 +644,6 @@ Now handle unstable packages.
 
   (add-to-list 'package-archives
      '("melpa-unstable" . "https://melpa.org/packages/"))
-  (package-refresh-contents)
 
   (jc/install-packages my-package-list-unstable)
 #+END_SRC
