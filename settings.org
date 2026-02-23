@@ -43,17 +43,17 @@ Set up what you'll need for your =~/.emacs.d/init.el= to work.
 You'll first have to grab some stuff:
 
 #+tblname: git-repos
-|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
-| package                                 | Location                                          | description           | anchors     |
-|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
-| ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate        | Buffer rotate         | [[rotate][rotate]]      |
-| ~/.emacs.d/git/org-contrib/             | https://git.sr.ht/~bzg/org-contrib                | org contrib           |             |
-| ~/.emacs.d/git/org-mode.git/            | git://git.savannah.gnu.org/emacs/org-mode.git     | org                   |             |
-| ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present            | org presentation mode | [[org-present]] |
-| ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss             | org rss  mode         | [[rss][rss]]         |
-| ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el | Title capitalization  | [[writing][writing]]     |
-| ~/.emacs.d/git/gptel/                   | https://github.com/karthink/gptel                 | gptel                 | [[llm][llm]]         |
-|-----------------------------------------+---------------------------------------------------+-----------------------+-------------|
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
+| package                                 | Location                                            | description           | anchors     |
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
+| ~/.emacs.d/git/emacs-rotate/            | https://github.com/daichirata/emacs-rotate          | Buffer rotate         | [[rotate][rotate]]      |
+| ~/.emacs.d/git/org-contrib/             | https://git.sr.ht/~bzg/org-contrib                  | org contrib           |             |
+| ~/.emacs.d/git/org-mode.git/            | https://git.savannah.gnu.org/git/emacs/org-mode.git | org                   |             |
+| ~/.emacs.d/git/org-present/             | https://github.com/rlister/org-present              | org presentation mode | [[org-present]] |
+| ~/.emacs.d/git/ox-rss/                  | https://github.com/emacsmirror/ox-rss               | org rss  mode         | [[rss][rss]]         |
+| ~/.emacs.d/git/title-capitalization.el/ | https://github.com/novoid/title-capitalization.el   | Title capitalization  | [[writing][writing]]     |
+| ~/.emacs.d/git/gptel/                   | https://github.com/karthink/gptel                   | gptel                 | [[llm][llm]]         |
+|-----------------------------------------+-----------------------------------------------------+-----------------------+-------------|
 
 #+begin_src emacs-lisp :tangle no :eval no :var repos=git-repos :hlines no
   (defun jc/clone-repositories-if-needed (repo-list)
@@ -85,6 +85,27 @@ Also
   mkdir -p ~/.emacs.d/wget/infoplus/ && wget -O ~/.emacs.d/wget/infoplus/info+.el https://raw.githubusercontent.com/emacsmirror/info-plus/master/info%2B.el
 #+end_src
 
+*** Init.el
+
+Next, in order to have this file be the emacs initialization file, put the following
+snippet in your =~/.emacs.d/init.el= file.
+
+#+begin_src sh :tangle no :eval no
+  cat << EOF > ~/.emacs.d/init.el
+  (add-to-list 'load-path
+               (expand-file-name "git/org-contrib/lisp" user-emacs-directory))
+  (add-to-list 'load-path
+               (expand-file-name "git/org-mode.git/lisp" user-emacs-directory))
+
+  (require 'org)
+  (require 'ob-tangle)
+  (org-babel-load-file
+   (expand-file-name "git/dotemacs/settings.org" user-emacs-directory))
+  (put 'dired-find-alternate-file 'disabled nil)
+  (put 'erase-buffer 'disabled nil)
+  EOF
+  #+END_SRC
+
 *** Early-init.el
 
 For a faster startup, add this minimal snippet to =~/.emacs.d/early-init.el=.
@@ -107,27 +128,6 @@ For a faster startup, add this minimal snippet to =~/.emacs.d/early-init.el=.
      (setq file-name-handler-alist jc/default-file-name-handler-alist)))
   EOF
 #+END_SRC
-
-*** Init.el
-
-Next, in order to have this file be the emacs initialization file, put the following
-snippet in your =~/.emacs.d/init.el= file.
-
-#+begin_src sh :tangle no :eval no
-  cat << EOF > ~/.emacs.d/init.el
-  (add-to-list 'load-path
-               (expand-file-name "git/org-contrib/lisp" user-emacs-directory))
-  (add-to-list 'load-path
-               (expand-file-name "git/org-mode.git/lisp" user-emacs-directory))
-
-  (require 'org)
-  (require 'ob-tangle)
-  (org-babel-load-file
-   (expand-file-name "git/dotemacs/settings.org" user-emacs-directory))
-  (put 'dired-find-alternate-file 'disabled nil)
-  (put 'erase-buffer 'disabled nil)
-  EOF
-  #+END_SRC
 
 ** Info on swapping ctrl and cap locks
 
@@ -237,13 +237,7 @@ UTF-8
 y or n instead of yes or no
 
 #+BEGIN_SRC emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
-
-Turn on syntax highlighting for all buffers
-
-#+BEGIN_SRC emacs-lisp
-  (global-font-lock-mode t)
+  (setq use-short-answers t)
 #+END_SRC
 
 Turn off irrelevant stuff.
@@ -253,8 +247,8 @@ Turn off irrelevant stuff.
       (menu-bar-mode  -1))
   (if (fboundp 'tool-bar-mode)
       (tool-bar-mode  -1))
-  (if (fboundp 'set-scroll-bar-mode)
-      (set-scroll-bar-mode 'nil))
+  (if (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))
   (when (require 'mwheel nil 'noerror)
     (mouse-wheel-mode t))
   (tooltip-mode -1)
@@ -651,10 +645,8 @@ Now handle unstable packages.
 Path sanity
 
 #+BEGIN_SRC emacs-lisp
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
-
-  (when (daemonp)
+  (when (or (memq window-system '(mac ns x))
+            (daemonp))
     (exec-path-from-shell-initialize))
 #+END_SRC
 
@@ -1016,8 +1008,13 @@ eldoc for emacs lisp development
 direx
 
 #+BEGIN_SRC emacs-lisp
-  (require 'direx)
-  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
+  ;; Work around stale/non-generic definitions that can break direx on load.
+  ;; (when (and (fboundp 'direx:tree-name)
+  ;;            (null (get 'direx:tree-name 'cl--generic)))
+  ;;   (fmakunbound 'direx:tree-name))
+
+  ;; (require 'direx)
+  ;; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
 #+END_SRC
 
 Allow dired to muck with the permissions.
@@ -1091,7 +1088,7 @@ Easily copy from one dired buffer to another
 
   (defun disable-remote-file-backups-autosaves-locks ()
     "Disable backups, auto-save, and lock files for remote files."
-    (when (tramp-tramp-file-p (buffer-file-name))
+    (when (and buffer-file-name (file-remote-p buffer-file-name))
       (setq-local make-backup-files nil)
       (setq-local auto-save-default nil)
       (setq-local create-lockfiles nil)))
