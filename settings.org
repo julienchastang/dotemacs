@@ -197,8 +197,20 @@ On Linux, may have to do something like this before installation:
 #+end_example
 
 #+BEGIN_SRC emacs-lisp
-  ;; Inconsolata can be installed through a package manager
-  (set-frame-font "iosevka 16" nil t)
+  (defvar jc/default-font "iosevka 16")
+
+  ;; Make the preferred font part of frame defaults.
+  (add-to-list 'default-frame-alist `(font . ,jc/default-font))
+
+  (defun jc/apply-default-font (&optional frame)
+    "Apply `jc/default-font' to FRAME (or selected frame)."
+    (let ((frame (or frame (selected-frame))))
+      (when (display-graphic-p frame)
+        (set-face-attribute 'default frame :font jc/default-font))))
+
+  ;; Ensure the initial GUI frame and all later frames get the same font.
+  (add-hook 'after-init-hook #'jc/apply-default-font)
+  (add-hook 'after-make-frame-functions #'jc/apply-default-font)
 #+END_SRC
 
 Deal with additional paths
