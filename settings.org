@@ -568,6 +568,11 @@ emacs org mode.
 | rw-ispell                     | spelling                                      | [[spelling][spelling]]   |
 | rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]   |
 | flycheck                      | on-the-fly syntax checking                    |            |
+| company                       | Completion framework for buffers              | [[python][python]]     |
+| lsp-mode                      | Language Server Protocol client               | [[python][python]]     |
+| lsp-pyright                   | Pyright LSP client for Python                 | [[python][python]]     |
+| lsp-ui                        | LSP UI extras                                 | [[python][python]]     |
+| direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
@@ -736,6 +741,76 @@ ibuffer
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
 #+END_SRC
+
+*** Python
+<<python>>
+
+1. Create a project venv (if it doesn’t exist): ~python3 -m venv .env~.
+2. Create a ~.envrc~ in the project root and add ~source .env/bin/activate~.
+3. ~source .env/bin/activate~ and the run ~pip install -r requirements.txt~.
+4. Run ~direnv allow~ once in that directory.
+5. Open a ~.py~ file in Emacs and run ~M-x lsp-restart-workspace~ if needed.
+
+After that, Emacs should use the project's Python for LSP, completions, and imports.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'lsp-mode)
+  (require 'lsp-pyright)
+  (require 'lsp-ui)
+  (require 'company)
+
+  ;; Keep LSP keybindings under a predictable prefix.
+  (setq lsp-keymap-prefix "C-c l")
+
+  ;; Shut down LSP servers when their buffers are closed.
+  (setq lsp-keep-workspace-alive nil)
+
+  ;; Prefer one LSP server per Python project.
+  (setq lsp-pyright-multi-root nil)
+
+  ;; Completion tweaks for LSP + company.
+  (setq lsp-completion-provider :capf)
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 1)
+  (setq company-selection-wrap-around t)
+  (setq company-tooltip-align-annotations t)
+
+  ;; LSP UI tuning.
+  (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-delay 0.5)
+  (setq lsp-ui-doc-position 'at-point)
+  (setq lsp-ui-sideline-enable t)
+  (setq lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-sideline-show-diagnostics t)
+
+  ;; Basic Python IDE wiring.
+  (add-hook 'python-mode-hook #'lsp-deferred)
+  (add-hook 'python-mode-hook #'lsp-ui-mode)
+  (add-hook 'python-mode-hook #'company-mode)
+#+END_SRC
+
+Direnv
+
+#+BEGIN_SRC emacs-lisp
+  (require 'direnv)
+  (direnv-mode)
+#+END_SRC
+
+The `.envrc` file is a per-project environment definition. When you enter a
+project directory, direnv reads this file and exports its variables into your
+shell (and thus into Emacs), so tools like LSP and `run-python` pick up the
+correct interpreter and PATH without manual activation.
+
+Example `.envrc` for a Python project:
+
+#+BEGIN_SRC sh :tangle no
+  cat << 'EOF' > .envrc
+  source .env/bin/activate
+  EOF
+#+END_SRC
+
+After creating or updating `.envrc`, run `direnv allow` once in that
+project so direnv will trust and load the file.
 
 *** Projectile
 <<projectile>>
