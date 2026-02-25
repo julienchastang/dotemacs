@@ -940,6 +940,7 @@ Spaceline.
 <<paren>>
 
 #+BEGIN_SRC emacs-lisp
+  (electric-pair-mode 1)
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'ielm-mode-hook 'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
