@@ -745,9 +745,9 @@ ibuffer
 *** Python
 <<python>>
 
-1. Create a project venv (if it doesn’t exist): ~python3 -m venv .env~.
-2. Create a ~.envrc~ in the project root and add ~source .env/bin/activate~.
-3. ~source .env/bin/activate~ and the run ~pip install -r requirements.txt~.
+1. Create a project venv (if it doesn’t exist): ~python3 -m venv .venv~.
+2. Create a ~.envrc~ in the project root and add ~source .venv/bin/activate~.
+3. ~source .venv/bin/activate~ and the run ~pip install -r requirements.txt~.
 4. Run ~direnv allow~ once in that directory.
 5. Open a ~.py~ file in Emacs and run ~M-x lsp-restart-workspace~ if needed.
 
