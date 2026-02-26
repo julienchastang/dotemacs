@@ -573,7 +573,8 @@ emacs org mode.
 | lsp-pyright                   | Pyright LSP client for Python                 | [[python][python]]     |
 | lsp-ui                        | LSP UI extras                                 | [[python][python]]     |
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
-| python-black                  | Format Python code with Black                 | [[python][python]]     |
+| flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
+| ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
@@ -749,7 +750,7 @@ ibuffer
 1. Create a project venv (if it doesn’t exist): ~python3 -m venv .venv~.
 2. Create a ~.envrc~ in the project root and add ~source .venv/bin/activate~.
 3. ~source .venv/bin/activate~ and then run ~pip install -r requirements.txt~.
-4. Install flake8 in that same environment: ~pip install flake8~.
+4. Install Ruff in that same environment: ~pip install ruff~.
 5. Run ~direnv allow~ once in that directory.
 6. Open a ~.py~ file in Emacs and run ~M-x lsp-restart-workspace~ if needed.
 
@@ -760,8 +761,8 @@ After that, Emacs should use the project's Python for LSP, completions, and impo
   (require 'lsp-pyright)
   (require 'lsp-ui)
   (require 'company)
-  (require 'flycheck)
-  (require 'python-black)
+  (require 'flymake-ruff)
+  (require 'ruff-format)
 
   ;; Keep LSP keybindings under a predictable prefix.
   (setq lsp-keymap-prefix "C-c l")
@@ -771,6 +772,9 @@ After that, Emacs should use the project's Python for LSP, completions, and impo
 
   ;; Prefer one LSP server per Python project.
   (setq lsp-pyright-multi-root nil)
+
+  ;; Use Flymake diagnostics so Ruff + LSP diagnostics share one UI.
+  (setq lsp-diagnostics-provider :flymake)
 
   ;; Completion tweaks for LSP + company.
   (setq lsp-completion-provider :capf)
@@ -791,10 +795,10 @@ After that, Emacs should use the project's Python for LSP, completions, and impo
   (add-hook 'python-mode-hook #'lsp-deferred)
   (add-hook 'python-mode-hook #'lsp-ui-mode)
   (add-hook 'python-mode-hook #'company-mode)
-  ;; Use Flycheck in Python buffers (e.g., with flake8 from project venv).
-  (add-hook 'python-mode-hook #'flycheck-mode)
-  ;; Enable format-on-save only when the project appears to use Black.
-  (add-hook 'python-mode-hook #'python-black-on-save-mode-enable-dwim)
+  ;; Enable Ruff diagnostics and formatting in Python buffers.
+  (add-hook 'python-mode-hook #'flymake-mode)
+  (add-hook 'python-mode-hook #'flymake-ruff-load)
+  (add-hook 'python-mode-hook #'ruff-format-on-save-mode)
 #+END_SRC
 
 Direnv
