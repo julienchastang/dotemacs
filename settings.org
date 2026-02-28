@@ -575,6 +575,7 @@ emacs org mode.
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
 | flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
 | ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
+| imenu-list                    | Side-buffer code outline                      | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
@@ -762,6 +763,7 @@ After that, Emacs should use the project's Python for LSP, completions, and impo
 #+BEGIN_SRC emacs-lisp
   (require 'eglot)
   (require 'company)
+  (require 'imenu-list)
   (require 'ruff-format)
 
   ;; Prefer CAPF-backed completion in Python buffers.
@@ -795,6 +797,13 @@ After that, Emacs should use the project's Python for LSP, completions, and impo
     (ruff-format-on-save-mode 1))
 
   (add-hook 'python-base-mode-hook #'jc/python-eglot-setup)
+
+  ;; Slim side outline of symbols in the current buffer.
+  (setq imenu-list-size 28)
+  (setq imenu-list-position 'right)
+  (setq imenu-list-focus-after-activation nil)
+  (setq imenu-list-auto-resize t)
+  (global-set-key (kbd "C-c i") #'imenu-list-smart-toggle)
 
   ;; Handy Eglot actions.
   (with-eval-after-load 'eglot
