@@ -750,55 +750,57 @@ ibuffer
 1. Create a project venv (if it doesn’t exist): ~python3 -m venv .venv~.
 2. Create a ~.envrc~ in the project root and add ~source .venv/bin/activate~.
 3. ~source .venv/bin/activate~ and then run ~pip install -r requirements.txt~.
-4. Install Ruff in that same environment: ~pip install ruff~.
+4. Install language tools in that same environment:
+   - ~pip install basedpyright~ (or ~pyright~)
+   - optional fallback: ~pip install python-lsp-server~
+   - ~pip install ruff~
 5. Run ~direnv allow~ once in that directory.
-6. Open a ~.py~ file in Emacs and run ~M-x lsp-restart-workspace~ if needed.
+6. Open a ~.py~ file in Emacs and run ~M-x eglot-reconnect~ if needed.
 
 After that, Emacs should use the project's Python for LSP, completions, and imports.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'lsp-mode)
-  (require 'lsp-pyright)
-  (require 'lsp-ui)
+  (require 'eglot)
   (require 'company)
-  (require 'flymake-ruff)
   (require 'ruff-format)
 
-  ;; Keep LSP keybindings under a predictable prefix.
-  (setq lsp-keymap-prefix "C-c l")
-
-  ;; Shut down LSP servers when their buffers are closed.
-  (setq lsp-keep-workspace-alive nil)
-
-  ;; Prefer one LSP server per Python project.
-  (setq lsp-pyright-multi-root nil)
-
-  ;; Use Flymake diagnostics so Ruff + LSP diagnostics share one UI.
-  (setq lsp-diagnostics-provider :flymake)
-
-  ;; Completion tweaks for LSP + company.
-  (setq lsp-completion-provider :capf)
+  ;; Prefer CAPF-backed completion in Python buffers.
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)
 
-  ;; LSP UI tuning.
-  (setq lsp-ui-doc-enable t)
-  (setq lsp-ui-doc-delay 0.5)
-  (setq lsp-ui-doc-position 'at-point)
-  (setq lsp-ui-sideline-enable t)
-  (setq lsp-ui-sideline-show-hover t)
-  (setq lsp-ui-sideline-show-diagnostics t)
+  ;; Shut down Eglot servers when the last managed buffer closes.
+  (setq eglot-autoshutdown t)
 
-  ;; Basic Python IDE wiring.
-  (add-hook 'python-mode-hook #'lsp-deferred)
-  (add-hook 'python-mode-hook #'lsp-ui-mode)
-  (add-hook 'python-mode-hook #'company-mode)
-  ;; Enable Ruff diagnostics and formatting in Python buffers.
-  (add-hook 'python-mode-hook #'flymake-mode)
-  (add-hook 'python-mode-hook #'flymake-ruff-load)
-  (add-hook 'python-mode-hook #'ruff-format-on-save-mode)
+  ;; Choose Python language server in priority order.
+  ;; Keep global setup minimal; prefer project-specific options in
+  ;; `.dir-locals.el` via `eglot-workspace-configuration`.
+  (add-to-list 'eglot-server-programs
+               `(python-mode . ,(eglot-alternatives
+                                 '(("basedpyright-langserver" "--stdio")
+                                   ("pyright-langserver" "--stdio")
+                                   ("pylsp")))))
+  (add-to-list 'eglot-server-programs
+               `(python-ts-mode . ,(eglot-alternatives
+                                    '(("basedpyright-langserver" "--stdio")
+                                      ("pyright-langserver" "--stdio")
+                                      ("pylsp")))))
+
+  ;; Python IDE wiring for both classic and tree-sitter modes.
+  (defun jc/python-eglot-setup ()
+    "Enable Eglot, completion, and formatting in Python buffers."
+    (eglot-ensure)
+    (company-mode 1)
+    (ruff-format-on-save-mode 1))
+
+  (add-hook 'python-base-mode-hook #'jc/python-eglot-setup)
+
+  ;; Handy Eglot actions.
+  (with-eval-after-load 'eglot
+    (define-key eglot-mode-map (kbd "C-c C-r") #'eglot-rename)
+    (define-key eglot-mode-map (kbd "C-c C-f") #'eglot-format-buffer)
+    (define-key eglot-mode-map (kbd "C-c C-o") #'eglot-code-action-organize-imports))
 #+END_SRC
 
 Direnv
