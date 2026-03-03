@@ -905,22 +905,22 @@ make sure to =brew install hunspell=.
 
 #+BEGIN_SRC emacs-lisp
   (require 'yasnippet)
-  (add-to-list 'yas-snippet-dirs "~/.emacs.d/git/yasnippet-snippets/")
-  (yas-global-mode +1)
+  (require 'yasnippet-snippets nil t)
 
-  ;; Use built-in completion for snippet selection.
-  (defun jc/yas-completing-read-prompt (prompt choices &optional display-fn)
-    "Use `completing-read' to select a snippet for `yas-prompt-functions'."
-    (interactive)
-    (setq display-fn (or display-fn 'identity))
-    (let* ((cands (mapcar (lambda (x) (funcall display-fn x)) choices))
-           (rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
-           (result (completing-read prompt cands nil t)))
-      (if (string-empty-p result)
-          (signal 'quit "user quit!")
-        (cdr (assoc result rmap)))))
+  ;; Use minibuffer completion (Vertico/Orderless via `completing-read`).
+  (setq yas-prompt-functions '(yas-completing-prompt yas-no-prompt))
 
-  (add-to-list 'yas-prompt-functions 'jc/yas-completing-read-prompt)
+  ;; Keep snippets in a standard local directory.
+  (setq yas-snippet-dirs (list (expand-file-name "snippets" user-emacs-directory)))
+  (setq yas-triggers-in-field t
+        yas-wrap-around-region t)
+
+  (yas-global-mode 1)
+
+  ;; Handy snippet commands.
+  (global-set-key (kbd "C-c y i") #'yas-insert-snippet)
+  (global-set-key (kbd "C-c y n") #'yas-new-snippet)
+  (global-set-key (kbd "C-c y v") #'yas-visit-snippet-file)
 #+END_SRC
 
 *** git
