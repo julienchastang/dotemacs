@@ -577,6 +577,7 @@ emacs org mode.
 | ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
 | imenu-list                    | Side-buffer code outline                      | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
+| yasnippet-snippets            | Community snippet collection                  | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
