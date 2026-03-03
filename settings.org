@@ -911,8 +911,11 @@ make sure to =brew install hunspell=.
   ;; Use minibuffer completion (Vertico/Orderless via `completing-read`).
   (setq yas-prompt-functions '(yas-completing-prompt yas-no-prompt))
 
-  ;; Keep snippets in a standard local directory.
-  (setq yas-snippet-dirs (list (expand-file-name "snippets" user-emacs-directory)))
+  ;; Use local snippets plus package snippets.
+  (setq yas-snippet-dirs
+        (delq nil
+              (list (expand-file-name "snippets" user-emacs-directory)
+                    (and (boundp 'yasnippet-snippets-dir) yasnippet-snippets-dir))))
   (setq yas-triggers-in-field t
         yas-wrap-around-region t)
 
