@@ -575,6 +575,7 @@ emacs org mode.
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
 | flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
 | ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
+| pytest                        | Run pytest from Emacs buffers                 | [[python][python]]     |
 | imenu-list                    | Side-buffer code outline                      | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | yasnippet-snippets            | Community snippet collection                  | [[yasnippet][yasnippet]]  |
@@ -835,6 +836,26 @@ Example `.envrc` for a Python project:
 
 After creating or updating `.envrc`, run `direnv allow` once in that
 project so direnv will trust and load the file.
+
+Pytest
+
+#+BEGIN_SRC emacs-lisp
+  (require 'pytest)
+
+  ;; Keep output concise but include summary lines for failures/skips.
+  (setq pytest-cmd-flags "-q -ra")
+
+  ;; Helpful pytest.el keybindings in Python buffers.
+  (defun jc/python-pytest-setup ()
+    "Set pytest.el keybindings for Python buffers."
+    (local-set-key (kbd "C-c t t") #'pytest-one)
+    (local-set-key (kbd "C-c t m") #'pytest-module)
+    (local-set-key (kbd "C-c t a") #'pytest-all)
+    (local-set-key (kbd "C-c t l") #'pytest-last-failed)
+    (local-set-key (kbd "C-c t r") #'pytest-again))
+
+  (add-hook 'python-base-mode-hook #'jc/python-pytest-setup)
+#+END_SRC
 
 *** Projectile
 <<projectile>>
