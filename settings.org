@@ -573,9 +573,10 @@ emacs org mode.
 | lsp-pyright                   | Pyright LSP client for Python                 | [[python][python]]     |
 | lsp-ui                        | LSP UI extras                                 | [[python][python]]     |
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
+| envrc                         | .envrc automatically apply                    | [[python][python]]     |
 | flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
 | ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
-| pytest                        | Run pytest from Emacs buffers                 | [[python][python]]     |
+| python-pytest                 | Run pytest from Emacs buffers                 | [[python][python]]     |
 | imenu-list                    | Side-buffer code outline                      | [[python][python]]     |
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | yasnippet-snippets            | Community snippet collection                  | [[yasnippet][yasnippet]]  |
@@ -751,7 +752,7 @@ ibuffer
 <<python>>
 
 1. Create a project venv (if it doesn’t exist): ~python3 -m venv .venv~.
-2. Create a ~.envrc~ in the project root and add ~source .venv/bin/activate~.
+2. Create a ~.envrc~ (see below) in the project root and add ~source .venv/bin/activate~.
 3. ~source .venv/bin/activate~ and then run ~pip install -r requirements.txt~.
 4. Install language tools in that same environment:
    - ~pip install basedpyright~ (or ~pyright~)
@@ -830,7 +831,8 @@ Example `.envrc` for a Python project:
 
 #+BEGIN_SRC sh :tangle no
   cat << 'EOF' > .envrc
-  source .venv/bin/activate
+  export VIRTUAL_ENV="$PWD/.venv"
+  layout python3 "$VIRTUAL_ENV"
   EOF
 #+END_SRC
 
@@ -840,7 +842,7 @@ project so direnv will trust and load the file.
 Pytest
 
 #+BEGIN_SRC emacs-lisp
-  (require 'pytest)
+  (require 'python-pytest)
 
   ;; Keep output concise but include summary lines for failures/skips.
   (setq pytest-cmd-flags "-q -ra")
