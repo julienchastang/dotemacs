@@ -613,6 +613,7 @@ emacs org mode.
 | elfeed-org         | Emacs feed reader for org-mode      | [[elfeed][elfeed]]       |
 | flymake-shellcheck | Flymake handler for bash/sh scripts | [[shell]]        |
 | citeproc           | citeproc                            | [[citation][citation]]     |
+| ruff-format        | Python tool                         | [[python]]       |
 |--------------------+-------------------------------------+--------------|
 
 Packages that are not working or dead, but hope to see alive again.
