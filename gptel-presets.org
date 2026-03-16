@@ -16,14 +16,13 @@
 * Imports
 
 #+begin_src emacs-lisp
-  (dolist (gpt-mod
-           '(gptel
-             gptel-gemini
-             gptel-curl
-             gptel-context
-             gptel-transient
-             gptel-rewrite))
-    (require gpt-mod))
+  (add-to-list 'load-path "~/.emacs.d/git/gptel/")
+
+  (unless (file-exists-p "~/.emacs.d/git/gptel/gptel-autoloads.el")
+    (package-generate-autoloads "gptel" "~/.emacs.d/git/gptel/"))
+
+  (load "~/.emacs.d/git/gptel/gptel-autoloads.el")
+  (require 'gptel)
 #+end_src
 
 * API Keys
