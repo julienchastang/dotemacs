@@ -759,7 +759,7 @@ ibuffer
 4. Install language tools in that same environment:
    - ~pip install basedpyright~ (or ~pyright~)
    - optional fallback: ~pip install python-lsp-server~
-   - ~pip install ruff~
+   - ~pip install ruff pytest httpx~
 5. Run ~direnv allow~ once in that directory.
 6. Open a ~.py~ file in Emacs and run ~M-x eglot-reconnect~ if needed.
 
