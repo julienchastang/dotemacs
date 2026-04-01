@@ -591,6 +591,7 @@ emacs org mode.
 | yaml-mode                     | yaml for emacs                                | [[yaml][yaml]]       |
 | undo-tree                     | undo tree                                     | [[undo][undo]]       |
 | windresize                    | arrow keys resize the window                  |            |
+| dired-sidebar                 | Sidebar for Emacs leveraging Dired            | [[dired][dired]]      |
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
@@ -1155,6 +1156,26 @@ direx
 
   ;; (require 'direx)
   ;; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
+#+END_SRC
+
+dired-sidebar
+
+#+BEGIN_SRC emacs-lisp
+  (require 'dired-sidebar)
+
+  (global-set-key (kbd "C-x C-n") #'dired-sidebar-toggle-sidebar)
+
+  (add-hook 'dired-sidebar-mode-hook
+            (lambda ()
+              (unless (file-remote-p default-directory)
+                (auto-revert-mode 1))))
+
+  ;; Keep the sidebar lightweight and terminal-friendly by default.
+  (setq dired-sidebar-use-term-integration t)
+  (setq dired-sidebar-subtree-line-prefix "__")
+
+  ;; Avoid layout surprises when toggling the sidebar.
+  (push 'rotate-window dired-sidebar-toggle-hidden-commands)
 #+END_SRC
 
 Allow dired to muck with the permissions.
