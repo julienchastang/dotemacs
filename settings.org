@@ -753,16 +753,18 @@ ibuffer
 *** Python
 <<python>>
 
-1. Create a project venv (if it doesn’t exist): ~python3 -m venv .venv~.
-2. Create a ~.envrc~ (see below) in the project root and add ~source .venv/bin/activate~.
-3. ~source .venv/bin/activate~ and then run ~pip install -r requirements.txt~.
-4. Install language tools in that same environment:
-   - ~pip install basedpyright~ (or ~pyright~)
+1. Create a project venv if it does not exist: ~python3 -m venv .venv~.
+2. Create ~.envrc~ (see below) in the project root with ~source .venv/bin/activate~.
+3. Activate it: ~source .venv/bin/activate~.
+4. Install the project:
+   - usual case: ~pip install -e .~
+   - if the project defines dev extras: ~pip install -e ".[dev]"~
+5. Install language/test tools if not already included:
+   - ~pip install basedpyright~
    - optional fallback: ~pip install python-lsp-server~
    - ~pip install ruff pytest httpx~
-5. Run ~direnv allow~ once in that directory.
-6. Open a ~.py~ file in Emacs and run ~M-x eglot-reconnect~ if needed.
-
+6. Run ~direnv allow~ once in that directory.
+7. Open a ~.py~ file in Emacs and run ~M-x eglot-reconnect~ if needed.
 After that, Emacs should use the project's Python for LSP, completions, and imports.
 
 #+BEGIN_SRC emacs-lisp
