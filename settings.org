@@ -615,6 +615,7 @@ emacs org mode.
 | flymake-shellcheck | Flymake handler for bash/sh scripts | [[shell]]        |
 | citeproc           | citeproc                            | [[citation][citation]]     |
 | ruff-format        | Python tool                         | [[python]]       |
+| nushell-mode       | nushell mode                        |              |
 |--------------------+-------------------------------------+--------------|
 
 Packages that are not working or dead, but hope to see alive again.
@@ -863,6 +864,10 @@ Pytest
   (add-hook 'python-base-mode-hook #'jc/python-pytest-setup)
 #+END_SRC
 
+*** nushell
+#+begin_src emacs-lisp
+  (require 'nushell-mode)
+#+end_src
 *** Projectile
 <<projectile>>
 
