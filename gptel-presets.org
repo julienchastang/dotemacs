@@ -36,13 +36,16 @@
 * Define backends
 
 #+begin_src emacs-lisp
-  (gptel-make-openai "Jetstream2"
-    :host "llm.jetstream-cloud.org"
-    :endpoint "/api/chat/completions"
-    :protocol "https"
-    :stream t
-    :key jc/jetstream-api-key
-    :models '(llama-4-scout))
+
+(gptel-make-openai "Jetstream2"
+  :host "llm.jetstream-cloud.org"
+  :endpoint "/api/chat/completions"
+  :protocol "https"
+  :stream t
+  :key jc/jetstream-api-key
+  :models '(llama-4-scout
+            gpt-oss-120b
+            muse-glimmer))
 
   (gptel-make-gemini "Gemini"
     :key jc/gemini-api-key
