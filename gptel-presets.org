@@ -16,6 +16,7 @@
 * Imports
 
 #+begin_src emacs-lisp
+  ;; -*- lexical-binding: t; -*-
   (add-to-list 'load-path "~/.emacs.d/git/gptel/")
 
   (unless (file-exists-p "~/.emacs.d/git/gptel/gptel-autoloads.el")
