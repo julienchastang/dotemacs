@@ -12,3 +12,5 @@ snippets
 .python-environments
 /.projectile
 /settings.el
+/custom.el
+/gptel-presets.el
