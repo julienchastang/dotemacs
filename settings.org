@@ -1325,7 +1325,6 @@ Easily copy from one dired buffer to another
 
 #+begin_src emacs-lisp
   (org-babel-load-file "~/.emacs.d/git/dotemacs/gptel-presets.org")
-  (jc/rebuild-gptel-presets)
 #+end_src
 
 ** Emacs Shell Settings
