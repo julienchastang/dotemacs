@@ -25,30 +25,21 @@
   (require 'gptel)
 #+end_src
 
-* API Keys
-
-#+begin_src emacs-lisp
-  (let ((api-keys-file "~/.emacs-api-keys.el"))
-    (when (file-readable-p api-keys-file)
-      (load-file api-keys-file)))
-#+end_src
-
 * Define backends
 
 #+begin_src emacs-lisp
-
-(gptel-make-openai "Jetstream2"
-  :host "llm.jetstream-cloud.org"
-  :endpoint "/api/chat/completions"
-  :protocol "https"
-  :stream t
-  :key jc/jetstream-api-key
-  :models '(llama-4-scout
-            gpt-oss-120b
-            muse-glimmer))
+  (gptel-make-openai "Jetstream2"
+    :host "llm.jetstream-cloud.org"
+    :endpoint "/api/chat/completions"
+    :protocol "https"
+    :stream t
+    :key #'gptel-api-key-from-auth-source
+    :models '(llama-4-scout
+              gpt-oss-120b
+              muse-glimmer))
 
   (gptel-make-gemini "Gemini"
-    :key jc/gemini-api-key
+    :key #'gptel-api-key-from-auth-source
     :stream t)
 
   (setq gptel-backend (gptel-get-backend "Jetstream2")
