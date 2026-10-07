@@ -35,16 +35,17 @@
     :protocol "https"
     :stream t
     :key #'gptel-api-key-from-auth-source
-    :models '(llama-4-scout
-              gpt-oss-120b
-              muse-glimmer))
+    :models '(gpt-oss-120b
+          gemma-4-31b-it
+          muse-glimmer
+          qwen-3.8-27b))
 
   (gptel-make-gemini "Gemini"
     :key #'gptel-api-key-from-auth-source
     :stream t)
 
   (setq gptel-backend (gptel-get-backend "Jetstream2")
-        gptel-model 'llama-4-scout)
+        gptel-model 'muse-glimmer)
 #+end_src
 
 * Directives
