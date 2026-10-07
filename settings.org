@@ -1282,16 +1282,6 @@ Magit
     nil)
 #+END_SRC
 
-Clear buffer
-
-#+BEGIN_SRC emacs-lisp
-  (defun eshell/clear ()
-    "Clear the eshell buffer"
-    (interactive)
-    (let ((eshell-buffer-maximum-lines 0))
-      (eshell-truncate-buffer)))
-#+END_SRC
-
 ** VT100 Escape Codes
 
 # http://www8.cs.umu.se/~isak/snippets/vt100.txt
