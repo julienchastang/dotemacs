@@ -424,13 +424,6 @@ into bitmap graphics. Here is the Ditaa path:
 *** Inline image support
 
 #+BEGIN_SRC emacs-lisp
-  (defun jc/do-org-show-all-inline-images ()
-    (interactive)
-    (org-display-inline-images t t))
-
-  (global-set-key (kbd "C-c C-x C v")
-                  'do-org-show-all-inline-images)
-
   (defun jc/fix-inline-images ()
       (when org-inline-image-overlays
         (org-redisplay-inline-images)))
