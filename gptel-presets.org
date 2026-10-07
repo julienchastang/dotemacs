@@ -45,7 +45,7 @@
     :stream t)
 
   (setq gptel-backend (gptel-get-backend "Jetstream2")
-        gptel-model 'muse-glimmer)
+        gptel-model 'qwen-3.8-27b)
 #+end_src
 
 * Directives
