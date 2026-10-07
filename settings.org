@@ -1197,14 +1197,13 @@ Easily copy from one dired buffer to another
 
   (global-set-key (kbd "C-c s") #'jc/tramp-find-file)
 
-  (defun disable-remote-file-backups-autosaves-locks ()
-    "Disable backups, auto-save, and lock files for remote files."
-    (when (and buffer-file-name (file-remote-p buffer-file-name))
-      (setq-local make-backup-files nil)
-      (setq-local auto-save-default nil)
-      (setq-local create-lockfiles nil)))
+  (setq remote-file-name-inhibit-auto-save t)
+  (setq remote-file-name-inhibit-locks t)
 
-  (add-hook 'find-file-hook #'disable-remote-file-backups-autosaves-locks)
+  (setq backup-enable-predicate
+        (lambda (name)
+          (and (normal-backup-enable-predicate name)
+               (not (file-remote-p name)))))
 
   (setq tramp-copy-size-limit (* 5 1024 1024))  ; 5MB threshold for external copying
   (setq tramp-inline-compress-start-size (* 2 1024 1024))  ; Compress files > 2MB
@@ -1308,7 +1307,7 @@ Magit
     "Get the CUSTOM_ID property of the entry at point-or-marker POM.  If POM is
        nil, refer to the entry at point. If the entry does not have an CUSTOM_ID,
        the function returns nil. However, when CREATE is non nil, create a CUSTOM_ID
-       if none is present already. PREFIX will be passed through to `jc/org-id-new'. In
+       if none is present already. PREFIX will be passed through to `org-id-new'. In
        any case, the CUSTOM_ID of the entry is returned."
     (interactive)
     (org-with-point-at pom
@@ -1317,7 +1316,7 @@ Magit
          ((and id (stringp id) (string-match "\\S-" id))
           id)
          (create
-          (setq id (jc/org-id-new (concat prefix "h")))
+          (setq id (org-id-new (concat prefix "h")))
           (org-entry-put pom "CUSTOM_ID" (substring id 0 10))
           (org-id-add-location id (buffer-file-name (buffer-base-buffer)))
           id)))))
@@ -1333,37 +1332,6 @@ Magit
       (when (re-search-forward "^#\\+OPTIONS:.*auto-id:t" (point-max) t)
         (org-map-entries (lambda () (jc/org-custom-id-get (point) 'create))))))
 
-  (defun jc/org-id-new (&optional prefix)
-    "Create a new globally unique ID.
-
-  An ID consists of two parts separated by a dash-
-  - a prefix
-  - a unique part that will be created according to `org-id-method'.
-
-  PREFIX can specify the prefix, the default is given by the variable
-  `org-id-prefix'.  However, if PREFIX is the symbol `none', don't use any
-  prefix even if `org-id-prefix' specifies one.
-
-  So a typical ID could look like \"Org-4nd91V40HI\"."
-    (let* ((prefix (if (eq prefix 'none)
-                       ""
-                     (concat (or prefix org-id-prefix) "-")))
-           unique)
-      (if (equal prefix "-") (setq prefix ""))
-      (cond
-       ((memq org-id-method '(uuidgen uuid))
-        (setq unique (org-trim (shell-command-to-string org-id-uuid-program)))
-        (unless (org-uuidgen-p unique)
-          (setq unique (org-id-uuid))))
-       ((eq org-id-method 'org)
-        (let* ((etime (org-reverse-string (org-id-time-to-b36)))
-               (postfix (if org-id-include-domain
-                            (progn
-                              (require 'message)
-                              (concat "@" (message-make-fqdn))))))
-          (setq unique (concat etime postfix))))
-       (t (error "Invalid `org-id-method'")))
-      (concat prefix unique)))
 #+END_SRC
 ** Word frequency
 
