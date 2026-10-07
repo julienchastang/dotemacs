@@ -961,17 +961,24 @@ Spaceline.
 GPG data should not be leaked out.
 
 #+begin_src emacs-lisp
-  (defun jc/disable-backups-for-gpg ()
+  ;; Prevent Emacs's normal persistence mechanisms from writing plaintext
+  ;; contents of files handled by EasyPG.
+
+  (defun jc/protect-gpg-buffer ()
+    "Disable normal plaintext persistence for files handled by EasyPG."
     (when (and buffer-file-name
-               (string-match-p "\\.gpg\\'" buffer-file-name))
-      (setq-local backup-inhibited t)
-      (setq-local make-backup-files nil)
-      (setq-local create-lockfiles nil)
+               (string-match-p epa-file-name-regexp buffer-file-name))
+      (setq-local backup-inhibited t
+                  make-backup-files nil
+                  create-lockfiles nil)
       (auto-save-mode -1)
       (when (boundp 'undo-tree-auto-save-history)
-        (setq undo-tree-auto-save-history nil))))
+        (setq-local undo-tree-auto-save-history nil))))
 
-  (add-hook 'find-file-hook #'jc/disable-backups-for-gpg)
+  (add-hook 'find-file-hook #'jc/protect-gpg-buffer)
+
+  ;; Explicitly prevent EasyPG buffers from being auto-saved.
+  (setq epa-file-inhibit-auto-save t)
 #+end_src
 
 *** Markdown
