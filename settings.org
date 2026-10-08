@@ -340,7 +340,7 @@ EWW
 GPG and [[http://liwen.name/tools/2017/03/21/emacs-easypg.html][Pinentry]]. Also [[https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources][see]]. [[https://www.reddit.com/r/emacs/comments/18d6fmt/how_to_lock_yourself_out_of_a_gpg_encrypted_file/][Make sure to stay on gpg <= 2.4.0 until further notice]].
 
 #+BEGIN_SRC emacs-lisp
-  (setf epa-pinentry-mode 'loopback)
+  (setq epg-pinentry-mode 'loopback)
 #+END_SRC
 
 ** Org mode Settings
