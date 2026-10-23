@@ -3,42 +3,99 @@
 
 * Python
 
-1. Create a project virtual environment if it does not exist:
-   ~python3 -m venv .venv~
-2. Create a ~.envrc~ in the project root:
-   #+begin_src sh
+These instructions assume Linux or macOS and a project using ~.venv~.
+Follow the project's documented environment and dependency workflow if it
+already has one. Run shell commands from the project root.
+
+1. Create the virtual environment if it does not already exist:
+
+   #+begin_src sh :tangle no
+   python3 -m venv .venv
+   #+end_src
+
+2. Configure automatic activation. Create or update ~.envrc~ to contain:
+
+   #+begin_src sh :tangle no
    source .venv/bin/activate
    #+end_src
-3. Authorize direnv:
-   ~direnv allow~
-4. Install project dependencies:
-   - If the repository is an installable Python project (~pyproject.toml~ or ~setup.py~), use ~python -m pip install -e .~.
-   - If development extras are defined, use ~python -m pip install -e ".[dev]"~.
-   - If the repository provides ~requirements.txt~, use ~python -m pip install -r requirements.txt~.
-   - For a standalone script repository without packaging metadata, install its required dependencies directly.
-5. Install development tools not already provided by the project:
-   ~python -m pip install basedpyright ruff pytest~
-   Install ~python-lsp-server~ only if you need a fallback language server.
-6. Verify the environment:
 
-   #+begin_src sh
-   which python
-   which basedpyright-langserver
-   python -m pytest
+   For Bash, add the following line once at the end of =~/.bashrc=,
+   then restart the shell:
+
+   #+begin_src sh :tangle no
+   eval "$(direnv hook bash)"
    #+end_src
 
-7. Open a Python file in Emacs. Verify the environment with:
+   See [[https://direnv.net/docs/hook.html][Direnv shell setup]] for other shells. Installing Direnv alone
+   does not enable shell activation. Emacs uses ~direnv-mode~, enabled below,
+   independently of the shell hook.
+
+   Authorize the project environment, then wait for the next shell prompt:
+
+   #+begin_src sh :tangle no
+   direnv allow
+   #+end_src
+
+   Confirm that Python resolves to this project's ~.venv/bin/python~ before
+   installing packages:
+
+   #+begin_src sh :tangle no
+   python -c 'import sys; print(sys.executable)'
+   #+end_src
+
+3. Install the project's dependencies using its documented commands.
+   Common pip workflows are ~python -m pip install -r requirements.txt~,
+   ~python -m pip install -e .~ for an installable project, or
+   ~python -m pip install -e ".[dev]"~ when it defines a ~dev~ extra.
+   A ~pyproject.toml~ file alone does not imply that a project is installable.
+
+   Install development tools into this environment if the project's setup
+   has not already supplied them:
+
+   #+begin_src sh :tangle no
+   python -m pip install basedpyright ruff pytest
+   #+end_src
+
+   The Docker image installs these tools globally, but a default virtual
+   environment isolates Python packages. In particular, ~python -m pytest~
+   needs pytest installed inside the environment. BasedPyright is the
+   preferred language server; Pyright and ~python-lsp-server~ are optional
+   alternatives, not additional requirements.
+
+4. Check the tools without running the test suite:
+
+   #+begin_src sh :tangle no
+   python -m pip --version
+   command -v basedpyright-langserver
+   basedpyright --version
+   ruff --version
+   python -m pytest --version
+   #+end_src
+
+   The pip path should be inside ~.venv~. Run ~python -m pytest~ separately
+   when ready to execute the project's tests.
+
+5. Open a Python file in Emacs. Run ~M-x direnv-update-environment~ if
+   necessary. From that buffer, use ~M-:~ to evaluate each expression:
 
    #+begin_src emacs-lisp :tangle no
    (getenv "VIRTUAL_ENV")
    (executable-find "python")
    (executable-find "basedpyright-langserver")
+   (executable-find "ruff")
+   (executable-find "pytest")
    #+end_src
 
-8. Verify Eglot with ~M-x eglot-current-server~. Reconnect with ~M-x eglot-reconnect~ if necessary.
+   ~VIRTUAL_ENV~ should name the project's ~.venv~, and Python should resolve
+   to its ~bin/python~. The other executables must be found; project-local
+   installations should resolve inside ~.venv/bin~.
 
-Direnv handles activation when entering the project directory. Manual activation is unnecessary once direnv is configured in the shell and Emacs.
-
+6. Check Eglot from the Python buffer using ~M-: (eglot-current-server)~.
+   A connected buffer should return a server object rather than ~nil~.
+   The Python hook starts Eglot automatically; use ~M-x eglot~ if no server
+   is connected. After changing the environment, use ~M-x eglot-reconnect~
+   for an existing connection. Inspect ~M-x eglot-events-buffer~ for
+   connection details or errors.
 
 #+BEGIN_SRC emacs-lisp
   (require 'eglot)
