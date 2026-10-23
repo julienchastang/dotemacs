@@ -93,18 +93,24 @@ snippet in your =~/.emacs.d/init.el= file.
 
 #+begin_src sh :tangle no :eval no
   cat << EOF > ~/.emacs.d/init.el
-  ;; -*- lexical-binding: t; -*-
+  ;;; init.el --- Emacs initialization -*- lexical-binding: t; -*-
+
   (add-to-list 'load-path
                (expand-file-name "git/org-contrib/lisp" user-emacs-directory))
   (add-to-list 'load-path
                (expand-file-name "git/org-mode.git/lisp" user-emacs-directory))
 
-  (require 'org)
-  (require 'ob-tangle)
-  (org-babel-load-file
-   (expand-file-name "git/dotemacs/settings.org" user-emacs-directory))
-  (put 'dired-find-alternate-file 'disabled nil)
-  (put 'erase-buffer 'disabled nil)
+  (let ((settings-file
+         (expand-file-name "git/dotemacs/settings.org"
+                           user-emacs-directory)))
+    (unless (file-readable-p settings-file)
+      (error "Literate Emacs configuration is missing: %s" settings-file))
+
+    (require 'org)
+    (require 'ob-tangle)
+    (org-babel-load-file settings-file))
+
+  ;;; init.el ends here
   EOF
   #+END_SRC
 
@@ -114,21 +120,18 @@ For a faster startup, add this minimal snippet to =~/.emacs.d/early-init.el=.
 
 #+begin_src sh :tangle no :eval no
   cat << EOF > ~/.emacs.d/early-init.el
-  ;; -*- lexical-binding: t; -*-
-  ;; Improve startup responsiveness during initialization.
-  (setq gc-cons-threshold most-positive-fixnum)
-  (setq gc-cons-percentage 0.6)
+  ;;; early-init.el --- Early initialization -*- lexical-binding: t; -*-
 
-  (defvar jc/default-file-name-handler-alist file-name-handler-alist)
-  (setq file-name-handler-alist nil)
+  ;; Improve startup responsiveness during initialization.
+  (setq gc-cons-threshold (* 128 1024 1024)
+        gc-cons-percentage 0.6)
 
   (add-hook
    'emacs-startup-hook
    (lambda ()
-     ;; Restore sensible defaults once startup is complete.
-     (setq gc-cons-threshold (* 64 1024 1024))
-     (setq gc-cons-percentage 0.1)
-     (setq file-name-handler-alist jc/default-file-name-handler-alist)))
+     ;; Retain a moderately high threshold for interactive use.
+     (setq gc-cons-threshold (* 64 1024 1024)
+           gc-cons-percentage 0.1)))
   EOF
 #+END_SRC
 
@@ -697,19 +700,42 @@ ibuffer
 *** Python
 <<python>>
 
-1. Create a project venv if it does not exist: ~python3 -m venv .venv~.
-2. Create ~.envrc~ (see below) in the project root with ~source .venv/bin/activate~.
-3. Activate it: ~source .venv/bin/activate~.
-4. Install the project:
-   - usual case: ~pip install -e .~
-   - if the project defines dev extras: ~pip install -e ".[dev]"~
-5. Install language/test tools if not already included:
-   - ~pip install basedpyright~
-   - optional fallback: ~pip install python-lsp-server~
-   - ~pip install ruff pytest httpx~
-6. Run ~direnv allow~ once in that directory.
-7. Open a ~.py~ file in Emacs and run ~M-x eglot-reconnect~ if needed.
-After that, Emacs should use the project's Python for LSP, completions, and imports.
+1. Create a project virtual environment if it does not exist:
+   ~python3 -m venv .venv~
+2. Create a ~.envrc~ in the project root:
+   #+begin_src sh
+   source .venv/bin/activate
+   #+end_src
+3. Authorize direnv:
+   ~direnv allow~
+4. Install project dependencies:
+   - If the repository is an installable Python project (~pyproject.toml~ or ~setup.py~), use ~python -m pip install -e .~.
+   - If development extras are defined, use ~python -m pip install -e ".[dev]"~.
+   - If the repository provides ~requirements.txt~, use ~python -m pip install -r requirements.txt~.
+   - For a standalone script repository without packaging metadata, install its required dependencies directly.
+5. Install development tools not already provided by the project:
+   ~python -m pip install basedpyright ruff pytest~
+   Install ~python-lsp-server~ only if you need a fallback language server.
+6. Verify the environment:
+
+   #+begin_src sh
+   which python
+   which basedpyright-langserver
+   python -m pytest
+   #+end_src
+
+7. Open a Python file in Emacs. Verify the environment with:
+
+   #+begin_src emacs-lisp
+   (getenv "VIRTUAL_ENV")
+   (executable-find "python")
+   (executable-find "basedpyright-langserver")
+   #+end_src
+
+8. Verify Eglot with ~M-x eglot-current-server~. Reconnect with ~M-x eglot-reconnect~ if necessary.
+
+Direnv handles activation when entering the project directory. Manual activation is unnecessary once direnv is configured in the shell and Emacs.
+
 
 #+BEGIN_SRC emacs-lisp
   (require 'eglot)
@@ -792,17 +818,11 @@ Pytest
 #+BEGIN_SRC emacs-lisp
   (require 'python-pytest)
 
-  ;; Keep output concise but include summary lines for failures/skips.
-  (setq pytest-cmd-flags "-q -ra")
-
-  ;; Helpful pytest.el keybindings in Python buffers.
   (defun jc/python-pytest-setup ()
-    "Set pytest.el keybindings for Python buffers."
-    (local-set-key (kbd "C-c t t") #'pytest-one)
-    (local-set-key (kbd "C-c t m") #'pytest-module)
-    (local-set-key (kbd "C-c t a") #'pytest-all)
-    (local-set-key (kbd "C-c t l") #'pytest-last-failed)
-    (local-set-key (kbd "C-c t r") #'pytest-again))
+    "Configure pytest keybindings for Python buffers."
+    (local-set-key (kbd "C-c t t") #'python-pytest)
+    (local-set-key (kbd "C-c t m") #'python-pytest-file)
+    (local-set-key (kbd "C-c t f") #'python-pytest-function))
 
   (add-hook 'python-base-mode-hook #'jc/python-pytest-setup)
 #+END_SRC
