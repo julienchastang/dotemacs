@@ -29,7 +29,7 @@
 
 7. Open a Python file in Emacs. Verify the environment with:
 
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp :tangle no
    (getenv "VIRTUAL_ENV")
    (executable-find "python")
    (executable-find "basedpyright-langserver")
@@ -107,10 +107,7 @@ correct interpreter and PATH without manual activation.
 Example `.envrc` for a Python project:
 
 #+BEGIN_SRC sh :tangle no
-  cat << 'EOF' > .envrc
-  export VIRTUAL_ENV="$PWD/.venv"
-  layout python3 "$VIRTUAL_ENV"
-  EOF
+  source .venv/bin/activate
 #+END_SRC
 
 After creating or updating `.envrc`, run `direnv allow` once in that
