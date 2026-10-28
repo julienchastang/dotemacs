@@ -536,7 +536,6 @@ emacs org mode.
 |--------------------+-------------------------------------+--------------|
 | package            | description                         | anchors      |
 |--------------------+-------------------------------------+--------------|
-| direx              | Simple tree directory explorer      | [[dired][dired]]        |
 | ox-gfm             | Github Flavored Markdown            | [[markdown][markdown]]     |
 | multiple-cursors   | Multiple cursors for Emacs          | [[multi-cursor][multi-cursor]] |
 | elfeed             | Emacs feed reader                   | [[elfeed][elfeed]]       |
@@ -981,18 +980,6 @@ eldoc for emacs lisp development
               ;; Set dired-x buffer-local variables here.  For example:
               ;; (dired-omit-mode 1)
               ))
-#+END_SRC
-
-direx
-
-#+BEGIN_SRC emacs-lisp
-  ;; Work around stale/non-generic definitions that can break direx on load.
-  ;; (when (and (fboundp 'direx:tree-name)
-  ;;            (null (get 'direx:tree-name 'cl--generic)))
-  ;;   (fmakunbound 'direx:tree-name))
-
-  ;; (require 'direx)
-  ;; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
 #+END_SRC
 
 dired-sidebar
