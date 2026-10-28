@@ -503,8 +503,6 @@ emacs org mode.
 | flycheck                      | on-the-fly syntax checking                    |            |
 | company                       | Completion framework for buffers              | [[python][python]]     |
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
-| envrc                         | .envrc automatically apply                    | [[python][python]]     |
-| flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
 | ruff-format                   | Format Python code with Ruff                  | [[python][python]]     |
 | python-pytest                 | Run pytest from Emacs buffers                 | [[python][python]]     |
 | imenu-list                    | Side-buffer code outline                      | [[python][python]]     |
@@ -513,7 +511,6 @@ emacs org mode.
 | magit                         | emacs git client                              | [[git][git]]        |
 | git-gutter                    | git gutter                                    | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
-| display-fill-column-indicator | Built-in 80 column rule                       | [[fci][fci]]        |
 | spaceline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
 | rainbow-delimiters            | rainbow parentheses                           | [[paren][paren]]      |
@@ -542,7 +539,6 @@ emacs org mode.
 | elfeed-org         | Emacs feed reader for org-mode      | [[elfeed][elfeed]]       |
 | flymake-shellcheck | Flymake handler for bash/sh scripts | [[shell]]        |
 | citeproc           | citeproc                            | [[citation][citation]]     |
-| ruff-format        | Python tool                         | [[python]]       |
 | nushell-mode       | nushell mode                        |              |
 |--------------------+-------------------------------------+--------------|
 
