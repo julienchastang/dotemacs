@@ -502,9 +502,6 @@ emacs org mode.
 | rw-language-and-country-codes | spelling                                      | [[spelling][spelling]]   |
 | flycheck                      | on-the-fly syntax checking                    |            |
 | company                       | Completion framework for buffers              | [[python][python]]     |
-| lsp-mode                      | Language Server Protocol client               | [[python][python]]     |
-| lsp-pyright                   | Pyright LSP client for Python                 | [[python][python]]     |
-| lsp-ui                        | LSP UI extras                                 | [[python][python]]     |
 | direnv                        | Sync env vars per-project via direnv          | [[python][python]]     |
 | envrc                         | .envrc automatically apply                    | [[python][python]]     |
 | flymake-ruff                  | Flymake backend powered by Ruff               | [[python][python]]     |
