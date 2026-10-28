@@ -411,19 +411,6 @@ Making Latex fragments legible:
   (add-hook 'kill-emacs-query-functions 'jc/org-query-clock-out)
 #+END_SRC
 
-*** Ditaa
-
-Ditaa is a command-line utility that converts diagrams drawn using ASCII art
-into bitmap graphics. Here is the Ditaa path:
-
-#+BEGIN_SRC emacs-lisp
-  (cond
-   ((string-equal system-type "darwin")   ; Mac OS X
-    (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.10/libexec/ditaa0_10.jar"))
-   ((string-equal system-type "gnu/linux") ; linux
-    (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))
-#+END_SRC
-
 *** Inline image support
 
 #+BEGIN_SRC emacs-lisp
@@ -935,8 +922,7 @@ Loading babel supported languages:
 #+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((ditaa . t)
-     (emacs-lisp . t)
+   '((emacs-lisp . t)
      (http . t)
      (latex . t)
      (org . t)
