@@ -541,7 +541,6 @@ emacs org mode.
 | dockerfile-mode               | Major mode for editing Docker's Dockerfiles   |            |
 | csv-mode                      | Major mode for editing comma separated values |            |
 | zoom-window                   | Zoom window like tmux                         |            |
-| gnuplot                       | gnuplot                                       | [[gnuplot][gnuplot]]    |
 | ob-http                       | http request in org-mode babel                | [[http][http]]       |
 | nginx-mode                    | Mode for editing Nginx config files           | [[nginx][nginx]]      |
 | ox-hugo                       | Hugo markdown back-end for org export engine  | [[hugo][hugo]]       |
@@ -938,7 +937,6 @@ Loading babel supported languages:
    'org-babel-load-languages
    '((ditaa . t)
      (emacs-lisp . t)
-     (gnuplot . t)
      (http . t)
      (latex . t)
      (org . t)
@@ -1058,11 +1056,6 @@ Easily copy from one dired buffer to another
 <<info>>
 #+BEGIN_SRC emacs-lisp
   (require 'info+)
-#+END_SRC
-*** Gnuplot
-<<gnuplot>>
-#+BEGIN_SRC emacs-lisp
-  (require 'gnuplot)
 #+END_SRC
 
 *** Multiple-cursors
