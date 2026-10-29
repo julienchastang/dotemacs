@@ -509,7 +509,7 @@ emacs org mode.
 | yasnippet                     | Yet another snippet extension for Emacs       | [[yasnippet][yasnippet]]  |
 | yasnippet-snippets            | Community snippet collection                  | [[yasnippet][yasnippet]]  |
 | magit                         | emacs git client                              | [[git][git]]        |
-| git-gutter                    | git gutter                                    | [[git][git]]        |
+| diff-hl                       | Highlight uncommitted changes                 | [[git][git]]        |
 | git-timemachine               | Walk through git revisions of a file          | [[git][git]]        |
 | spaceline                     | A better mode line                            | [[modeline][modeline]]   |
 | paredit                       | structured editing of S-expression data       | [[paren][paren]]      |
@@ -782,11 +782,18 @@ make sure to =brew install hunspell=.
 *** git
 <<git>>
 
-git gutter
+Diff highlighting
 
 #+BEGIN_SRC emacs-lisp
   (global-display-line-numbers-mode 0)
-  (global-git-gutter-mode t)
+
+  (require 'diff-hl)
+  (setq diff-hl-fallback-to-margin t)
+  (global-diff-hl-mode 1)
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+
+  (with-eval-after-load 'magit
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
 #+END_SRC
 
 Magit stuff
