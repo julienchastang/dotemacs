@@ -1189,7 +1189,8 @@ Magit
           id)
          (create
           (setq id (org-id-new (concat prefix "h")))
-          (org-entry-put pom "CUSTOM_ID" (substring id 0 10))
+          (org-entry-put pom "CUSTOM_ID"
+                         (replace-regexp-in-string "-" ":" (substring id 0 10)))
           (org-id-add-location id (buffer-file-name (buffer-base-buffer)))
           id)))))
 
